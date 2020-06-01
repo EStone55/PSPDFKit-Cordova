@@ -13,8 +13,12 @@ public class AnnotationSelectedListener implements OnAnnotationSelectedListener 
 
     }
 
-    public void onAnnotationSelected(Annotation annotation, boolean annotationCreated) throws JSONException {
-        EventDispatcher.getInstance().sendEvent("onAnnotationSelected", new JSONObject(annotation.toInstantJson()));
+    public void onAnnotationSelected(Annotation annotation, boolean annotationCreated) {
+        try {
+            EventDispatcher.getInstance().sendEvent("onAnnotationSelected", new JSONObject(annotation.toInstantJson()));
+        } catch(JSONException ex) {
+            // squash
+        }
     }
 
     public boolean onPrepareAnnotationSelection(AnnotationSelectionController controller, Annotation annotation,
