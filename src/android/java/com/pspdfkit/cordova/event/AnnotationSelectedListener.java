@@ -6,14 +6,19 @@ import com.pspdfkit.ui.special_mode.controller.AnnotationSelectionController;
 import com.pspdfkit.cordova.event.EventDispatcher;
 import org.json.JSONObject;
 import org.json.JSONException;
+import android.util.Log;
 
 public class AnnotationSelectedListener implements OnAnnotationSelectedListener {
+
+    public static final String LOG_TAG = "AnnotationSelectedListener";
+
 
     public AnnotationSelectedListener() {
 
     }
 
     public void onAnnotationSelected(Annotation annotation, boolean annotationCreated) {
+        Log.i(LOG_TAG, annotation);
         try {
             EventDispatcher.getInstance().sendEvent("onAnnotationSelected", new JSONObject(annotation.toInstantJson()));
         } catch(JSONException ex) {
