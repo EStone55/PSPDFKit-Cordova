@@ -1086,6 +1086,7 @@ exports.addEventListener = function (type, listener) {
     existing.push(listener);
   } else if (platform === "android") {
     if (type in channels) {
+      console.log(listener);
       channels[type].subscribe(listener, listener);
     }
   } else {
