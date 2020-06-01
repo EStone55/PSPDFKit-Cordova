@@ -1,5 +1,7 @@
 package com.pspdfkit.cordova.event;
 
+import android.util.Log;
+
 import com.pspdfkit.cordova.PSPDFKitPlugin;
 import com.pspdfkit.cordova.Utilities;
 import com.pspdfkit.cordova.action.Action;
@@ -27,6 +29,7 @@ public class EventDispatcher {
   @Nullable private CallbackContext eventChannel = null;
 
   @Nullable private EventDispatchingActions connectionActions;
+  public static final String LOG_TAG = "CordovaPdfActivity";
 
   private EventDispatcher() {}
 
@@ -39,6 +42,7 @@ public class EventDispatcher {
   }
 
   public void notifyActivityDismissed() {
+    Log.i(LOG_TAG, "Document dismissed");
     sendEvent("onDocumentDismissed");
   }
 
