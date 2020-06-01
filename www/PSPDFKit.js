@@ -1086,7 +1086,7 @@ exports.addEventListener = function (type, listener) {
     existing.push(listener);
   } else if (platform === "android") {
     if (type in channels) {
-      channels[type].subscribe(listener);
+      channels[type].subscribe(listener, listener);
     }
   } else {
     console.log("Not implemented on " + platform + ".");
@@ -1164,7 +1164,8 @@ function numberOfHandlers() {
   return (
     channels.onDocumentSaved.numHandlers +
     channels.onDocumentSaveFailed.numHandlers +
-    channels.onDocumentDismissed.numHandlers
+    channels.onDocumentDismissed.numHandlers + 
+    channels.onAnnotationSelected.numHandlers
   );
 }
 
