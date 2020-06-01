@@ -18,7 +18,7 @@ public class AnnotationSelectedListener implements OnAnnotationSelectedListener 
     }
 
     public void onAnnotationSelected(Annotation annotation, boolean annotationCreated) {
-        Log.i(LOG_TAG, annotation);
+        Log.i(LOG_TAG, annotation.toString());
         try {
             EventDispatcher.getInstance().sendEvent("onAnnotationSelected", new JSONObject(annotation.toInstantJson()));
         } catch(JSONException ex) {
