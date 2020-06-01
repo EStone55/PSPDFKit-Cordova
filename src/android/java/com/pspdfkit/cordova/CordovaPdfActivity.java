@@ -6,6 +6,7 @@ import android.util.Log;
 import androidx.annotation.NonNull;
 
 import com.pspdfkit.cordova.event.EventDispatcher;
+import com.pspdfkit.cordova.event.AnnotationSelectedListener;
 import com.pspdfkit.document.PdfDocument;
 import com.pspdfkit.listeners.DocumentListener;
 import com.pspdfkit.listeners.SimpleDocumentListener;
@@ -27,8 +28,8 @@ public class CordovaPdfActivity extends PdfActivity {
   public static final String LOG_TAG = "CordovaPdfActivity";
 
   /**
-   * For communication with the JavaScript context, we keep a static reference to the current
-   * activity.
+   * For communication with the JavaScript context, we keep a static reference to
+   * the current activity.
    */
   private static CordovaPdfActivity currentActivity;
   private final CompositeDisposable compositeDisposable = new CompositeDisposable();
@@ -41,8 +42,7 @@ public class CordovaPdfActivity extends PdfActivity {
     }
 
     @Override
-    public void onDocumentSaveFailed(
-        @NonNull PdfDocument document, @NonNull Throwable exception) {
+    public void onDocumentSaveFailed(@NonNull PdfDocument document, @NonNull Throwable exception) {
       try {
         final JSONObject data = new JSONObject();
         data.put("message", exception.getMessage());
@@ -52,6 +52,9 @@ public class CordovaPdfActivity extends PdfActivity {
       }
     }
   };
+
+  @NonNull
+  private final static AnnotationSelectedListener annotationSelectedListener = new AnnotationSelectedListener();
 
   public static CordovaPdfActivity getCurrentActivity() {
     return currentActivity;
@@ -65,7 +68,7 @@ public class CordovaPdfActivity extends PdfActivity {
       releaseActivity();
       oldActivity.disposeSubscriptions();
     }
-    
+
     currentActivity = activity;
     final PdfFragment pdfFragment = currentActivity.getPdfFragment();
     if (pdfFragment == null) {
@@ -79,16 +82,19 @@ public class CordovaPdfActivity extends PdfActivity {
   }
 
   private void releaseActivity() {
-    // Release the current activity instance. However, we intentionally don't unregister the
-    // document listener, so that asynchronous save events from saving the document after the
+    // Release the current activity instance. However, we intentionally don't
+    // unregister the
+    // document listener, so that asynchronous save events from saving the document
+    // after the
     // activity was destroyed, can still be relayed to the JavaScript interface.
     // Since the listener is static, we also don't leak the activity nor fragment.
     currentActivity = null;
   }
 
   /**
-   * Adds given {@link Disposable} to disposable collection which will be automatically disposed as
-   * a part of onDestroy during activity finishing process.
+   * Adds given {@link Disposable} to disposable collection which will be
+   * automatically disposed as a part of onDestroy during activity finishing
+   * process.
    *
    * @param disposable to add to the disposable collection.
    */
@@ -108,7 +114,7 @@ public class CordovaPdfActivity extends PdfActivity {
 
   @Override
   protected void onDestroy() {
-    if(currentActivity.equals(this)) {
+    if (currentActivity.equals(this)) {
       releaseActivity();
 
       if (isFinishing()) {

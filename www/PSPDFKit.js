@@ -25,7 +25,7 @@ var platform = window.cordova.platformId;
  *
  * -iOS
  */
-exports.setLicenseKey = function(key, callback) {
+exports.setLicenseKey = function (key, callback) {
   if (platform === "ios") {
     executeAction(callback, "setLicenseKey", [key]);
   } else {
@@ -66,7 +66,7 @@ exports.setGlobalOptions = function (options, callback) {
  * -iOS
  * -Android
  */
-exports.present = function(path, options, callback) {
+exports.present = function (path, options, callback) {
   if (platform === "ios") {
     executeAction(callback, "present", [path, options]);
   } else if (platform === "android") {
@@ -90,7 +90,7 @@ exports.present = function(path, options, callback) {
  *
  * -Android
  */
-exports.presentFromAssets = function(assetFile, options, callback) {
+exports.presentFromAssets = function (assetFile, options, callback) {
   if (platform === "android") {
     options = options || {};
     var password = getPropertyAndUnset(options, "password");
@@ -116,7 +116,7 @@ exports.presentFromAssets = function(assetFile, options, callback) {
  *
  * -iOS
  */
-exports.presentWithXFDF = function(path, xfdfPath, callback, options) {
+exports.presentWithXFDF = function (path, xfdfPath, callback, options) {
   if (platform === "ios") {
     executeAction(callback, "presentWithXFDF", [path, xfdfPath, options]);
   } else {
@@ -136,7 +136,7 @@ exports.presentWithXFDF = function(path, xfdfPath, callback, options) {
  * -iOS
  * -Android
  */
-exports.dismiss = function(callback) {
+exports.dismiss = function (callback) {
   if (platform === "ios" || platform === "android") {
     executeAction(callback, "dismiss", []);
   } else {
@@ -153,7 +153,7 @@ exports.dismiss = function(callback) {
  *
  * -iOS
  */
-exports.reload = function(callback) {
+exports.reload = function (callback) {
   if (platform === "ios") {
     executeAction(callback, "reload", []);
   } else {
@@ -175,7 +175,7 @@ exports.reload = function(callback) {
  *
  * -Android
  */
-exports.saveDocument = function(success, error) {
+exports.saveDocument = function (success, error) {
   if (platform === "android") {
     executeAction(callback, "saveDocument", []);
   } else {
@@ -192,7 +192,7 @@ exports.saveDocument = function(success, error) {
  *
  * -iOS
  */
-exports.saveAnnotations = function(callback) {
+exports.saveAnnotations = function (callback) {
   if (platform === "ios") {
     executeAction(callback, "saveAnnotations", []);
   } else {
@@ -210,7 +210,7 @@ exports.saveAnnotations = function(callback) {
  * -iOS
  * -Android
  */
-exports.getHasDirtyAnnotations = function(callback) {
+exports.getHasDirtyAnnotations = function (callback) {
   if (platform === "ios" || platform === "android") {
     executeAction(callback, "getHasDirtyAnnotations", []);
   } else {
@@ -232,7 +232,7 @@ exports.getHasDirtyAnnotations = function(callback) {
  *
  * -iOS
  */
-exports.search = function(query, animated, headless, callback) {
+exports.search = function (query, animated, headless, callback) {
   if (platform === "ios") {
     executeAction(callback, "search", []);
   } else {
@@ -376,7 +376,7 @@ exports.ShareFeatures = {
  *
  * -iOS
  */
-exports.setOptions = function(options, animated, callback) {
+exports.setOptions = function (options, animated, callback) {
   if (platform === "ios") {
     executeAction(callback, "setOptions", [options, animated]);
   } else {
@@ -394,7 +394,7 @@ exports.setOptions = function(options, animated, callback) {
  *
  * -iOS
  */
-exports.getOptions = function(names, callback) {
+exports.getOptions = function (names, callback) {
   if (platform === "ios") {
     executeAction(callback, "getOptions", [names]);
   } else {
@@ -414,7 +414,7 @@ exports.getOptions = function(names, callback) {
  *
  * -iOS
  */
-exports.setOption = function(name, value, animated, callback) {
+exports.setOption = function (name, value, animated, callback) {
   if (platform === "ios") {
     executeAction(callback, "setOption", [name, value, animated]);
   } else {
@@ -432,7 +432,7 @@ exports.setOption = function(name, value, animated, callback) {
  *
  * -iOS
  */
-exports.getOption = function(name, callback) {
+exports.getOption = function (name, callback) {
   if (platform === "ios") {
     executeAction(callback, "getOption", [name]);
   } else {
@@ -453,7 +453,7 @@ exports.getOption = function(name, callback) {
  *
  * -iOS
  */
-exports.setPage = function(page, animated, callback) {
+exports.setPage = function (page, animated, callback) {
   if (platform === "ios") {
     executeAction(callback, "setPage", [page, animated]);
   } else {
@@ -470,7 +470,7 @@ exports.setPage = function(page, animated, callback) {
  *
  * -iOS
  */
-exports.getPage = function(callback) {
+exports.getPage = function (callback) {
   if (platform === "ios") {
     executeAction(callback, "getPage", []);
   } else {
@@ -487,7 +487,7 @@ exports.getPage = function(callback) {
  *
  * -iOS
  */
-exports.getPageCount = function(callback) {
+exports.getPageCount = function (callback) {
   if (platform === "ios") {
     executeAction(callback, "getPageCount", []);
   } else {
@@ -505,7 +505,7 @@ exports.getPageCount = function(callback) {
  *
  * -iOS
  */
-exports.scrollToNextPage = function(animated, callback) {
+exports.scrollToNextPage = function (animated, callback) {
   if (platform === "ios") {
     executeAction(callback, "scrollToNextPage", [animated]);
   } else {
@@ -523,7 +523,7 @@ exports.scrollToNextPage = function(animated, callback) {
  *
  * -iOS
  */
-exports.scrollToPreviousPage = function(animated, callback) {
+exports.scrollToPreviousPage = function (animated, callback) {
   if (platform === "ios") {
     executeAction(callback, "scrollToPreviousPage", [animated]);
   } else {
@@ -541,7 +541,7 @@ exports.scrollToPreviousPage = function(animated, callback) {
  *
  * -iOS
  */
-exports.setAppearanceMode = function(appearanceMode, callback) {
+exports.setAppearanceMode = function (appearanceMode, callback) {
   if (platform === "ios") {
     executeAction(callback, "setAppearanceMode", [appearanceMode]);
   } else {
@@ -564,7 +564,7 @@ exports.setAppearanceMode = function(appearanceMode, callback) {
  * -iOS
  * -Android
  */
-exports.clearCache = function(clearDiskCache, callback) {
+exports.clearCache = function (clearDiskCache, callback) {
   if (platform === "ios" || platform === "android") {
     clearDiskCache = clearDiskCache || {};
     executeAction(callback, "clearCache", [clearDiskCache]);
@@ -583,7 +583,7 @@ exports.clearCache = function(clearDiskCache, callback) {
  * -iOS
  * -Android
  */
-exports.removeCacheForPresentedDocument = function(callback) {
+exports.removeCacheForPresentedDocument = function (callback) {
   if (platform === "ios" || platform === "android") {
     executeAction(callback, "removeCacheForPresentedDocument", []);
   } else {
@@ -602,7 +602,7 @@ exports.removeCacheForPresentedDocument = function(callback) {
  * -iOS
  * -Android
  */
-exports.clearCacheForPage = function(pageIndex, callback) {
+exports.clearCacheForPage = function (pageIndex, callback) {
   if (platform === "ios" || platform === "android") {
     executeAction(callback, "clearCacheForPage", [pageIndex]);
   } else {
@@ -639,7 +639,7 @@ var rightBarButtonItems = ["search", "outline", "thumbnails"];
  *
  * -iOS
  */
-exports.dispatchLeftBarButtonAction = function(index) {
+exports.dispatchLeftBarButtonAction = function (index) {
   if (platform === "ios") {
     leftBarButtonItems[index].action();
   } else {
@@ -656,7 +656,7 @@ exports.dispatchLeftBarButtonAction = function(index) {
  *
  * -iOS
  */
-exports.dispatchRightBarButtonAction = function(index) {
+exports.dispatchRightBarButtonAction = function (index) {
   rightBarButtonItems[index].action();
 };
 
@@ -671,12 +671,12 @@ exports.dispatchRightBarButtonAction = function(index) {
  *
  * -iOS
  */
-exports.setLeftBarButtonItems = function(items) {
+exports.setLeftBarButtonItems = function (items) {
   if (platform === "ios") {
     leftBarButtonItems = items;
     exec(
-      function(result) {},
-      function(error) {},
+      function (result) { },
+      function (error) { },
       "PSPDFKitPlugin",
       "setLeftBarButtonItems",
       [items]
@@ -696,12 +696,12 @@ exports.setLeftBarButtonItems = function(items) {
  *
  * -iOS
  */
-exports.setRightBarButtonItems = function(items) {
+exports.setRightBarButtonItems = function (items) {
   if (platform === "ios") {
     rightBarButtonItems = items;
     exec(
-      function(result) {},
-      function(error) {},
+      function (result) { },
+      function (error) { },
       "PSPDFKitPlugin",
       "setRightBarButtonItems",
       [items]
@@ -720,7 +720,7 @@ exports.setRightBarButtonItems = function(items) {
  *
  * -iOS
  */
-exports.getLeftBarButtonItems = function(callback) {
+exports.getLeftBarButtonItems = function (callback) {
   if (platform === "ios") {
     callback(leftBarButtonItems);
   } else {
@@ -737,7 +737,7 @@ exports.getLeftBarButtonItems = function(callback) {
  *
  * -iOS
  */
-exports.getRightBarButtonItems = function(callback) {
+exports.getRightBarButtonItems = function (callback) {
   if (platform === "ios") {
     callback(rightBarButtonItems);
   } else {
@@ -754,7 +754,7 @@ exports.getRightBarButtonItems = function(callback) {
  *
  * -iOS
  */
-exports.hideAnnotationToolbar = function(callback) {
+exports.hideAnnotationToolbar = function (callback) {
   if (platform === "ios") {
     executeAction(callback, "hideAnnotationToolbar", []);
   } else {
@@ -771,7 +771,7 @@ exports.hideAnnotationToolbar = function(callback) {
  *
  * -iOS
  */
-exports.showAnnotationToolbar = function(callback) {
+exports.showAnnotationToolbar = function (callback) {
   if (platform === "ios") {
     executeAction(callback, "showAnnotationToolbar", []);
   } else {
@@ -788,7 +788,7 @@ exports.showAnnotationToolbar = function(callback) {
  *
  * -iOS
  */
-exports.toggleAnnotationToolbar = function(callback) {
+exports.toggleAnnotationToolbar = function (callback) {
   if (platform === "ios") {
     executeAction(callback, "toggleAnnotationToolbar", []);
   } else {
@@ -809,7 +809,7 @@ exports.toggleAnnotationToolbar = function(callback) {
  * -iOS
  * -Android
  */
-exports.applyInstantJSON = function(jsonValue, callback) {
+exports.applyInstantJSON = function (jsonValue, callback) {
   if (platform === "ios" || platform === "android") {
     executeAction(callback, "applyInstantJSON", [jsonValue]);
   } else {
@@ -829,7 +829,7 @@ exports.applyInstantJSON = function(jsonValue, callback) {
  * -iOS
  * -Android
  */
-exports.addAnnotation = function(jsonAnnotation, callback) {
+exports.addAnnotation = function (jsonAnnotation, callback) {
   if (platform === "ios" || platform === "android") {
     executeAction(callback, "addAnnotation", [jsonAnnotation]);
   } else {
@@ -849,7 +849,7 @@ exports.addAnnotation = function(jsonAnnotation, callback) {
  * -iOS
  * -Android
  */
-exports.removeAnnotation = function(jsonAnnotation, callback) {
+exports.removeAnnotation = function (jsonAnnotation, callback) {
   if (platform === "ios" || platform === "android") {
     executeAction(callback, "removeAnnotation", [jsonAnnotation]);
   } else {
@@ -869,7 +869,7 @@ exports.removeAnnotation = function(jsonAnnotation, callback) {
  * -iOS
  * -Android
  */
-exports.getAnnotations = function(pageIndex, type, callback) {
+exports.getAnnotations = function (pageIndex, type, callback) {
   if (platform === "ios" || platform === "android") {
     executeAction(callback, "getAnnotations", [pageIndex, type]);
   } else {
@@ -887,7 +887,7 @@ exports.getAnnotations = function(pageIndex, type, callback) {
  * -iOS
  * -Android
  */
-exports.getAllUnsavedAnnotations = function(callback) {
+exports.getAllUnsavedAnnotations = function (callback) {
   if (platform === "ios" || platform === "android") {
     executeAction(callback, "getAllUnsavedAnnotations", []);
   } else {
@@ -909,7 +909,7 @@ exports.getAllUnsavedAnnotations = function(callback) {
  * -iOS
  * -Android
  */
-exports.setFormFieldValue = function(value, fullyQualifiedName, callback) {
+exports.setFormFieldValue = function (value, fullyQualifiedName, callback) {
   if (platform === "ios" || platform === "android") {
     executeAction(callback, "setFormFieldValue", [value, fullyQualifiedName]);
   } else {
@@ -928,7 +928,7 @@ exports.setFormFieldValue = function(value, fullyQualifiedName, callback) {
  * -iOS
  * -Android
  */
-exports.getFormFieldValue = function(fullyQualifiedName, callback) {
+exports.getFormFieldValue = function (fullyQualifiedName, callback) {
   if (platform === "ios" || platform === "android") {
     executeAction(callback, "getFormFieldValue", [fullyQualifiedName]);
   } else {
@@ -949,7 +949,7 @@ exports.getFormFieldValue = function(fullyQualifiedName, callback) {
  * -iOS
  * -Android
  */
-exports.importXFDF = function(xfdfPath, callback) {
+exports.importXFDF = function (xfdfPath, callback) {
   if (platform === "ios" || platform === "android") {
     executeAction(callback, "importXFDF", [xfdfPath]);
   } else {
@@ -968,7 +968,7 @@ exports.importXFDF = function(xfdfPath, callback) {
  * -iOS
  * -Android
  */
-exports.exportXFDF = function(xfdfPath, callback) {
+exports.exportXFDF = function (xfdfPath, callback) {
   if (platform === "ios" || platform === "android") {
     executeAction(callback, "exportXFDF", [xfdfPath]);
   } else {
@@ -991,7 +991,7 @@ exports.exportXFDF = function(xfdfPath, callback) {
  * -iOS
  * -Android
  */
-exports.processAnnotations = function(
+exports.processAnnotations = function (
   annotationChange,
   processedDocumentPath,
   callback,
@@ -1022,7 +1022,7 @@ exports.processAnnotations = function(
  *
  * -iOS
  */
-exports.convertPDFFromHTMLString = function(html, fileName, options, callback) {
+exports.convertPDFFromHTMLString = function (html, fileName, options, callback) {
   if (platform === "ios") {
     executeAction(callback, "convertPDFFromHTMLString", [
       html,
@@ -1049,7 +1049,7 @@ exports.convertPDFFromHTMLString = function(html, fileName, options, callback) {
  */
 var listeners = {};
 
-exports.dispatchEvent = function(event) {
+exports.dispatchEvent = function (event) {
   if (platform === "ios") {
     var result = undefined;
     var functions = listeners[event.type];
@@ -1076,7 +1076,7 @@ exports.dispatchEvent = function(event) {
  * -iOS
  * -Android
  */
-exports.addEventListener = function(type, listener) {
+exports.addEventListener = function (type, listener) {
   if (platform === "ios") {
     var existing = listeners[type];
     if (!existing) {
@@ -1101,7 +1101,7 @@ exports.addEventListener = function(type, listener) {
  * -iOS
  * -Android
  */
-exports.addEventListeners = function(listeners) {
+exports.addEventListeners = function (listeners) {
   if (platform === "ios" || platform === "android") {
     for (type in listeners) {
       exports.addEventListener(type, listeners[type]);
@@ -1119,7 +1119,7 @@ exports.addEventListeners = function(listeners) {
  * -iOS
  * -Android
  */
-exports.removeEventListener = function(type, listener) {
+exports.removeEventListener = function (type, listener) {
   if (platform === "ios") {
     var existing = listeners[type];
     if (existing) {
@@ -1149,7 +1149,8 @@ var channel = require("cordova/channel");
 var channels = {
   onDocumentSaved: channel.create("onDocumentSaved"),
   onDocumentSaveFailed: channel.create("onDocumentSaveFailed"),
-  onDocumentDismissed: channel.create("onDocumentDismissed")
+  onDocumentDismissed: channel.create("onDocumentDismissed"),
+  onAnnotationSelected: channel.create("onAnnotationSelected")
 };
 
 /**
@@ -1180,11 +1181,11 @@ function onEventSubscribersChanged() {
   if (this.numHandlers === 1 && numberOfHandlers() === 1) {
     console.log("connecting event channel");
     exec(
-      function(info) {
+      function (info) {
         console.log("Received event", info);
         channels[info.eventType].fire(info.data);
       },
-      function() {
+      function () {
         console.log("Error while receiving event.");
       },
       "PSPDFKitPlugin",
@@ -1225,10 +1226,10 @@ function getPropertyAndUnset(target, name) {
  */
 function executeAction(callback, action, params) {
   exec(
-    function(success) {
+    function (success) {
       if (callback) callback(success, null);
     },
-    function(error) {
+    function (error) {
       console.log(error);
       if (callback) callback(null, error);
     },
