@@ -12,7 +12,7 @@ public class AnnotationSelectedListener implements OnAnnotationSelectedListener 
     }
 
     public void onAnnotationSelected(Annotation annotation, boolean annotationCreated) {
-        EventDispatcher.getInstance().sendEvent("onAnnotationSelected", annotation.toInstantJson());
+        EventDispatcher.getInstance().sendEvent("onAnnotationSelected", annotation);
     }
 
     public boolean onPrepareAnnotationSelection(AnnotationSelectionController controller, Annotation annotation,
