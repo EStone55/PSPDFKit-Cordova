@@ -5,6 +5,7 @@ import com.pspdfkit.ui.special_mode.manager.AnnotationManager.OnAnnotationSelect
 import com.pspdfkit.ui.special_mode.controller.AnnotationSelectionController;
 import com.pspdfkit.cordova.event.EventDispatcher;
 import org.json.JSONObject;
+import org.json.JSONException;
 
 public class AnnotationSelectedListener implements OnAnnotationSelectedListener {
 
@@ -12,7 +13,7 @@ public class AnnotationSelectedListener implements OnAnnotationSelectedListener 
 
     }
 
-    public void onAnnotationSelected(Annotation annotation, boolean annotationCreated) {
+    public void onAnnotationSelected(Annotation annotation, boolean annotationCreated) throws JSONException {
         EventDispatcher.getInstance().sendEvent("onAnnotationSelected", new JSONObject(annotation.toInstantJson()));
     }
 
