@@ -175,7 +175,7 @@ exports.reload = function (callback) {
  *
  * -Android
  */
-exports.saveDocument = function (success, error) {
+exports.saveDocument = function (callback) {
   if (platform === "android") {
     executeAction(callback, "saveDocument", []);
   } else {
