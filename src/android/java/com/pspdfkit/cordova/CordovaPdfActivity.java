@@ -79,6 +79,7 @@ public class CordovaPdfActivity extends PdfActivity {
     Log.d("WTF", "listener during create = " + listener);
 
     pdfFragment.addDocumentListener(listener);
+    pdfFragment.addOnAnnotationSelectedListener(annotationSelectedListener);
   }
 
   private void releaseActivity() {
