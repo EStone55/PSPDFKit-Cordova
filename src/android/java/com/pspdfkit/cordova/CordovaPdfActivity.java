@@ -140,6 +140,10 @@ public class CordovaPdfActivity extends PdfActivity {
     finish();
   }
 
+  public PdfDocument getDocument() {
+    return this.currentActivity.getPdfFragment().getDocument();
+  }
+
   public boolean saveDocument() throws IOException {
     final PdfDocument document = getDocument();
     if (document != null) {
