@@ -51,4 +51,14 @@ public class OpenAssetModalListener implements OnContextualToolbarLifecycleListe
         }
     }
 
+    @Override
+    public void onDisplayContextualToolbar(ContextualToolbar toolbar) {
+        // squash;
+    }
+
+    @Override
+    public void onRemoveContextualToolbar(ContextualToolbar toolbar) {
+        //squash;
+    }
+
 }
