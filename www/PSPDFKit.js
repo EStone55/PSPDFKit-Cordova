@@ -1150,7 +1150,8 @@ var channels = {
   onDocumentSaved: channel.create("onDocumentSaved"),
   onDocumentSaveFailed: channel.create("onDocumentSaveFailed"),
   onDocumentDismissed: channel.create("onDocumentDismissed"),
-  onAnnotationSelected: channel.create("onAnnotationSelected")
+  onAnnotationSelected: channel.create("onAnnotationSelected"),
+  onOpenAssetActionModal: channel.create("onOpenAssetActionModal")
 };
 
 /**
