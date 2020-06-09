@@ -95,13 +95,6 @@ public class CordovaPdfActivity extends PdfActivity implements OnContextualToolb
       // Add the custom item to our toolbar.
       menuItems.add(customItem);
       toolbar.setMenuItems(menuItems);
-      try {
-        JSONObject data = new JSONObject();
-        data.put("item", menuItems.get(0));
-        EventDispatcher.getInstance().sendEvent("onGenericEvent", data);
-      } catch(JSONException ex) {
-        // squash
-      }
       // Add a click listener to handle clicks on the custom item.
       toolbar.setOnMenuItemClickListener((toolbar1, menuItem) -> {
         if (menuItem.getId() == 8237456) {
@@ -111,6 +104,13 @@ public class CordovaPdfActivity extends PdfActivity implements OnContextualToolb
         }
         return false;
       });
+      try {
+        JSONObject data = new JSONObject();
+        // data.put("item", menuItems.get(0));
+        EventDispatcher.getInstance().sendEvent("onGenericEvent", data);
+      } catch (JSONException ex) {
+        // squash
+      }
     }
   }
 
