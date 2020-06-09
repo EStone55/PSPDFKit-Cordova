@@ -21,7 +21,8 @@ import com.pspdfkit.ui.toolbar.ToolbarCoordinatorLayout.OnContextualToolbarLifec
 import com.pspdfkit.ui.toolbar.AnnotationEditingToolbar;
 import com.pspdfkit.ui.toolbar.ContextualToolbarMenuItem;
 
-import android.R;
+import android.R.id;
+import android.R.
 import android.graphics.Color;
 
 import androidx.core.content.ContextCompat;
@@ -87,8 +88,8 @@ public class CordovaPdfActivity extends PdfActivity {
             final List<ContextualToolbarMenuItem> menuItems = ((AnnotationEditingToolbar) toolbar).getMenuItems();
 
             // Create custom menu item.
-            final ContextualToolbarMenuItem openForm = ContextualToolbarMenuItem.createSingleItem(this,
-                    R.id.pspdf_menu_custom, ContextCompat.getDrawable(this, R.drawable.ic_input_add), "Title",
+            final ContextualToolbarMenuItem openForm = ContextualToolbarMenuItem.createSingleItem(currentActivity,
+                    R.id.pspdf_menu_custom, ContextCompat.getDrawable(currentActivity, R.drawable.ic_input_add), "Title",
                     Color.WHITE, Color.WHITE, ContextualToolbarMenuItem.Position.END, false);
 
             // Add the custom item to our toolbar.
