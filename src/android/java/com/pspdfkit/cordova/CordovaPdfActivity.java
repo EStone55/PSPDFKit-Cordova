@@ -36,7 +36,7 @@ import io.reactivex.disposables.Disposable;
 
 import static com.pspdfkit.cordova.Utilities.checkArgumentNotNull;
 
-public class CordovaPdfActivity extends PdfActivity implements OnContextualToolbarLifecycleListener{
+public class CordovaPdfActivity extends PdfActivity implements OnContextualToolbarLifecycleListener {
 
   public static final String LOG_TAG = "CordovaPdfActivity";
 
@@ -83,7 +83,7 @@ public class CordovaPdfActivity extends PdfActivity implements OnContextualToolb
       // Create custom menu item.
       final ContextualToolbarMenuItem customItem = ContextualToolbarMenuItem.createSingleItem(
         this,
-        8237456, 
+        R.id.content, 
         ContextCompat.getDrawable(this, R.drawable.ic_menu_add), 
         "Title", 
         Color.WHITE,
@@ -97,7 +97,7 @@ public class CordovaPdfActivity extends PdfActivity implements OnContextualToolb
       toolbar.setMenuItems(menuItems);
       // Add a click listener to handle clicks on the custom item.
       toolbar.setOnMenuItemClickListener((toolbar1, menuItem) -> {
-        if (menuItem.getId() == 8237456) {
+        if (menuItem.getId() == R.id.content) {
           EventDispatcher.getInstance().sendEvent("onGenericEvent", new JSONObject());
           EventDispatcher.getInstance().sendEvent("onOpenAssetActionModal", annotationSelectedListener.getAnnotation());
           return true;
