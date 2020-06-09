@@ -1151,7 +1151,8 @@ var channels = {
   onDocumentSaveFailed: channel.create("onDocumentSaveFailed"),
   onDocumentDismissed: channel.create("onDocumentDismissed"),
   onAnnotationSelected: channel.create("onAnnotationSelected"),
-  onOpenAssetActionModal: channel.create("onOpenAssetActionModal")
+  onOpenAssetActionModal: channel.create("onOpenAssetActionModal"),
+  onGenericEvent: channel.create("onGenericEvent")
 };
 
 /**
@@ -1167,7 +1168,8 @@ function numberOfHandlers() {
     channels.onDocumentSaveFailed.numHandlers +
     channels.onDocumentDismissed.numHandlers + 
     channels.onAnnotationSelected.numHandlers +
-    channels.onOpenAssetActionModal.numHandlers
+    channels.onOpenAssetActionModal.numHandlers + 
+    channels.onGenericEvent.numHandlers
   );
 }
 
