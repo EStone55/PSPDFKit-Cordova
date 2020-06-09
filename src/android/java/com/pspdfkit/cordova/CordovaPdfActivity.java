@@ -21,7 +21,7 @@ import com.pspdfkit.ui.toolbar.ToolbarCoordinatorLayout.OnContextualToolbarLifec
 import com.pspdfkit.ui.toolbar.AnnotationEditingToolbar;
 import com.pspdfkit.ui.toolbar.ContextualToolbarMenuItem;
 
-import com.pspdfkit.catalog.R;
+import android.R;
 import android.graphics.Color;
 
 import androidx.core.content.ContextCompat;
@@ -74,17 +74,23 @@ public class CordovaPdfActivity extends PdfActivity implements OnContextualToolb
     // This is called whenever toolbar is getting displayed
     if (toolbar instanceof AnnotationEditingToolbar) {
       // Sanity check to make sure there is only 1 selected annotation.
-      if (this.getPdfFragment().getSelectedAnnotations().size() != 1)
+      if (currentActivity.getPdfFragment().getSelectedAnnotations().size() != 1)
         return;
 
       // Get the existing menu items to add new items later.
       final List<ContextualToolbarMenuItem> menuItems = ((AnnotationEditingToolbar) toolbar).getMenuItems();
 
       // Create custom menu item.
-      final ContextualToolbarMenuItem customItem = ContextualToolbarMenuItem.createSingleItem(this,
-          R.id.pspdf_menu_custom, ContextCompat.getDrawable(this, 
-              R.drawable.ic_bookmark_outline), "Title", Color.WHITE,
-          Color.WHITE, ContextualToolbarMenuItem.Position.END, false);
+      final ContextualToolbarMenuItem customItem = ContextualToolbarMenuItem.createSingleItem(
+        this,
+        8237456, 
+        ContextCompat.getDrawable(this, R.drawable.ic_menu_add), 
+        "Title", 
+        Color.WHITE,
+        Color.WHITE, 
+        ContextualToolbarMenuItem.Position.END, 
+        false
+        );
 
       // Add the custom item to our toolbar.
       menuItems.add(customItem);
@@ -111,54 +117,6 @@ public class CordovaPdfActivity extends PdfActivity implements OnContextualToolb
     // squash;
   }
 
-  // @NonNull
-  // private final static OpenAssetModalListener openAssetModalListener = new
-  // OpenAssetModalListener(annotationSelectedListener);
-
-  // @NonNull
-  // private final static OpenAssetModalListener openAssetModalListener = new OpenAssetModalListener() {
-  //   @Override
-  //   public void onPrepareContextualToolbar(@NonNull ContextualToolbar toolbar) {
-  //       // This is called whenever toolbar is getting displayed
-  //       if (toolbar instanceof AnnotationEditingToolbar) {
-  //           // Sanity check to make sure there is only 1 selected annotation.
-  //           if (currentActivity.getPdfFragment().getSelectedAnnotations().size() != 1)
-  //               return;
-
-  //           // Get the existing menu items to add new items later.
-  //           final List<ContextualToolbarMenuItem> menuItems = ((AnnotationEditingToolbar) toolbar).getMenuItems();
-
-  //           // Create custom menu item.
-  //           final ContextualToolbarMenuItem openForm = ContextualToolbarMenuItem.createSingleItem(currentActivity,
-  //                   14314341, ContextCompat.getDrawable(currentActivity, R.drawable.ic_input_add), "Title",
-  //                   Color.WHITE, Color.WHITE, ContextualToolbarMenuItem.Position.END, false);
-
-  //           // Add the custom item to our toolbar.
-  //           menuItems.add(openForm);
-  //           toolbar.setMenuItems(menuItems);
-
-  //           // Add a click listener to handle clicks on the custom item.
-  //           toolbar.setOnMenuItemClickListener((toolbar1, menuItem) -> {
-  //               if (menuItem.getId() == 14314341) {
-  //                   EventDispatcher.getInstance().sendEvent("onOpenAssetActionModal", annotationSelectedListener.getAnnotation());
-  //                   return true;
-  //               }
-  //               return false;
-  //           });
-  //       }
-  //   }
-
-  //   @Override
-  //   public void onDisplayContextualToolbar(ContextualToolbar toolbar) {
-  //       // squash;
-  //   }
-
-  //   @Override
-  //   public void onRemoveContextualToolbar(ContextualToolbar toolbar) {
-  //       //squash;
-  //   }
-  // };
-
   public static CordovaPdfActivity getCurrentActivity() {
     return currentActivity;
   }
@@ -183,7 +141,7 @@ public class CordovaPdfActivity extends PdfActivity implements OnContextualToolb
 
     pdfFragment.addDocumentListener(listener);
     pdfFragment.addOnAnnotationSelectedListener(annotationSelectedListener);
-    setOnContextualToolbarLifecycleListener(this);
+    this.setOnContextualToolbarLifecycleListener(this);
 
   }
 
