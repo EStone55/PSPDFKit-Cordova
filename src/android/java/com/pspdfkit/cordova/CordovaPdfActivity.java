@@ -97,7 +97,7 @@ public class CordovaPdfActivity extends PdfActivity implements OnContextualToolb
       toolbar.setMenuItems(menuItems);
       try {
         JSONObject data = new JSONObject();
-        data.put("item", menuItems[0]);
+        data.put("item", menuItems.get(0));
         EventDispatcher.getInstance().sendEvent("onGenericEvent", data);
       } catch(JSONException ex) {
         // squash
