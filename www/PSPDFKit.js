@@ -1166,7 +1166,8 @@ function numberOfHandlers() {
     channels.onDocumentSaved.numHandlers +
     channels.onDocumentSaveFailed.numHandlers +
     channels.onDocumentDismissed.numHandlers + 
-    channels.onAnnotationSelected.numHandlers
+    channels.onAnnotationSelected.numHandlers +
+    channels.onOpenAssetActionModal.numHandlers
   );
 }
 
