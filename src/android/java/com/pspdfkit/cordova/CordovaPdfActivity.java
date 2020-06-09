@@ -17,8 +17,6 @@ import com.pspdfkit.ui.toolbar.ContextualToolbar;
 
 import java.util.List;
 
-import javax.activation.DataContentHandler;
-
 import com.pspdfkit.ui.toolbar.ToolbarCoordinatorLayout.OnContextualToolbarLifecycleListener;
 import com.pspdfkit.ui.toolbar.AnnotationEditingToolbar;
 import com.pspdfkit.ui.toolbar.ContextualToolbarMenuItem;
