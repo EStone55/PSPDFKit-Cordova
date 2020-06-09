@@ -21,8 +21,7 @@ import com.pspdfkit.ui.toolbar.ToolbarCoordinatorLayout.OnContextualToolbarLifec
 import com.pspdfkit.ui.toolbar.AnnotationEditingToolbar;
 import com.pspdfkit.ui.toolbar.ContextualToolbarMenuItem;
 
-import android.R.id;
-import android.R.
+import android.R;
 import android.graphics.Color;
 
 import androidx.core.content.ContextCompat;
