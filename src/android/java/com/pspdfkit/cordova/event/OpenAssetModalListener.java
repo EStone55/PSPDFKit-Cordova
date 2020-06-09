@@ -17,7 +17,7 @@ import androidx.annotation.NonNull;
 
 public class OpenAssetModalListener implements OnContextualToolbarLifecycleListener {
 
-    private final AnnotationSelectedListener annotationSelectedListener;
+    // private final AnnotationSelectedListener annotationSelectedListener;
 
     public OpenAssetModalListener() {
     }
