@@ -88,7 +88,7 @@ public class CordovaPdfActivity extends PdfActivity {
 
             // Create custom menu item.
             final ContextualToolbarMenuItem openForm = ContextualToolbarMenuItem.createSingleItem(currentActivity,
-                    R.id.pspdf_menu_custom, ContextCompat.getDrawable(currentActivity, R.drawable.ic_input_add), "Title",
+                    14314341, ContextCompat.getDrawable(currentActivity, R.drawable.ic_input_add), "Title",
                     Color.WHITE, Color.WHITE, ContextualToolbarMenuItem.Position.END, false);
 
             // Add the custom item to our toolbar.
@@ -97,7 +97,7 @@ public class CordovaPdfActivity extends PdfActivity {
 
             // Add a click listener to handle clicks on the custom item.
             toolbar.setOnMenuItemClickListener((toolbar1, menuItem) -> {
-                if (menuItem.getId() == R.id.pspdf_menu_custom) {
+                if (menuItem.getId() == 14314341) {
                     EventDispatcher.getInstance().sendEvent("onOpenAssetActionModal", annotationSelectedListener.getAnnotation());
                     return true;
                 }

@@ -10,9 +10,9 @@
 THIS SOURCE CODE AND ANY ACCOMPANYING DOCUMENTATION ARE PROTECTED BY INTERNATIONAL COPYRIGHT LAW
 AND MAY NOT BE RESOLD OR REDISTRIBUTED. USAGE IS BOUND TO THE PSPDFKIT LICENSE AGREEMENT. UNAUTHORIZED REPRODUCTION OR DISTRIBUTION IS SUBJECT TO CIVIL AND CRIMINAL PENALTIES. This notice may not be removed from this file. http://pspdfkit.com/license.html</license>
   
-  <resources>
+  <!-- <resources>
     <item name="pspdf_menu_custom" type="id"/>
-  </resources>
+  </resources> -->
 
   <platform name="android">
     <js-module name="PSPDFKit" src="www/PSPDFKit.js">
