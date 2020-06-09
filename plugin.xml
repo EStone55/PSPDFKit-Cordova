@@ -37,6 +37,7 @@ AND MAY NOT BE RESOLD OR REDISTRIBUTED. USAGE IS BOUND TO THE PSPDFKIT LICENSE A
     <source-file src="src/android/java/com/pspdfkit/cordova/action/DismissAction.java" target-dir="src/com/pspdfkit/cordova/action" />
     <source-file src="src/android/java/com/pspdfkit/cordova/event/EventDispatcher.java" target-dir="src/com/pspdfkit/cordova/event" />
     <source-file src="src/android/java/com/pspdfkit/cordova/event/AnnotationSelectedListener.java" target-dir="src/com/pspdfkit/cordova/event" />
+    <source-file src="src/android/java/com/pspdfkit/cordova/event/OpenAssetModalListener.java" target-dir="src/com/pspdfkit/cordova/event" />
     <source-file src="src/android/java/com/pspdfkit/cordova/provider/DocumentJsonDataProvider.java" target-dir="src/com/pspdfkit/cordova/provider" />
     <source-file src="src/android/java/com/pspdfkit/cordova/CordovaPdfActivity.java" target-dir="src/com/pspdfkit/cordova" />
     <source-file src="src/android/java/com/pspdfkit/cordova/ExtractAssetTask.java" target-dir="src/com/pspdfkit/cordova" />

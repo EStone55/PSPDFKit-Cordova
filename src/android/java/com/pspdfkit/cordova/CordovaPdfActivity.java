@@ -6,7 +6,7 @@ import android.util.Log;
 import androidx.annotation.NonNull;
 
 import com.pspdfkit.cordova.event.EventDispatcher;
-// import com.pspdfkit.cordova.event.OpenAssetModalListener;
+import com.pspdfkit.cordova.event.OpenAssetModalListener;
 import com.pspdfkit.cordova.event.AnnotationSelectedListener;
 import com.pspdfkit.document.PdfDocument;
 import com.pspdfkit.listeners.DocumentListener;
@@ -59,7 +59,7 @@ public class CordovaPdfActivity extends PdfActivity {
   private final static AnnotationSelectedListener annotationSelectedListener = new AnnotationSelectedListener();
 
   @NonNull
-  // private final static OpenAssetModalListener openAssetModalListener = new OpenAssetModalListener(annotationSelectedListener);
+  private final static OpenAssetModalListener openAssetModalListener = new OpenAssetModalListener(annotationSelectedListener);
 
   public static CordovaPdfActivity getCurrentActivity() {
     return currentActivity;
