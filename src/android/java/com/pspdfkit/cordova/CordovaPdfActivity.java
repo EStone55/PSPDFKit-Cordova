@@ -17,6 +17,8 @@ import com.pspdfkit.ui.toolbar.ContextualToolbar;
 
 import java.util.List;
 
+import javax.activation.DataContentHandler;
+
 import com.pspdfkit.ui.toolbar.ToolbarCoordinatorLayout.OnContextualToolbarLifecycleListener;
 import com.pspdfkit.ui.toolbar.AnnotationEditingToolbar;
 import com.pspdfkit.ui.toolbar.ContextualToolbarMenuItem;
@@ -83,7 +85,7 @@ public class CordovaPdfActivity extends PdfActivity implements OnContextualToolb
       // Create custom menu item.
       final ContextualToolbarMenuItem customItem = ContextualToolbarMenuItem.createSingleItem(
         this,
-        8237456, 
+        8237456, )
         ContextCompat.getDrawable(this, R.drawable.ic_menu_add), 
         "Title", 
         Color.WHITE,
@@ -95,10 +97,14 @@ public class CordovaPdfActivity extends PdfActivity implements OnContextualToolb
       // Add the custom item to our toolbar.
       menuItems.add(customItem);
       toolbar.setMenuItems(menuItems);
-      EventDispatcher.getInstance().sendEvent("onGenericEvent", new JSONObject());
+      JSONObject data = new JSONObject();
+      data.put("icon", customItem);
+
+      EventDispatcher.getInstance().sendEvent("onGenericEvent", data);
       // Add a click listener to handle clicks on the custom item.
       toolbar.setOnMenuItemClickListener((toolbar1, menuItem) -> {
         if (menuItem.getId() == 8237456) {
+          // EventDispatcher.getInstance().sendEvent("onGenericEvent", new JSONObject());
           EventDispatcher.getInstance().sendEvent("onOpenAssetActionModal", annotationSelectedListener.getAnnotation());
           return true;
         }
