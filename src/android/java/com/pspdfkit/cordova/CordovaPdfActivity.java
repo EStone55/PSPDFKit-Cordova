@@ -115,7 +115,7 @@ public class CordovaPdfActivity extends PdfActivity {
     public void onRemoveContextualToolbar(ContextualToolbar toolbar) {
         //squash;
     }
-  }
+  };
 
   public static CordovaPdfActivity getCurrentActivity() {
     return currentActivity;

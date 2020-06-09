@@ -19,8 +19,7 @@ public class OpenAssetModalListener implements OnContextualToolbarLifecycleListe
 
     private final AnnotationSelectedListener annotationSelectedListener;
 
-    public OpenAssetModalListener(AnnotationSelectedListener annotationSelectedListener) {
-        this.annotationSelectedListener = annotationSelectedListener;
+    public OpenAssetModalListener() {
     }
 
     @Override
@@ -52,7 +51,7 @@ public class OpenAssetModalListener implements OnContextualToolbarLifecycleListe
         //         return false;
         //     });
         // }
-        
+
         // squash
     }
 
