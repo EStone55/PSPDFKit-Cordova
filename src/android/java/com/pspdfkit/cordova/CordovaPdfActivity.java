@@ -85,7 +85,7 @@ public class CordovaPdfActivity extends PdfActivity implements OnContextualToolb
       // Create custom menu item.
       final ContextualToolbarMenuItem customItem = ContextualToolbarMenuItem.createSingleItem(
         this,
-        8237456, )
+        8237456, 
         ContextCompat.getDrawable(this, R.drawable.ic_menu_add), 
         "Title", 
         Color.WHITE,
