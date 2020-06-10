@@ -88,7 +88,7 @@ public class CordovaPdfActivity extends PdfActivity implements OnContextualToolb
               PSPDFKitPlugin.getCurrentPlugin().cordova.getActivity().getPackageName()),
           ContextCompat.getDrawable(this,
               PSPDFKitPlugin.cordova.getDrawable(PSPDFKitPlugin.getCurrentPlugin().cordova.getActivity().getResources()
-                  .getIdentifier("ic_edit", "drawable", PSPDFKitPlugin.getCurrentPlugin().cordova.getActivity.getPackageName()))),
+                  .getIdentifier("ic_edit", "drawable", PSPDFKitPlugin.getCurrentPlugin().cordova.getActivity().getPackageName()))),
           "Title", Color.WHITE, Color.WHITE, ContextualToolbarMenuItem.Position.END, false);
 
       // Add the custom item to our toolbar.
@@ -96,7 +96,8 @@ public class CordovaPdfActivity extends PdfActivity implements OnContextualToolb
       toolbar.setMenuItems(menuItems);
       // Add a click listener to handle clicks on the custom item.
       toolbar.setOnMenuItemClickListener((toolbar1, menuItem) -> {
-        if (menuItem.getId() == R.id.edit_asset) {
+        if (menuItem.getId() == PSPDFKitPlugin.getCurrentPlugin().cordova.getActivity().getResources().getIdentifier(
+            "ic_edit", "drawable", PSPDFKitPlugin.getCurrentPlugin().cordova.getActivity().getPackageName())) {
           EventDispatcher.getInstance().sendEvent("onGenericEvent", new JSONObject());
           EventDispatcher.getInstance().sendEvent("onOpenAssetActionModal", annotationSelectedListener.getAnnotation());
           return true;
