@@ -104,7 +104,6 @@ public class CordovaPdfActivity extends PdfActivity implements OnContextualToolb
         }
         return false;
       });
-      JSONObject data = new JSONObject();
       // EventDispatcher.getInstance().sendEvent("onGenericEvent", data);
       try {
         JSONObject data = new JSONObject();
