@@ -87,7 +87,7 @@ public class CordovaPdfActivity extends PdfActivity implements OnContextualToolb
           PSPDFKitPlugin.getCurrentPlugin().cordova.getActivity().getResources().getIdentifier("ic_edit", "drawable",
               PSPDFKitPlugin.getCurrentPlugin().cordova.getActivity().getPackageName()),
           ContextCompat.getDrawable(this,
-              PSPDFKitPlugin.cordova.getActivity().getResources().getDrawable(PSPDFKitPlugin.getCurrentPlugin().cordova.getActivity().getResources()
+              PSPDFKitPlugin.getCurrentPlugin().cordova.getActivity().getResources().getDrawable(PSPDFKitPlugin.getCurrentPlugin().cordova.getActivity().getResources()
                   .getIdentifier("ic_edit", "drawable", PSPDFKitPlugin.getCurrentPlugin().cordova.getActivity().getPackageName()))),
           "Title", Color.WHITE, Color.WHITE, ContextualToolbarMenuItem.Position.END, false);
 
