@@ -83,8 +83,8 @@ public class CordovaPdfActivity extends PdfActivity implements OnContextualToolb
       // Create custom menu item.
       final ContextualToolbarMenuItem customItem = ContextualToolbarMenuItem.createSingleItem(
         this,
-        R.id.content, 
-        ContextCompat.getDrawable(this, R.drawable.ic_menu_add), 
+        R.id.edit_asset, 
+        ContextCompat.getDrawable(this, R.drawable.ic_edit), 
         "Title", 
         Color.WHITE,
         Color.WHITE, 
@@ -97,7 +97,7 @@ public class CordovaPdfActivity extends PdfActivity implements OnContextualToolb
       toolbar.setMenuItems(menuItems);
       // Add a click listener to handle clicks on the custom item.
       toolbar.setOnMenuItemClickListener((toolbar1, menuItem) -> {
-        if (menuItem.getId() == R.id.content) {
+        if (menuItem.getId() == R.id.edit_asset) {
           EventDispatcher.getInstance().sendEvent("onGenericEvent", new JSONObject());
           EventDispatcher.getInstance().sendEvent("onOpenAssetActionModal", annotationSelectedListener.getAnnotation());
           return true;
