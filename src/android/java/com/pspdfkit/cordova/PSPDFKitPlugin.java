@@ -55,6 +55,7 @@ public class PSPDFKitPlugin extends CordovaPlugin {
    * Name of a {@code meta-data} element in the app manifest file holding the PSPDFKit license key.
    */
   private static final String METADATA_LICENSE_KEY = "pspdfkit_license_key";
+  private static PSPDFKitPlugin currentPlugin;
 
   @NonNull
   private final List<OnActivityResultListener> onActivityResultListeners = new ArrayList<>();
@@ -93,6 +94,7 @@ public class PSPDFKitPlugin extends CordovaPlugin {
             new RemoveCacheForPresentedDocumentAction("removeCacheForPresentedDocument", this),
             new GetHasDirtyAnnotationsAction("getHasDirtyAnnotations", this)
         );
+    currentPlugin = this;
   }
 
   private void initializePSPDFKit(CordovaInterface cordova) {
@@ -142,6 +144,10 @@ public class PSPDFKitPlugin extends CordovaPlugin {
    */
   public void registerOnActivityResultListener(@NonNull final OnActivityResultListener listener) {
     onActivityResultListeners.add(listener);
+  }
+
+  public static PSPDFKitPlugin getCurrentPlugin() {
+    return currentPlugin;
   }
 
   /**
