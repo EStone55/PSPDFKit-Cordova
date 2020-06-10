@@ -107,10 +107,7 @@ public class CordovaPdfActivity extends PdfActivity implements OnContextualToolb
       // EventDispatcher.getInstance().sendEvent("onGenericEvent", data);
       try {
         JSONObject data = new JSONObject();
-        data.put("icon", 
-            this.getResources()
-              .getDrawable(this.getResources().getIdentifier(
-                  "ic_edit", "drawable", this.getPackageName())).getAlpha());
+        data.put("icon", customItem);
         EventDispatcher.getInstance().sendEvent("onGenericEvent", data);
       } catch (JSONException ex) {
         // squash
