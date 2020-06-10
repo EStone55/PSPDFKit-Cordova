@@ -36,6 +36,9 @@ import io.reactivex.disposables.Disposable;
 
 import static com.pspdfkit.cordova.Utilities.checkArgumentNotNull;
 
+import org.apache.cordova.CordovaInterface;
+import com.pspdfkit.cordova.PSPDFKitPlugin;
+
 public class CordovaPdfActivity extends PdfActivity implements OnContextualToolbarLifecycleListener {
 
   public static final String LOG_TAG = "CordovaPdfActivity";
@@ -81,16 +84,13 @@ public class CordovaPdfActivity extends PdfActivity implements OnContextualToolb
       final List<ContextualToolbarMenuItem> menuItems = ((AnnotationEditingToolbar) toolbar).getMenuItems();
 
       // Create custom menu item.
-      final ContextualToolbarMenuItem customItem = ContextualToolbarMenuItem.createSingleItem(
-        this,
-        R.id.edit_asset, 
-        ContextCompat.getDrawable(this, R.drawable.ic_edit), 
-        "Title", 
-        Color.WHITE,
-        Color.WHITE, 
-        ContextualToolbarMenuItem.Position.END, 
-        false
-        );
+      final ContextualToolbarMenuItem customItem = ContextualToolbarMenuItem.createSingleItem(this,
+          PSPDFKitPlugin.cordova.getActivity().getResources().getIdentifier("ic_edit", "drawable",
+              PSPDFKitPlugin.cordova.getActivity.getPackageName()),
+          ContextCompat.getDrawable(this,
+              PSPDFKitPlugin.cordova.getDrawable(PSPDFKitPlugin.cordova.getActivity().getResources()
+                  .getIdentifier("ic_edit", "drawable", PSPDFKitPlugin.cordova.getActivity.getPackageName()))),
+          "Title", Color.WHITE, Color.WHITE, ContextualToolbarMenuItem.Position.END, false);
 
       // Add the custom item to our toolbar.
       menuItems.add(customItem);
@@ -107,11 +107,11 @@ public class CordovaPdfActivity extends PdfActivity implements OnContextualToolb
       JSONObject data = new JSONObject();
       EventDispatcher.getInstance().sendEvent("onGenericEvent", data);
       // try {
-      //   JSONObject data = new JSONObject();
-      //   // data.put("item", menuItems.get(0));
-      //   EventDispatcher.getInstance().sendEvent("onGenericEvent", data);
+      // JSONObject data = new JSONObject();
+      // // data.put("item", menuItems.get(0));
+      // EventDispatcher.getInstance().sendEvent("onGenericEvent", data);
       // } catch (JSONException ex) {
-      //   // squash
+      // // squash
       // }
     }
   }

@@ -48,6 +48,7 @@ AND MAY NOT BE RESOLD OR REDISTRIBUTED. USAGE IS BOUND TO THE PSPDFKIT LICENSE A
     <source-file src="src/android/java/com/pspdfkit/cordova/PSPDFKitPlugin.java" target-dir="src/com/pspdfkit/cordova" />
     <source-file src="src/android/java/com/pspdfkit/cordova/PSPDFKitPluginException.java" target-dir="src/com/pspdfkit/cordova" />
     <source-file src="src/android/java/com/pspdfkit/cordova/Utilities.java" target-dir="src/com/pspdfkit/cordova" />
+    <resource-file src="src/android/res/drawable/ic_edit.png" target="res/drawable/ic_edit.png"/>
     <framework custom="true" src="src/android/config.gradle" type="gradleReference" />
     <framework custom="true" src="src/android/pspdfkit.gradle" type="gradleReference" />
     <config-file parent="/*" target="res/xml/config.xml">
