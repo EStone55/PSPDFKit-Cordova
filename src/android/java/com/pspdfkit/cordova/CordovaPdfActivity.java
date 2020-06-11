@@ -69,7 +69,7 @@ public class CordovaPdfActivity extends PdfActivity implements OnContextualToolb
 
       // Add our custom item to the grouping preset.
       groupPreset.add(new com.pspdfkit.ui.toolbar.grouping.presets.MenuItem(this.getResources().getIdentifier("custom_button_id", "id",
-              this.getPackageName()));
+              this.getPackageName())));
 
       return groupPreset;
     }
