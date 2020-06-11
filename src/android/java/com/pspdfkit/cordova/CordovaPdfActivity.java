@@ -17,6 +17,7 @@ import com.pspdfkit.ui.PdfFragment;
 import com.pspdfkit.ui.toolbar.ContextualToolbar;
 
 import java.util.List;
+import java.util.ArrayList;
 
 import com.pspdfkit.ui.toolbar.ToolbarCoordinatorLayout.OnContextualToolbarLifecycleListener;
 import com.pspdfkit.ui.toolbar.AnnotationEditingToolbar;
@@ -118,7 +119,7 @@ public class CordovaPdfActivity extends PdfActivity implements OnContextualToolb
       // Add the custom item to our toolbar.
       menuItems.add(customItem);
       toolbar.setMenuItems(menuItems);
-      toolbar.setMenuITemGroupingRule(new CustomAnnotationEditingToolbarGroupingRule(this));
+      toolbar.setMenuItemGroupingRule(new CustomAnnotationEditingToolbarGroupingRule(this));
       // Add a click listener to handle clicks on the custom item.
       toolbar.setOnMenuItemClickListener((toolbar1, menuItem) -> {
         if (menuItem.getId() == this.getResources().getIdentifier(
