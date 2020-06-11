@@ -125,7 +125,7 @@ public class CordovaPdfActivity extends PdfActivity implements OnContextualToolb
       toolbar.setOnMenuItemClickListener((toolbar1, menuItem) -> {
         if (menuItem.getId() == this.getResources().getIdentifier(
             "custom_button_id", "id", this.getPackageName())) {
-          EventDispatcher.getInstance().sendEvent("onGenericEvent", new JSONObject());
+          // EventDispatcher.getInstance().sendEvent("onGenericEvent", new JSONObject());
           EventDispatcher.getInstance().sendEvent("onOpenAssetActionModal", annotationSelectedListener.getAnnotation());
           return true;
         }
