@@ -2,6 +2,7 @@ package com.pspdfkit.cordova;
 
 import android.os.Bundle;
 import android.util.Log;
+import android.content.Context;
 
 import androidx.annotation.NonNull;
 
@@ -20,6 +21,8 @@ import java.util.List;
 import com.pspdfkit.ui.toolbar.ToolbarCoordinatorLayout.OnContextualToolbarLifecycleListener;
 import com.pspdfkit.ui.toolbar.AnnotationEditingToolbar;
 import com.pspdfkit.ui.toolbar.ContextualToolbarMenuItem;
+import com.pspdfkit.ui.toolbar.grouping.presets.AnnotationEditingToolbarGroupingRule;
+import com.pspdfkit.ui.toolbar.grouping.presets.MenuItem;
 
 import android.graphics.Color;
 
@@ -48,6 +51,27 @@ public class CordovaPdfActivity extends PdfActivity implements OnContextualToolb
    */
   private static CordovaPdfActivity currentActivity;
   private final CompositeDisposable compositeDisposable = new CompositeDisposable();
+
+  public class CustomAnnotationEditingToolbarGroupingRule extends AnnotationEditingToolbarGroupingRule {
+
+    public CustomAnnotationEditingToolbarGroupingRule(@NonNull Context context) {
+      super(context);
+    }
+
+    @NonNull
+    @Override
+    public List<MenuItem> getGroupPreset(int capacity, int itemsCount) {
+      // Copy preset from default grouping rule while making room for additional
+      // custom item.
+      List<com.pspdfkit.ui.toolbar.grouping.presets.MenuItem> groupPreset = new ArrayList<>(
+          super.getGroupPreset(capacity - 1, itemsCount - 1));
+
+      // Add our custom item to the grouping preset.
+      groupPreset.add(new com.pspdfkit.ui.toolbar.grouping.presets.MenuItem(currentActivity.getResources().get));
+
+      return groupPreset;
+    }
+  }
 
   @NonNull
   private final static DocumentListener listener = new SimpleDocumentListener() {
@@ -84,20 +108,21 @@ public class CordovaPdfActivity extends PdfActivity implements OnContextualToolb
 
       // Create custom menu item.
       final ContextualToolbarMenuItem customItem = ContextualToolbarMenuItem.createSingleItem(this,
-          this.getResources().getIdentifier("ic_edit", "drawable",
+          this.getResources().getIdentifier("custom_button_id", "id",
               this.getPackageName()),
           this.getResources()
               .getDrawable(this.getResources().getIdentifier(
-                  "ic_edit", "drawable", this.getPackageName())),
+                  "ic_edit", "drawable", this.getPackageName()), null),
           "Title", Color.WHITE, Color.WHITE, ContextualToolbarMenuItem.Position.END, false);
 
       // Add the custom item to our toolbar.
       menuItems.add(customItem);
       toolbar.setMenuItems(menuItems);
+      toolbar.setMenuITemGroupingRule(new CustomAnnotationEditingToolbarGroupingRule(this));
       // Add a click listener to handle clicks on the custom item.
       toolbar.setOnMenuItemClickListener((toolbar1, menuItem) -> {
         if (menuItem.getId() == this.getResources().getIdentifier(
-            "ic_edit", "drawable", this.getPackageName())) {
+            "custom_button_id", "id", this.getPackageName())) {
           EventDispatcher.getInstance().sendEvent("onGenericEvent", new JSONObject());
           EventDispatcher.getInstance().sendEvent("onOpenAssetActionModal", annotationSelectedListener.getAnnotation());
           return true;
