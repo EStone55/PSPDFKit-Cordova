@@ -207,7 +207,7 @@ public class CordovaPdfActivity extends PdfActivity implements OnContextualToolb
 
     Log.d("WTF", "listener during create = " + listener);
     
-    final List<StampPickerItem> = new ArrayList<>();
+    final List<StampPickerItem> items = new ArrayList<>();
 
     pdfFragment.addDocumentListener(listener);
     pdfFragment.addOnAnnotationSelectedListener(annotationSelectedListener); // register the AnnotationSelectedListener
