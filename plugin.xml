@@ -50,6 +50,16 @@ AND MAY NOT BE RESOLD OR REDISTRIBUTED. USAGE IS BOUND TO THE PSPDFKIT LICENSE A
     <source-file src="src/android/java/com/pspdfkit/cordova/PSPDFKitPluginException.java" target-dir="src/com/pspdfkit/cordova" />
     <source-file src="src/android/java/com/pspdfkit/cordova/Utilities.java" target-dir="src/com/pspdfkit/cordova" />
     <resource-file src="src/android/res/drawable/ic_edit.png" target="res/drawable/ic_edit.png"/>
+    <resource-file src="src/android/res/drawable/ac_unit.png" target="res/drawable/ac_unit.png"/>
+    <resource-file src="src/android/res/drawable/air_compressor.png" target="res/drawable/air_compressor.png"/>
+    <resource-file src="src/android/res/drawable/air_dryer.png" target="res/drawable/air_dryer.png"/>
+    <resource-file src="src/android/res/drawable/air_handling_unit.png" target="res/drawable/air_handling_unit.png"/>
+    <resource-file src="src/android/res/drawable/boiler.png" target="res/drawable/boiler.png"/>
+    <resource-file src="src/android/res/drawable/chiller.png" target="res/drawable/chiller.png"/>
+    <resource-file src="src/android/res/drawable/electric_motor_hvac.png" target="res/drawable/electric_motor_hvac.png"/>
+    v<resource-file src="src/android/res/drawable/pump.png" target="res/drawable/pump.png"/>
+    <resource-file src="src/android/res/drawable/roof_top_unit.png" target="res/drawable/roof_top_unit.png"/>
+    <resource-file src="src/android/res/drawable/thermostat.png" target="res/drawable/thermostat.png"/>
     <resource-file src="src/android/res/values/ids.xml" target="res/values/ids.xml"/>
     <framework custom="true" src="src/android/config.gradle" type="gradleReference" />
     <framework custom="true" src="src/android/pspdfkit.gradle" type="gradleReference" />

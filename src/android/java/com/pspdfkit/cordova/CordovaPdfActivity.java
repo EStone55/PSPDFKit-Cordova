@@ -28,8 +28,10 @@ import com.pspdfkit.ui.toolbar.grouping.presets.MenuItem;
 
 import com.pspdfkit.annotations.stamps.StampPickerItem;
 import com.pspdfkit.annotations.AnnotationType;
+import com.pspdfkit.annotations.configuration.StampAnnotationConfiguration;
 
 import android.graphics.Color;
+import android.graphics.BitmapFactory;
 
 import androidx.core.content.ContextCompat;
 
@@ -47,8 +49,9 @@ import org.apache.cordova.CordovaInterface;
 import com.pspdfkit.cordova.PSPDFKitPlugin;
 
 /**
- * Implementation of OnContextualToolbarLifecycleListener is specific to masterlibraryu
- * It is used to customize the annotation editing toolbar to select the menu to add fields to the asset
+ * Implementation of OnContextualToolbarLifecycleListener is specific to
+ * masterlibraryu It is used to customize the annotation editing toolbar to
+ * select the menu to add fields to the asset
  */
 public class CordovaPdfActivity extends PdfActivity implements OnContextualToolbarLifecycleListener {
 
@@ -62,8 +65,8 @@ public class CordovaPdfActivity extends PdfActivity implements OnContextualToolb
   private final CompositeDisposable compositeDisposable = new CompositeDisposable();
 
   /**
-   * Nested class. Code specific to ML, not in default plugin. 
-   * Description: Specificies the rules for placement of custom items in toolbars
+   * Nested class. Code specific to ML, not in default plugin. Description:
+   * Specificies the rules for placement of custom items in toolbars
    */
   public class CustomAnnotationEditingToolbarGroupingRule extends AnnotationEditingToolbarGroupingRule {
 
@@ -80,8 +83,8 @@ public class CordovaPdfActivity extends PdfActivity implements OnContextualToolb
           super.getGroupPreset(capacity - 1, itemsCount - 1));
 
       // Add our custom item to the grouping preset.
-      groupPreset.add(new com.pspdfkit.ui.toolbar.grouping.presets.MenuItem(currentActivity.getResources().getIdentifier("custom_button_id", "id",
-              currentActivity.getPackageName())));
+      groupPreset.add(new com.pspdfkit.ui.toolbar.grouping.presets.MenuItem(
+          currentActivity.getResources().getIdentifier("custom_button_id", "id", currentActivity.getPackageName())));
 
       return groupPreset;
     }
@@ -113,6 +116,7 @@ public class CordovaPdfActivity extends PdfActivity implements OnContextualToolb
   // Make an instance of AnnotationUpdatedListener
   @NonNull
   private final static AnnotationUpdatedListener annotationUpdatedListener = new AnnotationUpdatedListener();
+
   /**
    * Method that needs to be implemented for OnContextualToolbarLifecycleListener
    * Specific to ML, not in default plugin
@@ -132,11 +136,9 @@ public class CordovaPdfActivity extends PdfActivity implements OnContextualToolb
 
       // Create custom menu item.
       final ContextualToolbarMenuItem customItem = ContextualToolbarMenuItem.createSingleItem(this,
-          this.getResources().getIdentifier("custom_button_id", "id",
-              this.getPackageName()),
+          this.getResources().getIdentifier("custom_button_id", "id", this.getPackageName()),
           this.getResources()
-              .getDrawable(this.getResources().getIdentifier(
-                  "ic_edit", "drawable", this.getPackageName()), null),
+              .getDrawable(this.getResources().getIdentifier("ic_edit", "drawable", this.getPackageName()), null),
           "Title", Color.WHITE, Color.WHITE, ContextualToolbarMenuItem.Position.END, false);
 
       // Add the custom item to our toolbar.
@@ -145,8 +147,7 @@ public class CordovaPdfActivity extends PdfActivity implements OnContextualToolb
       toolbar.setMenuItemGroupingRule(new CustomAnnotationEditingToolbarGroupingRule(this));
       // Add a click listener to handle clicks on the custom item.
       toolbar.setOnMenuItemClickListener((toolbar1, menuItem) -> {
-        if (menuItem.getId() == this.getResources().getIdentifier(
-            "custom_button_id", "id", this.getPackageName())) {
+        if (menuItem.getId() == this.getResources().getIdentifier("custom_button_id", "id", this.getPackageName())) {
           // EventDispatcher.getInstance().sendEvent("onGenericEvent", new JSONObject());
           EventDispatcher.getInstance().sendEvent("onOpenAssetActionModal", annotationSelectedListener.getAnnotation());
           return true;
@@ -199,13 +200,21 @@ public class CordovaPdfActivity extends PdfActivity implements OnContextualToolb
     }
 
     Log.d("WTF", "listener during create = " + listener);
-    
+
     final List<StampPickerItem> items = new ArrayList<>();
+    items.add(StampPickerItem
+        .fromBitmap(BitmapFactory.decodeResources(this.getResources(),
+            this.getResources()
+                .getDrawable(this.getResources().getIdentifier("ac_unit", "drawable", this.getPackageName()))))
+        .build());
+    pdfFragment.getAnnotationConfiguration().put(AnnotationType.STAMP,
+        StampAnnotationConfiguration.builder(this).setAvailableStampPickeritems(items).build());
 
     pdfFragment.addDocumentListener(listener);
     pdfFragment.addOnAnnotationSelectedListener(annotationSelectedListener); // register the AnnotationSelectedListener
     pdfFragment.addOnAnnotationUpdatedListener(annotationUpdatedListener);
-    this.setOnContextualToolbarLifecycleListener(this); // Register this CordovaPdfActivity to listen for Toolbar lifecycles
+    this.setOnContextualToolbarLifecycleListener(this); // Register this CordovaPdfActivity to listen for Toolbar
+                                                        // lifecycles
 
   }
 
