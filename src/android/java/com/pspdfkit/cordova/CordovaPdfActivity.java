@@ -42,6 +42,10 @@ import static com.pspdfkit.cordova.Utilities.checkArgumentNotNull;
 import org.apache.cordova.CordovaInterface;
 import com.pspdfkit.cordova.PSPDFKitPlugin;
 
+/**
+ * Implementation of OnContextualToolbarLifecycleListener is specific to masterlibraryu
+ * It is used to customize the annotation editing toolbar to select the menu to add fields to the asset
+ */
 public class CordovaPdfActivity extends PdfActivity implements OnContextualToolbarLifecycleListener {
 
   public static final String LOG_TAG = "CordovaPdfActivity";
@@ -53,6 +57,10 @@ public class CordovaPdfActivity extends PdfActivity implements OnContextualToolb
   private static CordovaPdfActivity currentActivity;
   private final CompositeDisposable compositeDisposable = new CompositeDisposable();
 
+  /**
+   * Nested class. Code specific to ML, not in default plugin. 
+   * Description: Specificies the rules for placement of custom items in toolbars
+   */
   public class CustomAnnotationEditingToolbarGroupingRule extends AnnotationEditingToolbarGroupingRule {
 
     public CustomAnnotationEditingToolbarGroupingRule(@NonNull Context context) {
@@ -94,9 +102,16 @@ public class CordovaPdfActivity extends PdfActivity implements OnContextualToolb
     }
   };
 
+  // Make an instance of AnnotationSelectedListener
   @NonNull
   private final static AnnotationSelectedListener annotationSelectedListener = new AnnotationSelectedListener();
 
+  /**
+   * Method that needs to be implemented for OnContextualToolbarLifecycleListener
+   * Specific to ML, not in default plugin
+   * 
+   * @param toolbar
+   */
   @Override
   public void onPrepareContextualToolbar(@NonNull ContextualToolbar toolbar) {
     // This is called whenever toolbar is getting displayed
@@ -131,7 +146,6 @@ public class CordovaPdfActivity extends PdfActivity implements OnContextualToolb
         }
         return false;
       });
-      // EventDispatcher.getInstance().sendEvent("onGenericEvent", data);
       try {
         JSONObject data = new JSONObject();
         data.put("icon", customItem);
@@ -142,11 +156,23 @@ public class CordovaPdfActivity extends PdfActivity implements OnContextualToolb
     }
   }
 
+  /**
+   * Method that needs to be implemented for OnContextualToolbarLifecycleListener
+   * Specific to ML, not in default plugin
+   * 
+   * @param toolbar
+   */
   @Override
   public void onDisplayContextualToolbar(ContextualToolbar toolbar) {
     // squash;
   }
 
+  /**
+   * Method that needs to be implemented for OnContextualToolbarLifecycleListener
+   * Specific to ML, not in default plugin
+   * 
+   * @param toolbar
+   */
   @Override
   public void onRemoveContextualToolbar(ContextualToolbar toolbar) {
     // squash;
@@ -175,8 +201,8 @@ public class CordovaPdfActivity extends PdfActivity implements OnContextualToolb
     Log.d("WTF", "listener during create = " + listener);
 
     pdfFragment.addDocumentListener(listener);
-    pdfFragment.addOnAnnotationSelectedListener(annotationSelectedListener);
-    this.setOnContextualToolbarLifecycleListener(this);
+    pdfFragment.addOnAnnotationSelectedListener(annotationSelectedListener); // register the AnnotationSelectedListener
+    this.setOnContextualToolbarLifecycleListener(this); // Register this CordovaPdfActivity to listen for Toolbar lifecycles
 
   }
 

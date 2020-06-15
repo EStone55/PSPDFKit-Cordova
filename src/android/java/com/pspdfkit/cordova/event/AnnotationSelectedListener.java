@@ -8,11 +8,15 @@ import org.json.JSONObject;
 import org.json.JSONException;
 import android.util.Log;
 
+/**
+ * ML specific code. Not in the orignal plugin
+ * Description: EventListener for when an annotation is selected
+ */
 public class AnnotationSelectedListener implements OnAnnotationSelectedListener {
 
     public static final String LOG_TAG = "AnnotationSelectedListener";
 
-    private JSONObject annotation = new JSONObject();
+    private JSONObject annotation = new JSONObject(); // keep track of a JSONObject of the annotation currently selected
 
     public AnnotationSelectedListener() {
 
@@ -22,7 +26,6 @@ public class AnnotationSelectedListener implements OnAnnotationSelectedListener 
     public void onAnnotationSelected(Annotation annotation, boolean annotationCreated) {
         try {
             this.annotation = new JSONObject(annotation.toInstantJson());
-            // EventDispatcher.getInstance().sendEvent("onAnnotationSelected", new JSONObject(annotation.toInstantJson()));
         } catch (JSONException ex) {
             // squash
         }
