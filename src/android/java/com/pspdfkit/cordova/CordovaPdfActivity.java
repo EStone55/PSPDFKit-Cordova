@@ -9,6 +9,7 @@ import androidx.annotation.NonNull;
 import com.pspdfkit.cordova.event.EventDispatcher;
 import com.pspdfkit.cordova.event.OpenAssetModalListener;
 import com.pspdfkit.cordova.event.AnnotationSelectedListener;
+import com.pspdfkit.cordova.event.AnnotationUpdatedListener;
 import com.pspdfkit.document.PdfDocument;
 import com.pspdfkit.listeners.DocumentListener;
 import com.pspdfkit.listeners.SimpleDocumentListener;
@@ -24,6 +25,9 @@ import com.pspdfkit.ui.toolbar.AnnotationEditingToolbar;
 import com.pspdfkit.ui.toolbar.ContextualToolbarMenuItem;
 import com.pspdfkit.ui.toolbar.grouping.presets.AnnotationEditingToolbarGroupingRule;
 import com.pspdfkit.ui.toolbar.grouping.presets.MenuItem;
+
+import com.pspdfkit.annotations.stamps.StampPickerItem;
+import com.pspdfkit.annotations.AnnotationType;
 
 import android.graphics.Color;
 
@@ -106,6 +110,9 @@ public class CordovaPdfActivity extends PdfActivity implements OnContextualToolb
   @NonNull
   private final static AnnotationSelectedListener annotationSelectedListener = new AnnotationSelectedListener();
 
+  // Make an instance of AnnotationUpdatedListener
+  @NonNull
+  private final static AnnotationUpdatedListener annotationUpdatedListener = new AnnotationUpdatedListener();
   /**
    * Method that needs to be implemented for OnContextualToolbarLifecycleListener
    * Specific to ML, not in default plugin
@@ -199,9 +206,12 @@ public class CordovaPdfActivity extends PdfActivity implements OnContextualToolb
     }
 
     Log.d("WTF", "listener during create = " + listener);
+    
+    final List<StampPickerItem> = new ArrayList<>();
 
     pdfFragment.addDocumentListener(listener);
     pdfFragment.addOnAnnotationSelectedListener(annotationSelectedListener); // register the AnnotationSelectedListener
+    pdfFragment.addOnAnnotationUpdatedListener(annotationUpdatedListener);
     this.setOnContextualToolbarLifecycleListener(this); // Register this CordovaPdfActivity to listen for Toolbar lifecycles
 
   }
