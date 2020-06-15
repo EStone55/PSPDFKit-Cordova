@@ -36,7 +36,7 @@ public class AnnotationUpdatedListener implements OnAnnotationUpdatedListener {
     }
 
     @Override
-    public void onAnnotationZOrderChanged(int pageIndex, List<Annotation> oldOrder, List<Annotation>, newOrder) {
+    public void onAnnotationZOrderChanged(int pageIndex, List<Annotation> oldOrder, List<Annotation> newOrder) {
         
     }
 
