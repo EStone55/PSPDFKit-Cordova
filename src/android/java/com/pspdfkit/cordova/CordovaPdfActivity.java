@@ -153,13 +153,6 @@ public class CordovaPdfActivity extends PdfActivity implements OnContextualToolb
         }
         return false;
       });
-      try {
-        JSONObject data = new JSONObject();
-        data.put("icon", customItem);
-        EventDispatcher.getInstance().sendEvent("onGenericEvent", data);
-      } catch (JSONException ex) {
-        // squash
-      }
     }
   }
 
@@ -211,7 +204,7 @@ public class CordovaPdfActivity extends PdfActivity implements OnContextualToolb
 
     pdfFragment.addDocumentListener(listener);
     pdfFragment.addOnAnnotationSelectedListener(annotationSelectedListener); // register the AnnotationSelectedListener
-    //pdfFragment.addOnAnnotationUpdatedListener(annotationUpdatedListener);
+    pdfFragment.addOnAnnotationUpdatedListener(annotationUpdatedListener);
     this.setOnContextualToolbarLifecycleListener(this); // Register this CordovaPdfActivity to listen for Toolbar lifecycles
 
   }
