@@ -32,6 +32,7 @@ import com.pspdfkit.annotations.configuration.StampAnnotationConfiguration;
 
 import android.graphics.Color;
 import android.graphics.BitmapFactory;
+import android.graphics.Bitmap;
 
 import androidx.core.content.ContextCompat;
 
@@ -202,8 +203,12 @@ public class CordovaPdfActivity extends PdfActivity implements OnContextualToolb
     Log.d("WTF", "listener during create = " + listener);
 
     final List<StampPickerItem> items = new ArrayList<>();
-    items.add(StampPickerItem.fromBitmap(BitmapFactory.decodeResource(this.getResources(),
-        this.getResources().getIdentifier("ac_unit", "drawable", this.getPackageName()))).build());
+    Bitmap bitmap = Bitmap.decodeResource(this.getResources(),
+        this.getResources().getIdentifier("ac_unit", "drawable", this.getPackageName()));
+
+    EventDispatcher.getInstance().sendEvent("onGenericEvent", new JSONObject());
+
+    items.add(StampPickerItem.fromBitmap(bitmap).build());
 
     pdfFragment.getAnnotationConfiguration().put(AnnotationType.STAMP,
         StampAnnotationConfiguration.builder(this).setAvailableStampPickerItems(items).build());
