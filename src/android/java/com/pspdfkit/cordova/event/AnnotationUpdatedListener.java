@@ -26,7 +26,13 @@ public class AnnotationUpdatedListener implements OnAnnotationUpdatedListener {
             JSONObject removedAnnotation = new JSONObject(annotation.toInstantJson());
             EventDispatcher.getInstance().sendEvent("onAnnotationRemoved", removedAnnotation);
         } catch (JSONException ex) {
-            EventDispatcher.getInstance().sendEvent("onGenericEvent", ex);
+            try {
+                JSONObject error = new JSONObject();
+                error.put("message", ex.getMessage());
+                EventDispatcher.getInstance().sendEvent("onGenericEvent", error);
+            } catch {
+                // squash
+            }
         }
     }
 
