@@ -30,7 +30,7 @@ public class AnnotationUpdatedListener implements OnAnnotationUpdatedListener {
                 JSONObject error = new JSONObject();
                 error.put("message", ex.getMessage());
                 EventDispatcher.getInstance().sendEvent("onGenericEvent", error);
-            } catch {
+            } catch (JSONException exc) {
                 // squash
             }
         }
