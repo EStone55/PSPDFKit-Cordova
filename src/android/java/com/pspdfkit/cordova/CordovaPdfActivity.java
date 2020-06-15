@@ -203,7 +203,7 @@ public class CordovaPdfActivity extends PdfActivity implements OnContextualToolb
     Log.d("WTF", "listener during create = " + listener);
 
     final List<StampPickerItem> items = new ArrayList<>();
-    Bitmap bitmap = Bitmap.decodeResource(this.getResources(),
+    Bitmap bitmap = BitmapFactory.decodeResource(this.getResources(),
         this.getResources().getIdentifier("ac_unit", "drawable", this.getPackageName()));
 
     EventDispatcher.getInstance().sendEvent("onGenericEvent", new JSONObject());
