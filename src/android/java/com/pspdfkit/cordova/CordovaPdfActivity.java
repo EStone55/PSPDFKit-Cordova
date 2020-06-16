@@ -202,25 +202,20 @@ public class CordovaPdfActivity extends PdfActivity implements OnContextualToolb
 
     Log.d("WTF", "listener during create = " + listener);
 
-    EventDispatcher.getInstance().sendEvent("onGenericEvent", new JSONObject());
+    // final List<StampPickerItem> items = new ArrayList<>();
+    // Bitmap bitmap = BitmapFactory.decodeResource(this.getResources(),
+    //     this.getResources().getIdentifier("ac_unit", "drawable", this.getPackageName()));
 
-    final List<StampPickerItem> items = new ArrayList<>();
-    Bitmap bitmap = BitmapFactory.decodeResource(this.getResources(),
-        this.getResources().getIdentifier("ac_unit", "drawable", this.getPackageName()));
+    // items.add(StampPickerItem.fromBitmap(bitmap).build());
 
-    EventDispatcher.getInstance().sendEvent("onGenericEvent", new JSONObject());
-
-    items.add(StampPickerItem.fromBitmap(bitmap).build());
+    // pdfFragment.getAnnotationConfiguration().put(AnnotationType.STAMP,
+    //     StampAnnotationConfiguration.builder(this).setAvailableStampPickerItems(items).build());
 
     pdfFragment.addDocumentListener(listener);
     pdfFragment.addOnAnnotationSelectedListener(annotationSelectedListener); // register the AnnotationSelectedListener
     pdfFragment.addOnAnnotationUpdatedListener(annotationUpdatedListener);
     this.setOnContextualToolbarLifecycleListener(this); // Register this CordovaPdfActivity to listen for Toolbar
                                                         // lifecycles
-    pdfFragment.getAnnotationConfiguration().put(AnnotationType.STAMP,
-        StampAnnotationConfiguration.builder(this).setAvailableStampPickerItems(items).build());
-                                                        
-
   }
 
   private void releaseActivity() {
@@ -252,6 +247,15 @@ public class CordovaPdfActivity extends PdfActivity implements OnContextualToolb
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     bindActivity(this);
+    
+    final List<StampPickerItem> items = new ArrayList<>();
+    Bitmap bitmap = BitmapFactory.decodeResource(this.getResources(),
+        this.getResources().getIdentifier("ac_unit", "drawable", this.getPackageName()));
+
+    items.add(StampPickerItem.fromBitmap(bitmap).build());
+
+    pdfFragment.getAnnotationConfiguration().put(AnnotationType.STAMP,
+        StampAnnotationConfiguration.builder(this).setAvailableStampPickerItems(items).build());
   }
 
   @Override
