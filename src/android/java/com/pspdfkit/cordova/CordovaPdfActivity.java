@@ -29,6 +29,7 @@ import com.pspdfkit.ui.toolbar.grouping.presets.MenuItem;
 import com.pspdfkit.annotations.stamps.StampPickerItem;
 import com.pspdfkit.annotations.AnnotationType;
 import com.pspdfkit.annotations.configuration.StampAnnotationConfiguration;
+import com.pspdfkit.annotations.stamps.CustomStampAppearanceStreamGenerator;
 
 import android.graphics.Color;
 import android.graphics.BitmapFactory;
@@ -64,13 +65,13 @@ public class CordovaPdfActivity extends PdfActivity implements OnContextualToolb
    */
   private static CordovaPdfActivity currentActivity;
   private final CompositeDisposable compositeDisposable = new CompositeDisposable();
+  @NonNull private final CustomStampAppearanceStreamGenerator customStampAppearanceStreamGenerator = new CustomStampAppearanceStreamGenerator();
 
   /**
    * Nested class. Code specific to ML, not in default plugin. Description:
    * Specificies the rules for placement of custom items in toolbars
    */
   public class CustomAnnotationEditingToolbarGroupingRule extends AnnotationEditingToolbarGroupingRule {
-
     public CustomAnnotationEditingToolbarGroupingRule(@NonNull Context context) {
       super(context);
     }
@@ -122,14 +123,17 @@ public class CordovaPdfActivity extends PdfActivity implements OnContextualToolb
   public void onDocumentLoaded(@NonNull PdfDocument document) {
     super.onDocumentLoaded(document);
 
-    final List<StampPickerItem> items = new ArrayList<>();
-    Bitmap bitmap = BitmapFactory.decodeResource(this.getResources(),
-        this.getResources().getIdentifier("ac_unit", "drawable", this.getPackageName()));
+    document.getAnnotationProvider().addAppearanceStreamGenerator(customStampAppearanceStreamGenerator);
+    if(currentActivity.getPdfFragment() != null) {
+      final List<StampPickerItem> items = new ArrayList<>();
+      Bitmap bitmap = BitmapFactory.decodeResource(this.getResources(),
+          this.getResources().getIdentifier("ac_unit", "drawable", this.getPackageName()));
 
-    items.add(StampPickerItem.fromBitmap(bitmap).build());
+      items.add(StampPickerItem.fromBitmap(bitmap).build());
 
-    currentActivity.getPdfFragment().getAnnotationConfiguration().put(AnnotationType.STAMP,
-        StampAnnotationConfiguration.builder(this).setAvailableStampPickerItems(items).build());
+      currentActivity.getPdfFragment().getAnnotationConfiguration().put(AnnotationType.STAMP,
+          StampAnnotationConfiguration.builder(this).setAvailableStampPickerItems(items).build());
+    }
   }
 
   /**
@@ -215,15 +219,6 @@ public class CordovaPdfActivity extends PdfActivity implements OnContextualToolb
     }
 
     Log.d("WTF", "listener during create = " + listener);
-
-    // final List<StampPickerItem> items = new ArrayList<>();
-    // Bitmap bitmap = BitmapFactory.decodeResource(this.getResources(),
-    //     this.getResources().getIdentifier("ac_unit", "drawable", this.getPackageName()));
-
-    // items.add(StampPickerItem.fromBitmap(bitmap).build());
-
-    // pdfFragment.getAnnotationConfiguration().put(AnnotationType.STAMP,
-    //     StampAnnotationConfiguration.builder(this).setAvailableStampPickerItems(items).build());
 
     pdfFragment.addDocumentListener(listener);
     pdfFragment.addOnAnnotationSelectedListener(annotationSelectedListener); // register the AnnotationSelectedListener
