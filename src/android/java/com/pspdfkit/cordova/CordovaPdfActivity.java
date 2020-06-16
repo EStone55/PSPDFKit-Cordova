@@ -65,7 +65,8 @@ public class CordovaPdfActivity extends PdfActivity implements OnContextualToolb
    */
   private static CordovaPdfActivity currentActivity;
   private final CompositeDisposable compositeDisposable = new CompositeDisposable();
-  @NonNull private final CustomStampAppearanceStreamGenerator customStampAppearanceStreamGenerator = new CustomStampAppearanceStreamGenerator();
+  @NonNull
+  private final CustomStampAppearanceStreamGenerator customStampAppearanceStreamGenerator = new CustomStampAppearanceStreamGenerator();
 
   /**
    * Nested class. Code specific to ML, not in default plugin. Description:
@@ -124,12 +125,42 @@ public class CordovaPdfActivity extends PdfActivity implements OnContextualToolb
     super.onDocumentLoaded(document);
 
     document.getAnnotationProvider().addAppearanceStreamGenerator(customStampAppearanceStreamGenerator);
-    if(currentActivity.getPdfFragment() != null) {
+    if (currentActivity.getPdfFragment() != null) {
       final List<StampPickerItem> items = new ArrayList<>();
-      Bitmap bitmap = BitmapFactory.decodeResource(this.getResources(),
+      Bitmap bitmap1 = BitmapFactory.decodeResource(this.getResources(),
           this.getResources().getIdentifier("ac_unit", "drawable", this.getPackageName()));
+      Bitmap bitmap2 = BitmapFactory.decodeResource(this.getResources(),
+          this.getResources().getIdentifier("air_compressor", "drawable", this.getPackageName()));
+      Bitmap bitmap3 = BitmapFactory.decodeResource(this.getResources(),
+          this.getResources().getIdentifier("air_dryer", "drawable", this.getPackageName()));
+      Bitmap bitmap4 = BitmapFactory.decodeResource(this.getResources(),
+          this.getResources().getIdentifier("air_handling", "drawable", this.getPackageName()));
+      Bitmap bitmap5 = BitmapFactory.decodeResource(this.getResources(),
+          this.getResources().getIdentifier("boiler", "drawable", this.getPackageName()));
+      Bitmap bitmap6 = BitmapFactory.decodeResource(this.getResources(),
+          this.getResources().getIdentifier("chiller", "drawable", this.getPackageName()));
+      Bitmap bitmap7 = BitmapFactory.decodeResource(this.getResources(),
+          this.getResources().getIdentifier("electric_motor", "drawable", this.getPackageName()));
+      Bitmap bitmap8 = BitmapFactory.decodeResource(this.getResources(),
+          this.getResources().getIdentifier("fan", "drawable", this.getPackageName()));
+      Bitmap bitmap9 = BitmapFactory.decodeResource(this.getResources(),
+          this.getResources().getIdentifier("pump", "drawable", this.getPackageName()));
+      Bitmap bitmap10 = BitmapFactory.decodeResource(this.getResources(),
+          this.getResources().getIdentifier("roof_top_unit", "drawable", this.getPackageName()));
+      Bitmap bitmap11 = BitmapFactory.decodeResource(this.getResources(),
+          this.getResources().getIdentifier("thermostat", "drawable", this.getPackageName()));
 
-      items.add(StampPickerItem.fromBitmap(bitmap).build());
+      items.add(StampPickerItem.fromBitmap(bitmap1).build());
+      items.add(StampPickerItem.fromBitmap(bitmap2).build());
+      items.add(StampPickerItem.fromBitmap(bitmap3).build());
+      items.add(StampPickerItem.fromBitmap(bitmap4).build());
+      items.add(StampPickerItem.fromBitmap(bitmap5).build());
+      items.add(StampPickerItem.fromBitmap(bitmap6).build());
+      items.add(StampPickerItem.fromBitmap(bitmap7).build());
+      items.add(StampPickerItem.fromBitmap(bitmap8).build());
+      items.add(StampPickerItem.fromBitmap(bitmap9).build());
+      items.add(StampPickerItem.fromBitmap(bitmap10).build());
+      items.add(StampPickerItem.fromBitmap(bitmap11).build());
 
       currentActivity.getPdfFragment().getAnnotationConfiguration().put(AnnotationType.STAMP,
           StampAnnotationConfiguration.builder(this).setAvailableStampPickerItems(items).build());
