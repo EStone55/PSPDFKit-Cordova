@@ -134,13 +134,13 @@ public class CordovaPdfActivity extends PdfActivity implements OnContextualToolb
       Bitmap bitmap3 = BitmapFactory.decodeResource(this.getResources(),
           this.getResources().getIdentifier("air_dryer", "drawable", this.getPackageName()));
       Bitmap bitmap4 = BitmapFactory.decodeResource(this.getResources(),
-          this.getResources().getIdentifier("air_handling", "drawable", this.getPackageName()));
+          this.getResources().getIdentifier("air_handling_unit", "drawable", this.getPackageName()));
       Bitmap bitmap5 = BitmapFactory.decodeResource(this.getResources(),
           this.getResources().getIdentifier("boiler", "drawable", this.getPackageName()));
       Bitmap bitmap6 = BitmapFactory.decodeResource(this.getResources(),
           this.getResources().getIdentifier("chiller", "drawable", this.getPackageName()));
       Bitmap bitmap7 = BitmapFactory.decodeResource(this.getResources(),
-          this.getResources().getIdentifier("electric_motor", "drawable", this.getPackageName()));
+          this.getResources().getIdentifier("electric_motor_hvac", "drawable", this.getPackageName()));
       Bitmap bitmap8 = BitmapFactory.decodeResource(this.getResources(),
           this.getResources().getIdentifier("fan", "drawable", this.getPackageName()));
       Bitmap bitmap9 = BitmapFactory.decodeResource(this.getResources(),
