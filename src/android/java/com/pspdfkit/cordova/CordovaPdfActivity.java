@@ -118,6 +118,20 @@ public class CordovaPdfActivity extends PdfActivity implements OnContextualToolb
   @NonNull
   private final static AnnotationUpdatedListener annotationUpdatedListener = new AnnotationUpdatedListener();
 
+  @Override
+  public void onDocumentLoaded(@NonNull PdfDocument document) {
+    super.onDocumentLoaded(document);
+
+    final List<StampPickerItem> items = new ArrayList<>();
+    Bitmap bitmap = BitmapFactory.decodeResource(this.getResources(),
+        this.getResources().getIdentifier("ac_unit", "drawable", this.getPackageName()));
+
+    items.add(StampPickerItem.fromBitmap(bitmap).build());
+
+    currentActivity.getPdfFragment().getAnnotationConfiguration().put(AnnotationType.STAMP,
+        StampAnnotationConfiguration.builder(this).setAvailableStampPickerItems(items).build());
+  }
+
   /**
    * Method that needs to be implemented for OnContextualToolbarLifecycleListener
    * Specific to ML, not in default plugin
@@ -247,15 +261,6 @@ public class CordovaPdfActivity extends PdfActivity implements OnContextualToolb
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     bindActivity(this);
-
-    final List<StampPickerItem> items = new ArrayList<>();
-    Bitmap bitmap = BitmapFactory.decodeResource(this.getResources(),
-        this.getResources().getIdentifier("ac_unit", "drawable", this.getPackageName()));
-
-    items.add(StampPickerItem.fromBitmap(bitmap).build());
-
-    currentActivity.getPdfFragment().getAnnotationConfiguration().put(AnnotationType.STAMP,
-        StampAnnotationConfiguration.builder(this).setAvailableStampPickerItems(items).build());
   }
 
   @Override
