@@ -247,14 +247,14 @@ public class CordovaPdfActivity extends PdfActivity implements OnContextualToolb
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     bindActivity(this);
-    
+
     final List<StampPickerItem> items = new ArrayList<>();
     Bitmap bitmap = BitmapFactory.decodeResource(this.getResources(),
         this.getResources().getIdentifier("ac_unit", "drawable", this.getPackageName()));
 
     items.add(StampPickerItem.fromBitmap(bitmap).build());
 
-    pdfFragment.getAnnotationConfiguration().put(AnnotationType.STAMP,
+    currentActivity.getPdfFragment().getAnnotationConfiguration().put(AnnotationType.STAMP,
         StampAnnotationConfiguration.builder(this).setAvailableStampPickerItems(items).build());
   }
 
