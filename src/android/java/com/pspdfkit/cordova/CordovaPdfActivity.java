@@ -202,18 +202,18 @@ public class CordovaPdfActivity extends PdfActivity implements OnContextualToolb
 
     Log.d("WTF", "listener during create = " + listener);
 
-    EventDispatcher.getInstance().sendEvent("onGenericEvent", new JSONObject());
+    // EventDispatcher.getInstance().sendEvent("onGenericEvent", new JSONObject());
 
-    final List<StampPickerItem> items = new ArrayList<>();
-    Bitmap bitmap = BitmapFactory.decodeResource(this.getResources(),
-        this.getResources().getIdentifier("ac_unit", "drawable", this.getPackageName()));
+    // final List<StampPickerItem> items = new ArrayList<>();
+    // Bitmap bitmap = BitmapFactory.decodeResource(this.getResources(),
+    //     this.getResources().getIdentifier("ac_unit", "drawable", this.getPackageName()));
 
-    EventDispatcher.getInstance().sendEvent("onGenericEvent", new JSONObject());
+    // EventDispatcher.getInstance().sendEvent("onGenericEvent", new JSONObject());
 
-    items.add(StampPickerItem.fromBitmap(bitmap).build());
+    // items.add(StampPickerItem.fromBitmap(bitmap).build());
 
-    pdfFragment.getAnnotationConfiguration().put(AnnotationType.STAMP,
-        StampAnnotationConfiguration.builder(this).setAvailableStampPickerItems(items).build());
+    // pdfFragment.getAnnotationConfiguration().put(AnnotationType.STAMP,
+    //     StampAnnotationConfiguration.builder(this).setAvailableStampPickerItems(items).build());
 
     pdfFragment.addDocumentListener(listener);
     pdfFragment.addOnAnnotationSelectedListener(annotationSelectedListener); // register the AnnotationSelectedListener
