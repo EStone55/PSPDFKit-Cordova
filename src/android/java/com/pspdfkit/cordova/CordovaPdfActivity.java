@@ -150,17 +150,17 @@ public class CordovaPdfActivity extends PdfActivity implements OnContextualToolb
       Bitmap bitmap11 = BitmapFactory.decodeResource(this.getResources(),
           this.getResources().getIdentifier("thermostat", "drawable", this.getPackageName()));
 
-      items.add(StampPickerItem.fromBitmap(bitmap1).build());
-      items.add(StampPickerItem.fromBitmap(bitmap2).build());
-      items.add(StampPickerItem.fromBitmap(bitmap3).build());
-      items.add(StampPickerItem.fromBitmap(bitmap4).build());
-      items.add(StampPickerItem.fromBitmap(bitmap5).build());
-      items.add(StampPickerItem.fromBitmap(bitmap6).build());
-      items.add(StampPickerItem.fromBitmap(bitmap7).build());
-      items.add(StampPickerItem.fromBitmap(bitmap8).build());
-      items.add(StampPickerItem.fromBitmap(bitmap9).build());
-      items.add(StampPickerItem.fromBitmap(bitmap10).build());
-      items.add(StampPickerItem.fromBitmap(bitmap11).build());
+      items.add(StampPickerItem.fromBitmap(bitmap1).withSize(95, 46).build());
+      items.add(StampPickerItem.fromBitmap(bitmap2).withSize(54, 38).build());
+      items.add(StampPickerItem.fromBitmap(bitmap3).withSize(25, 25).build());
+      items.add(StampPickerItem.fromBitmap(bitmap4).withSize(98, 50).build());
+      items.add(StampPickerItem.fromBitmap(bitmap5).withSize(68, 68).build());
+      items.add(StampPickerItem.fromBitmap(bitmap6).withSize(122, 39).build());
+      items.add(StampPickerItem.fromBitmap(bitmap7).withSize(31, 21).build());
+      items.add(StampPickerItem.fromBitmap(bitmap8).withSize(37, 39).build());
+      items.add(StampPickerItem.fromBitmap(bitmap9).withSize(19, 20).build());
+      items.add(StampPickerItem.fromBitmap(bitmap10).withSize(100, 51).build());
+      items.add(StampPickerItem.fromBitmap(bitmap11).withSize(28, 28).build());
 
       currentActivity.getPdfFragment().getAnnotationConfiguration().put(AnnotationType.STAMP,
           StampAnnotationConfiguration.builder(this).setAvailableStampPickerItems(items).build());
