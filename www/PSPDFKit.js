@@ -1153,6 +1153,7 @@ var channels = {
   onAnnotationSelected: channel.create("onAnnotationSelected"),
   onOpenAssetActionModal: channel.create("onOpenAssetActionModal"),
   onAnnotationRemoved: channel.create("onAnnotationRemoved"),
+  onAnnotationCreated: channel.create("onAnnotionSelected"),
   onGenericEvent: channel.create("onGenericEvent")
 };
 
@@ -1171,6 +1172,7 @@ function numberOfHandlers() {
     channels.onAnnotationSelected.numHandlers +
     channels.onOpenAssetActionModal.numHandlers + 
     channels.onAnnotationRemoved.numHandlers +
+    channel.onAnnotationCreated.numHandlers +
     channels.onGenericEvent.numHandlers
   );
 }
