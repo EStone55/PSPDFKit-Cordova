@@ -1172,7 +1172,7 @@ function numberOfHandlers() {
     channels.onAnnotationSelected.numHandlers +
     channels.onOpenAssetActionModal.numHandlers + 
     channels.onAnnotationRemoved.numHandlers +
-    channel.onAnnotationCreated.numHandlers +
+    channels.onAnnotationCreated.numHandlers +
     channels.onGenericEvent.numHandlers
   );
 }
