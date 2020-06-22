@@ -21,7 +21,7 @@ public class AnnotationUpdatedListener implements OnAnnotationUpdatedListener {
             JSONObject data = new JSONObject();
             data.put("assetID", annotation.getName());
             data.put("dateAdded", annotation.getCreatedDate());
-            EventDispatcher.getInstance().sendEvent("onAnnotionCreated", data);
+            EventDispatcher.getInstance().sendEvent("onAnnotationCreated", data);
         } catch (JSONException ex) {
             // squash
         }
