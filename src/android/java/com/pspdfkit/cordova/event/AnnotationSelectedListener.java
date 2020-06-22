@@ -16,7 +16,7 @@ public class AnnotationSelectedListener implements OnAnnotationSelectedListener 
 
     public static final String LOG_TAG = "AnnotationSelectedListener";
 
-    private JSONObject annotation = new JSONObject(); // keep track of a JSONObject of the annotation currently selected
+    private JSONObject data = new JSONObject(); // keep track of a JSONObject of the annotation currently selected
 
     public AnnotationSelectedListener() {
 
@@ -25,7 +25,10 @@ public class AnnotationSelectedListener implements OnAnnotationSelectedListener 
     @Override
     public void onAnnotationSelected(Annotation annotation, boolean annotationCreated) {
         try {
-            this.annotation = new JSONObject(annotation.toInstantJson());
+            JJSONObject data = new JSONObject();
+            data.put("assetID", annotation.getName());
+            data.put("dateAdded", annotation.getCreatedDate());
+            this.data = data;
         } catch (JSONException ex) {
             // squash
         }
@@ -37,8 +40,8 @@ public class AnnotationSelectedListener implements OnAnnotationSelectedListener 
         return true;
     }
 
-    public JSONObject getAnnotation() {
-        return this.annotation;
+    public JSONObject getData() {
+        return this.data;
     }
  
 }
