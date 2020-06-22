@@ -1153,7 +1153,7 @@ var channels = {
   onAnnotationSelected: channel.create("onAnnotationSelected"),
   onOpenAssetActionModal: channel.create("onOpenAssetActionModal"),
   onAnnotationRemoved: channel.create("onAnnotationRemoved"),
-  onAnnotationCreated: channel.create("onAnnotionSelected"),
+  onAnnotationCreated: channel.create("onAnnotionCreated"),
   onGenericEvent: channel.create("onGenericEvent")
 };
 
