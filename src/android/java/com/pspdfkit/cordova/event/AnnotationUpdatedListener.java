@@ -18,9 +18,9 @@ public class AnnotationUpdatedListener implements OnAnnotationUpdatedListener {
     @Override
     public void onAnnotationCreated(Annotation annotation) {
         try {
-            JSONObject data = new JSONObject();
-            data.put("assetID", annotation.getName());
-            data.put("dateAdded", annotation.getCreatedDate());
+            JSONObject data = new JSONObject(annotation.toInstantJson());
+            // data.put("assetID", annotation.getName());
+            // data.put("dateAdded", annotation.getCreatedDate());
             EventDispatcher.getInstance().sendEvent("onAnnotationCreated", data);
         } catch (JSONException ex) {
             // squash
