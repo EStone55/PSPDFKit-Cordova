@@ -184,7 +184,7 @@ public class CordovaPdfActivity extends PdfActivity implements OnContextualToolb
   @NonNull
   private StampPickerItem createCustomApStampItem() {
     AssetAppearanceStreamGenerator appearanceStreamGenerator = new AssetAppearanceStreamGenerator(
-        "src/android/res/drawable/PSPDFKit_Logo.pdf");
+        "res/drawable/PSPDFKit_Logo.pdf");
 
     StampPickerItem stampPickerItem = StampPickerItem.fromTitle(this, "CustomApStream")
         .withSize(StampPickerItem.DEFAULT_STAMP_ANNOTATION_PDF_WIDTH)
