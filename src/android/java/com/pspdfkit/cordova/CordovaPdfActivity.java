@@ -30,6 +30,7 @@ import com.pspdfkit.annotations.stamps.StampPickerItem;
 import com.pspdfkit.annotations.AnnotationType;
 import com.pspdfkit.annotations.configuration.StampAnnotationConfiguration;
 import com.pspdfkit.annotations.stamps.CustomStampAppearanceStreamGenerator;
+import com.pspdfkit.annotations.appearance.AssetAppearanceStreamGenerator;
 
 import android.graphics.Color;
 import android.graphics.BitmapFactory;
@@ -126,45 +127,63 @@ public class CordovaPdfActivity extends PdfActivity implements OnContextualToolb
 
     document.getAnnotationProvider().addAppearanceStreamGenerator(customStampAppearanceStreamGenerator);
     if (currentActivity.getPdfFragment() != null) {
-      final List<StampPickerItem> items = new ArrayList<>();
-      Bitmap bitmap1 = BitmapFactory.decodeResource(this.getResources(),
-          this.getResources().getIdentifier("ac_unit", "drawable", this.getPackageName()));
-      Bitmap bitmap2 = BitmapFactory.decodeResource(this.getResources(),
-          this.getResources().getIdentifier("air_compressor", "drawable", this.getPackageName()));
-      Bitmap bitmap3 = BitmapFactory.decodeResource(this.getResources(),
-          this.getResources().getIdentifier("air_dryer", "drawable", this.getPackageName()));
-      Bitmap bitmap4 = BitmapFactory.decodeResource(this.getResources(),
-          this.getResources().getIdentifier("air_handling_unit", "drawable", this.getPackageName()));
-      Bitmap bitmap5 = BitmapFactory.decodeResource(this.getResources(),
-          this.getResources().getIdentifier("boiler", "drawable", this.getPackageName()));
-      Bitmap bitmap6 = BitmapFactory.decodeResource(this.getResources(),
-          this.getResources().getIdentifier("chiller", "drawable", this.getPackageName()));
-      Bitmap bitmap7 = BitmapFactory.decodeResource(this.getResources(),
-          this.getResources().getIdentifier("electric_motor_hvac", "drawable", this.getPackageName()));
-      Bitmap bitmap8 = BitmapFactory.decodeResource(this.getResources(),
-          this.getResources().getIdentifier("fan", "drawable", this.getPackageName()));
-      Bitmap bitmap9 = BitmapFactory.decodeResource(this.getResources(),
-          this.getResources().getIdentifier("pump", "drawable", this.getPackageName()));
-      Bitmap bitmap10 = BitmapFactory.decodeResource(this.getResources(),
-          this.getResources().getIdentifier("roof_top_unit", "drawable", this.getPackageName()));
-      Bitmap bitmap11 = BitmapFactory.decodeResource(this.getResources(),
-          this.getResources().getIdentifier("thermostat", "drawable", this.getPackageName()));
 
-      items.add(StampPickerItem.fromBitmap(bitmap1).withSize(95, 46).build());
-      items.add(StampPickerItem.fromBitmap(bitmap2).withSize(54, 38).build());
-      items.add(StampPickerItem.fromBitmap(bitmap3).withSize(25, 25).build());
-      items.add(StampPickerItem.fromBitmap(bitmap4).withSize(98, 50).build());
-      items.add(StampPickerItem.fromBitmap(bitmap5).withSize(68, 68).build());
-      items.add(StampPickerItem.fromBitmap(bitmap6).withSize(122, 39).build());
-      items.add(StampPickerItem.fromBitmap(bitmap7).withSize(31, 21).build());
-      items.add(StampPickerItem.fromBitmap(bitmap8).withSize(37, 39).build());
-      items.add(StampPickerItem.fromBitmap(bitmap9).withSize(19, 20).build());
-      items.add(StampPickerItem.fromBitmap(bitmap10).withSize(100, 51).build());
-      items.add(StampPickerItem.fromBitmap(bitmap11).withSize(28, 28).build());
+
+
+      final List<StampPickerItem> items = new ArrayList<>();
+      items.add(createCustomApStampItem());
+
+      // Bitmap bitmap1 = BitmapFactory.decodeResource(this.getResources(),
+      //     this.getResources().getIdentifier("ac_unit", "drawable", this.getPackageName()));
+      // Bitmap bitmap2 = BitmapFactory.decodeResource(this.getResources(),
+      //     this.getResources().getIdentifier("air_compressor", "drawable", this.getPackageName()));
+      // Bitmap bitmap3 = BitmapFactory.decodeResource(this.getResources(),
+      //     this.getResources().getIdentifier("air_dryer", "drawable", this.getPackageName()));
+      // Bitmap bitmap4 = BitmapFactory.decodeResource(this.getResources(),
+      //     this.getResources().getIdentifier("air_handling_unit", "drawable", this.getPackageName()));
+      // Bitmap bitmap5 = BitmapFactory.decodeResource(this.getResources(),
+      //     this.getResources().getIdentifier("boiler", "drawable", this.getPackageName()));
+      // Bitmap bitmap6 = BitmapFactory.decodeResource(this.getResources(),
+      //     this.getResources().getIdentifier("chiller", "drawable", this.getPackageName()));
+      // Bitmap bitmap7 = BitmapFactory.decodeResource(this.getResources(),
+      //     this.getResources().getIdentifier("electric_motor_hvac", "drawable", this.getPackageName()));
+      // Bitmap bitmap8 = BitmapFactory.decodeResource(this.getResources(),
+      //     this.getResources().getIdentifier("fan", "drawable", this.getPackageName()));
+      // Bitmap bitmap9 = BitmapFactory.decodeResource(this.getResources(),
+      //     this.getResources().getIdentifier("pump", "drawable", this.getPackageName()));
+      // Bitmap bitmap10 = BitmapFactory.decodeResource(this.getResources(),
+      //     this.getResources().getIdentifier("roof_top_unit", "drawable", this.getPackageName()));
+      // Bitmap bitmap11 = BitmapFactory.decodeResource(this.getResources(),
+      //     this.getResources().getIdentifier("thermostat", "drawable", this.getPackageName()));
+
+      // items.add(StampPickerItem.fromBitmap(bitmap1).withSize(95, 46).build());
+      // items.add(StampPickerItem.fromBitmap(bitmap2).withSize(54, 38).build());
+      // items.add(StampPickerItem.fromBitmap(bitmap3).withSize(25, 25).build());
+      // items.add(StampPickerItem.fromBitmap(bitmap4).withSize(98, 50).build());
+      // items.add(StampPickerItem.fromBitmap(bitmap5).withSize(68, 68).build());
+      // items.add(StampPickerItem.fromBitmap(bitmap6).withSize(122, 39).build());
+      // items.add(StampPickerItem.fromBitmap(bitmap7).withSize(31, 21).build());
+      // items.add(StampPickerItem.fromBitmap(bitmap8).withSize(37, 39).build());
+      // items.add(StampPickerItem.fromBitmap(bitmap9).withSize(19, 20).build());
+      // items.add(StampPickerItem.fromBitmap(bitmap10).withSize(100, 51).build());
+      // items.add(StampPickerItem.fromBitmap(bitmap11).withSize(28, 28).build());
 
       currentActivity.getPdfFragment().getAnnotationConfiguration().put(AnnotationType.STAMP,
           StampAnnotationConfiguration.builder(this).setAvailableStampPickerItems(items).build());
     }
+  }
+
+  @NonNull
+  private StampPickerItem createCustomApStampItem() {
+    AssetAppearanceStreamGenerator appearanceStreamGenerator = new AssetAppearanceStreamGenerator(
+        "src/android/res/drawable/PSPDFKit_Logo.pdf");
+
+    StampPickerItem stampPickerItem = StampPickerItem.fromTitle(this, "CustomApStream")
+        .withSize(StampPickerItem.DEFAULT_STAMP_ANNOTATION_WIDTH)
+        .withAppearanceStreamGenerator(appearanceStreamGenerator);
+
+    customStampAppearanceStreamGenerator.addAppearanceStreamGenerator("CustomApStream", appearanceStreamGenerator);
+    return stampPickerItem;
   }
 
   /**
