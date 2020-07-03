@@ -61,7 +61,7 @@ AND MAY NOT BE RESOLD OR REDISTRIBUTED. USAGE IS BOUND TO THE PSPDFKIT LICENSE A
     <resource-file src="src/android/res/drawable/pump.png" target="res/drawable/pump.png"/>
     <resource-file src="src/android/res/drawable/roof_top_unit.png" target="res/drawable/roof_top_unit.png"/>
     <resource-file src="src/android/res/drawable/thermostat.png" target="res/drawable/thermostat.png"/>
-    <!-- <resource-file src="src/android/res/drawable/PSPDFKit_Logo.pdf" target="res/drawable/PSPDFKit_Logo.pdf"/> -->
+
     <resource-file src="src/android/res/values/ids.xml" target="res/values/ids.xml"/>
     <framework custom="true" src="src/android/config.gradle" type="gradleReference" />
     <framework custom="true" src="src/android/pspdfkit.gradle" type="gradleReference" />
