@@ -184,105 +184,117 @@ public class CordovaPdfActivity extends PdfActivity implements OnContextualToolb
   @NonNull
   private List<StampPickerItem> createCustomApStampItem() {
     AssetAppearanceStreamGenerator appearanceStreamGenerator = new AssetAppearanceStreamGenerator("images/PSPDFKit_Logo.pdf");
-    // AssetAppearanceStreamGenerator appearanceStreamGen1 = new AssetAppearanceStreamGenerator("images/ac_unit.pdf");
-    // AssetAppearanceStreamGenerator appearanceStreamGen2 = new AssetAppearanceStreamGenerator(
-    //     "images/air_compressor.pdf");
-    // AssetAppearanceStreamGenerator appearanceStreamGen3 = new AssetAppearanceStreamGenerator("images/air_dryer.pdf");
-    // AssetAppearanceStreamGenerator appearanceStreamGen4 = new AssetAppearanceStreamGenerator(
-    //     "images/air_handling_unit.pdf");
-    // AssetAppearanceStreamGenerator appearanceStreamGen5 = new AssetAppearanceStreamGenerator("images/boiler.pdf");
-    // AssetAppearanceStreamGenerator appearanceStreamGen6 = new AssetAppearanceStreamGenerator("images/chiller.pdf");
-    // AssetAppearanceStreamGenerator appearanceStreamGen7 = new AssetAppearanceStreamGenerator(
-    //     "images/electric_motor_hvac.pdf");
-    // AssetAppearanceStreamGenerator appearanceStreamGen8 = new AssetAppearanceStreamGenerator(
-    //     "images/expansion_tank.pdf");
-    // AssetAppearanceStreamGenerator appearanceStreamGen9 = new AssetAppearanceStreamGenerator("images/fan.pdf");
-    // AssetAppearanceStreamGenerator appearanceStreamGen10 = new AssetAppearanceStreamGenerator("images/pump.pdf");
-    // AssetAppearanceStreamGenerator appearanceStreamGen11 = new AssetAppearanceStreamGenerator(
-    //     "images/roof_top_unit.pdf");
-    // AssetAppearanceStreamGenerator appearanceStreamGen12 = new AssetAppearanceStreamGenerator("images/thermostat.pdf");
+    AssetAppearanceStreamGenerator appearanceStreamGen1 = new AssetAppearanceStreamGenerator("images/ac_unit.pdf");
+    AssetAppearanceStreamGenerator appearanceStreamGen2 = new AssetAppearanceStreamGenerator(
+        "images/air_compressor.pdf");
+    AssetAppearanceStreamGenerator appearanceStreamGen3 = new AssetAppearanceStreamGenerator("images/air_dryer.pdf");
+    AssetAppearanceStreamGenerator appearanceStreamGen4 = new AssetAppearanceStreamGenerator(
+        "images/air_handling_unit.pdf");
+    AssetAppearanceStreamGenerator appearanceStreamGen5 = new AssetAppearanceStreamGenerator("images/boiler.pdf");
+    AssetAppearanceStreamGenerator appearanceStreamGen6 = new AssetAppearanceStreamGenerator("images/chiller.pdf");
+    AssetAppearanceStreamGenerator appearanceStreamGen7 = new AssetAppearanceStreamGenerator(
+        "images/electric_motor_hvac.pdf");
+    AssetAppearanceStreamGenerator appearanceStreamGen8 = new AssetAppearanceStreamGenerator(
+        "images/expansion_tank.pdf");
+    AssetAppearanceStreamGenerator appearanceStreamGen9 = new AssetAppearanceStreamGenerator("images/fan.pdf");
+    AssetAppearanceStreamGenerator appearanceStreamGen10 = new AssetAppearanceStreamGenerator("images/pump.pdf");
+    AssetAppearanceStreamGenerator appearanceStreamGen11 = new AssetAppearanceStreamGenerator(
+        "images/roof_top_unit.pdf");
+    AssetAppearanceStreamGenerator appearanceStreamGen12 = new AssetAppearanceStreamGenerator("images/thermostat.pdf");
 
     StampPickerItem stampPickerItem = StampPickerItem.fromTitle(this, CUSTOM_AP_STREAM_SUBJECT)
         .withSize(StampPickerItem.DEFAULT_STAMP_ANNOTATION_PDF_WIDTH)
         .withAppearanceStreamGenerator(appearanceStreamGenerator).build();
-    // Log.i(LOG_TAG, "Adding custom stamps 1");
-    // StampPickerItem stampPickerItem1 = StampPickerItem.fromTitle(this, "ac_unit").withSize(95, 46)
-    //     .withAppearanceStreamGenerator(appearanceStreamGen1).build();
-    // Log.i(LOG_TAG, "Adding custom stamps 2");
-    // StampPickerItem stampPickerItem2 = StampPickerItem.fromTitle(this, "air_compressor").withSize(54, 38)
-    //     .withAppearanceStreamGenerator(appearanceStreamGen2).build();
-    // Log.i(LOG_TAG, "Adding custom stamps 3");
-    // StampPickerItem stampPickerItem3 = StampPickerItem.fromTitle(this, "air_dryer").withSize(25, 25)
-    //     .withAppearanceStreamGenerator(appearanceStreamGen3).build();
-    // Log.i(LOG_TAG, "Adding custom stamps 4");
-    // StampPickerItem stampPickerItem4 = StampPickerItem.fromTitle(this, "air_handling_unit").withSize(98, 50)
-    //     .withAppearanceStreamGenerator(appearanceStreamGen4).build();
-    // Log.i(LOG_TAG, "Adding custom stamps 5");
-    // StampPickerItem stampPickerItem5 = StampPickerItem.fromTitle(this, "boiler").withSize(68, 68)
-    //     .withAppearanceStreamGenerator(appearanceStreamGen5).build();
-    // Log.i(LOG_TAG, "Adding custom stamps 6");
-    // StampPickerItem stampPickerItem6 = StampPickerItem.fromTitle(this, "chiller").withSize(122, 39)
-    //     .withAppearanceStreamGenerator(appearanceStreamGen6).build();
-    // Log.i(LOG_TAG, "Adding custom stamps 7");
-    // StampPickerItem stampPickerItem7 = StampPickerItem.fromTitle(this, "electric_motor_hvac").withSize(31, 31)
-    //     .withAppearanceStreamGenerator(appearanceStreamGen7).build();
-    // Log.i(LOG_TAG, "Adding custom stamps 8");
-    // StampPickerItem stampPickerItem8 = StampPickerItem.fromTitle(this, "expansion_tank").withSize(37, 39)
-    //     .withAppearanceStreamGenerator(appearanceStreamGen8).build();
-    // Log.i(LOG_TAG, "Adding custom stamps 9");
-    // StampPickerItem stampPickerItem9 = StampPickerItem.fromTitle(this, "fan").withSize(37, 34)
-    //     .withAppearanceStreamGenerator(appearanceStreamGen9).build();
-    // Log.i(LOG_TAG, "Adding custom stamps 10");
-    // StampPickerItem stampPickerItem10 = StampPickerItem.fromTitle(this, "pump").withSize(95, 46)
-    //     .withAppearanceStreamGenerator(appearanceStreamGen10).build();
-    // Log.i(LOG_TAG, "Adding custom stamps 11");
-    // StampPickerItem stampPickerItem11 = StampPickerItem.fromTitle(this, "roof_top_unit").withSize(95, 46)
-    //     .withAppearanceStreamGenerator(appearanceStreamGen11).build();
-    // Log.i(LOG_TAG, "Adding custom stamps 12");
-    // StampPickerItem stampPickerItem12 = StampPickerItem.fromTitle(this, "thermostat").withSize(95, 46)
-    //     .withAppearanceStreamGenerator(appearanceStreamGen12).build();
+    Log.i(LOG_TAG, "Adding custom stamps 1");
+    StampPickerItem stampPickerItem1 = StampPickerItem.fromTitle(this, "ac_unit").withSize(
+        StampPickerItem.DEFAULT_STAMP_ANNOTATION_PDF_WIDTH)
+        .withAppearanceStreamGenerator(appearanceStreamGen1).build();
+    Log.i(LOG_TAG, "Adding custom stamps 2");
+    StampPickerItem stampPickerItem2 = StampPickerItem.fromTitle(this, "air_compressor").withSize(
+        StampPickerItem.DEFAULT_STAMP_ANNOTATION_PDF_WIDTH)
+        .withAppearanceStreamGenerator(appearanceStreamGen2).build();
+    Log.i(LOG_TAG, "Adding custom stamps 3");
+    StampPickerItem stampPickerItem3 = StampPickerItem.fromTitle(this, "air_dryer").withSize(
+        StampPickerItem.DEFAULT_STAMP_ANNOTATION_PDF_WIDTH)
+        .withAppearanceStreamGenerator(appearanceStreamGen3).build();
+    Log.i(LOG_TAG, "Adding custom stamps 4");
+    StampPickerItem stampPickerItem4 = StampPickerItem.fromTitle(this, "air_handling_unit").withSize(
+        StampPickerItem.DEFAULT_STAMP_ANNOTATION_PDF_WIDTH)
+        .withAppearanceStreamGenerator(appearanceStreamGen4).build();
+    Log.i(LOG_TAG, "Adding custom stamps 5");
+    StampPickerItem stampPickerItem5 = StampPickerItem.fromTitle(this, "boiler").withSize(
+        StampPickerItem.DEFAULT_STAMP_ANNOTATION_PDF_WIDTH)
+        .withAppearanceStreamGenerator(appearanceStreamGen5).build();
+    Log.i(LOG_TAG, "Adding custom stamps 6");
+    StampPickerItem stampPickerItem6 = StampPickerItem.fromTitle(this, "chiller").withSize(
+        StampPickerItem.DEFAULT_STAMP_ANNOTATION_PDF_WIDTH)
+        .withAppearanceStreamGenerator(appearanceStreamGen6).build();
+    Log.i(LOG_TAG, "Adding custom stamps 7");
+    StampPickerItem stampPickerItem7 = StampPickerItem.fromTitle(this, "electric_motor_hvac").withSize(
+        StampPickerItem.DEFAULT_STAMP_ANNOTATION_PDF_WIDTH)
+        .withAppearanceStreamGenerator(appearanceStreamGen7).build();
+    Log.i(LOG_TAG, "Adding custom stamps 8");
+    StampPickerItem stampPickerItem8 = StampPickerItem.fromTitle(this, "expansion_tank").withSize(
+        StampPickerItem.DEFAULT_STAMP_ANNOTATION_PDF_WIDTH)
+        .withAppearanceStreamGenerator(appearanceStreamGen8).build();
+    Log.i(LOG_TAG, "Adding custom stamps 9");
+    StampPickerItem stampPickerItem9 = StampPickerItem.fromTitle(this, "fan").withSize(
+        StampPickerItem.DEFAULT_STAMP_ANNOTATION_PDF_WIDTH)
+        .withAppearanceStreamGenerator(appearanceStreamGen9).build();
+    Log.i(LOG_TAG, "Adding custom stamps 10");
+    StampPickerItem stampPickerItem10 = StampPickerItem.fromTitle(this, "pump").withSize(
+        StampPickerItem.DEFAULT_STAMP_ANNOTATION_PDF_WIDTH)
+        .withAppearanceStreamGenerator(appearanceStreamGen10).build();
+    Log.i(LOG_TAG, "Adding custom stamps 11");
+    StampPickerItem stampPickerItem11 = StampPickerItem.fromTitle(this, "roof_top_unit").withSize(
+        StampPickerItem.DEFAULT_STAMP_ANNOTATION_PDF_WIDTH)
+        .withAppearanceStreamGenerator(appearanceStreamGen11).build();
+    Log.i(LOG_TAG, "Adding custom stamps 12");
+    StampPickerItem stampPickerItem12 = StampPickerItem.fromTitle(this, "thermostat").withSize(
+        StampPickerItem.DEFAULT_STAMP_ANNOTATION_PDF_WIDTH)
+        .withAppearanceStreamGenerator(appearanceStreamGen12).build();
 
     final List<StampPickerItem> items = new ArrayList<>();
     items.add(stampPickerItem);
-    // items.add(stampPickerItem1);
-    // items.add(stampPickerItem2);
-    // items.add(stampPickerItem3);
-    // items.add(stampPickerItem4);
-    // items.add(stampPickerItem5);
-    // items.add(stampPickerItem6);
-    // items.add(stampPickerItem7);
-    // items.add(stampPickerItem8);
-    // items.add(stampPickerItem9);
-    // items.add(stampPickerItem10);
-    // items.add(stampPickerItem11);
-    // items.add(stampPickerItem12);
+    items.add(stampPickerItem1);
+    items.add(stampPickerItem2);
+    items.add(stampPickerItem3);
+    items.add(stampPickerItem4);
+    items.add(stampPickerItem5);
+    items.add(stampPickerItem6);
+    items.add(stampPickerItem7);
+    items.add(stampPickerItem8);
+    items.add(stampPickerItem9);
+    items.add(stampPickerItem10);
+    items.add(stampPickerItem11);
+    items.add(stampPickerItem12);
 
     customStampAppearanceStreamGenerator.addAppearanceStreamGenerator(CUSTOM_AP_STREAM_SUBJECT,
         appearanceStreamGenerator);
-    // Log.i(LOG_TAG, "adding appearance stream 1");
-    // customStampAppearanceStreamGenerator.addAppearanceStreamGenerator("ac_unit", appearanceStreamGen1);
-    // Log.i(LOG_TAG, "adding appearance stream 2");
-    // customStampAppearanceStreamGenerator.addAppearanceStreamGenerator("air_compressor", appearanceStreamGen2);
-    // Log.i(LOG_TAG, "adding appearance stream 3");
-    // customStampAppearanceStreamGenerator.addAppearanceStreamGenerator("air_dryer", appearanceStreamGen3);
-    // Log.i(LOG_TAG, "adding appearance stream 4");
-    // customStampAppearanceStreamGenerator.addAppearanceStreamGenerator("air_handling_unit", appearanceStreamGen4);
-    // Log.i(LOG_TAG, "adding appearance stream 5");
-    // customStampAppearanceStreamGenerator.addAppearanceStreamGenerator("boiler", appearanceStreamGen5);
-    // Log.i(LOG_TAG, "adding appearance stream 6");
-    // customStampAppearanceStreamGenerator.addAppearanceStreamGenerator("chiller", appearanceStreamGen6);
-    // Log.i(LOG_TAG, "adding appearance stream 7");
-    // customStampAppearanceStreamGenerator.addAppearanceStreamGenerator("electric_motor_hvac", appearanceStreamGen7);
-    // Log.i(LOG_TAG, "adding appearance stream 8");
-    // customStampAppearanceStreamGenerator.addAppearanceStreamGenerator("expansion_tank", appearanceStreamGen8);
-    // Log.i(LOG_TAG, "adding appearance stream 9");
-    // customStampAppearanceStreamGenerator.addAppearanceStreamGenerator("fan", appearanceStreamGen9);
-    // Log.i(LOG_TAG, "adding appearance stream 10");
-    // customStampAppearanceStreamGenerator.addAppearanceStreamGenerator("pump", appearanceStreamGen10);
-    // Log.i(LOG_TAG, "adding appearance stream 11");
-    // customStampAppearanceStreamGenerator.addAppearanceStreamGenerator("roof_top_unit", appearanceStreamGen11);
-    // Log.i(LOG_TAG, "adding appearance stream 12");
-    // customStampAppearanceStreamGenerator.addAppearanceStreamGenerator("thermostat", appearanceStreamGen12);
+    Log.i(LOG_TAG, "adding appearance stream 1");
+    customStampAppearanceStreamGenerator.addAppearanceStreamGenerator("ac_unit", appearanceStreamGen1);
+    Log.i(LOG_TAG, "adding appearance stream 2");
+    customStampAppearanceStreamGenerator.addAppearanceStreamGenerator("air_compressor", appearanceStreamGen2);
+    Log.i(LOG_TAG, "adding appearance stream 3");
+    customStampAppearanceStreamGenerator.addAppearanceStreamGenerator("air_dryer", appearanceStreamGen3);
+    Log.i(LOG_TAG, "adding appearance stream 4");
+    customStampAppearanceStreamGenerator.addAppearanceStreamGenerator("air_handling_unit", appearanceStreamGen4);
+    Log.i(LOG_TAG, "adding appearance stream 5");
+    customStampAppearanceStreamGenerator.addAppearanceStreamGenerator("boiler", appearanceStreamGen5);
+    Log.i(LOG_TAG, "adding appearance stream 6");
+    customStampAppearanceStreamGenerator.addAppearanceStreamGenerator("chiller", appearanceStreamGen6);
+    Log.i(LOG_TAG, "adding appearance stream 7");
+    customStampAppearanceStreamGenerator.addAppearanceStreamGenerator("electric_motor_hvac", appearanceStreamGen7);
+    Log.i(LOG_TAG, "adding appearance stream 8");
+    customStampAppearanceStreamGenerator.addAppearanceStreamGenerator("expansion_tank", appearanceStreamGen8);
+    Log.i(LOG_TAG, "adding appearance stream 9");
+    customStampAppearanceStreamGenerator.addAppearanceStreamGenerator("fan", appearanceStreamGen9);
+    Log.i(LOG_TAG, "adding appearance stream 10");
+    customStampAppearanceStreamGenerator.addAppearanceStreamGenerator("pump", appearanceStreamGen10);
+    Log.i(LOG_TAG, "adding appearance stream 11");
+    customStampAppearanceStreamGenerator.addAppearanceStreamGenerator("roof_top_unit", appearanceStreamGen11);
+    Log.i(LOG_TAG, "adding appearance stream 12");
+    customStampAppearanceStreamGenerator.addAppearanceStreamGenerator("thermostat", appearanceStreamGen12);
 
     return items;
   }
