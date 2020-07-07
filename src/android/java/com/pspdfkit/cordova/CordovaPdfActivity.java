@@ -200,6 +200,8 @@ public class CordovaPdfActivity extends PdfActivity implements OnContextualToolb
         "images/roof_top_unit.pdf");
     AssetAppearanceStreamGenerator appearanceStreamGen12 = new AssetAppearanceStreamGenerator("images/thermostat.pdf");
 
+    Log.i(LOG_TAG, "Adding custom stamps");
+
     StampPickerItem stampPickerItem1 = StampPickerItem.fromTitle(this, "ac_unit").withSize(95, 46)
         .withAppearanceStreamGenerator(appearanceStreamGen1).build();
     StampPickerItem stampPickerItem2 = StampPickerItem.fromTitle(this, "air_compressor").withSize(54, 38)
