@@ -62,6 +62,18 @@ AND MAY NOT BE RESOLD OR REDISTRIBUTED. USAGE IS BOUND TO THE PSPDFKIT LICENSE A
     <resource-file src="src/android/res/drawable/roof_top_unit.png" target="res/drawable/roof_top_unit.png"/>
     <resource-file src="src/android/res/drawable/thermostat.png" target="res/drawable/thermostat.png"/>
     <resource-file src="src/android/assets/images/PSPDFKit_Logo.pdf" target="assets/images/PSPDFKit_Logo.pdf"/>
+    <resource-file src="src/android/assets/images/ac_unit.pdf" target="assets/images/ac_unit.pdf"/>
+    <resource-file src="src/android/assets/images/air_compressor.pdf" target="assets/images/air_compressor.pdf"/>
+    <resource-file src="src/android/assets/images/air_dryer.pdf" target="assets/images/air_dryer.pdf"/>
+    <resource-file src="src/android/assets/images/air_handling_unit.pdf" target="assets/images/air_handling_unit.pdf"/>
+    <resource-file src="src/android/assets/images/boiler.pdf" target="assets/images/boiler.pdf"/>
+    <resource-file src="src/android/assets/images/chiller.pdf" target="assets/images/chiller.pdf"/>
+    <resource-file src="src/android/assets/images/electric_motor_hvac.pdf" target="assets/images/electric_motor_hvac.pdf"/>
+    <resource-file src="src/android/assets/images/expansion_tank.pdf" target="assets/images/expansion+tank.pdf"/>
+    <resource-file src="src/android/assets/images/fan.pdf" target="assets/images/fan.pdf"/>
+    <resource-file src="src/android/assets/images/pump.pdf" target="assets/images/pump.pdf"/>
+    <resource-file src="src/android/assets/images/roof_top_unit.pdf" target="assets/images/roof_top_unit.pdf"/>
+    <resource-file src="src/android/assets/images/thermostat.pdf" target="assets/images/thermostat.pdf"/>
     <resource-file src="src/android/res/values/ids.xml" target="res/values/ids.xml"/>
     <framework custom="true" src="src/android/config.gradle" type="gradleReference" />
     <framework custom="true" src="src/android/pspdfkit.gradle" type="gradleReference" />
