@@ -251,17 +251,29 @@ public class CordovaPdfActivity extends PdfActivity implements OnContextualToolb
     items.add(stampPickerItem11);
     items.add(stampPickerItem12);
 
+    LOG.i(LOG_TAG, "adding appearance stream 1");
     customStampAppearanceStreamGenerator.addAppearanceStreamGenerator("ac_unit", appearanceStreamGen1);
+    LOG.i(LOG_TAG, "adding appearance stream 2");
     customStampAppearanceStreamGenerator.addAppearanceStreamGenerator("air_compressor", appearanceStreamGen2);
+    LOG.i(LOG_TAG, "adding appearance stream 3");
     customStampAppearanceStreamGenerator.addAppearanceStreamGenerator("air_dryer", appearanceStreamGen3);
+    LOG.i(LOG_TAG, "adding appearance stream 4");
     customStampAppearanceStreamGenerator.addAppearanceStreamGenerator("air_handling_unit", appearanceStreamGen4);
+    LOG.i(LOG_TAG, "adding appearance stream 5");
     customStampAppearanceStreamGenerator.addAppearanceStreamGenerator("boiler", appearanceStreamGen5);
+    LOG.i(LOG_TAG, "adding appearance stream 6");
     customStampAppearanceStreamGenerator.addAppearanceStreamGenerator("chiller", appearanceStreamGen6);
+    LOG.i(LOG_TAG, "adding appearance stream 7");
     customStampAppearanceStreamGenerator.addAppearanceStreamGenerator("electric_motor_hvac", appearanceStreamGen7);
+    LOG.i(LOG_TAG, "adding appearance stream 8");
     customStampAppearanceStreamGenerator.addAppearanceStreamGenerator("expansion_tank", appearanceStreamGen8);
+    LOG.i(LOG_TAG, "adding appearance stream 9");
     customStampAppearanceStreamGenerator.addAppearanceStreamGenerator("fan", appearanceStreamGen9);
+    LOG.i(LOG_TAG, "adding appearance stream 10");
     customStampAppearanceStreamGenerator.addAppearanceStreamGenerator("pump", appearanceStreamGen10);
+    LOG.i(LOG_TAG, "adding appearance stream 11");
     customStampAppearanceStreamGenerator.addAppearanceStreamGenerator("roof_top_unit", appearanceStreamGen11);
+    LOG.i(LOG_TAG, "adding appearance stream 12");
     customStampAppearanceStreamGenerator.addAppearanceStreamGenerator("thermostat", appearanceStreamGen12);
 
     return items;
