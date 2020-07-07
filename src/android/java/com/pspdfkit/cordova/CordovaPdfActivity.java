@@ -206,40 +206,40 @@ public class CordovaPdfActivity extends PdfActivity implements OnContextualToolb
         .withSize(StampPickerItem.DEFAULT_STAMP_ANNOTATION_PDF_WIDTH)
         .withAppearanceStreamGenerator(appearanceStreamGenerator).build();
     Log.i(LOG_TAG, "Adding custom stamps 1");
-    StampPickerItem stampPickerItem1 = StampPickerItem.fromTitle(this, "ac_unit").withSize(95)
+    StampPickerItem stampPickerItem1 = StampPickerItem.fromTitle(this, "ac_unit")
         .withAppearanceStreamGenerator(appearanceStreamGen1).build();
     Log.i(LOG_TAG, "Adding custom stamps 2");
-    StampPickerItem stampPickerItem2 = StampPickerItem.fromTitle(this, "air_compressor").withSize(54)
+    StampPickerItem stampPickerItem2 = StampPickerItem.fromTitle(this, "air_compressor")
         .withAppearanceStreamGenerator(appearanceStreamGen2).build();
     Log.i(LOG_TAG, "Adding custom stamps 3");
-    StampPickerItem stampPickerItem3 = StampPickerItem.fromTitle(this, "air_dryer").withSize(25)
+    StampPickerItem stampPickerItem3 = StampPickerItem.fromTitle(this, "air_dryer")
         .withAppearanceStreamGenerator(appearanceStreamGen3).build();
     Log.i(LOG_TAG, "Adding custom stamps 4");
-    StampPickerItem stampPickerItem4 = StampPickerItem.fromTitle(this, "air_handling_unit").withSize(98)
+    StampPickerItem stampPickerItem4 = StampPickerItem.fromTitle(this, "air_handling_unit")
         .withAppearanceStreamGenerator(appearanceStreamGen4).build();
     Log.i(LOG_TAG, "Adding custom stamps 5");
-    StampPickerItem stampPickerItem5 = StampPickerItem.fromTitle(this, "boiler").withSize(68)
+    StampPickerItem stampPickerItem5 = StampPickerItem.fromTitle(this, "boiler")
         .withAppearanceStreamGenerator(appearanceStreamGen5).build();
     Log.i(LOG_TAG, "Adding custom stamps 6");
-    StampPickerItem stampPickerItem6 = StampPickerItem.fromTitle(this, "chiller").withSize(122)
+    StampPickerItem stampPickerItem6 = StampPickerItem.fromTitle(this, "chiller")
         .withAppearanceStreamGenerator(appearanceStreamGen6).build();
     Log.i(LOG_TAG, "Adding custom stamps 7");
-    StampPickerItem stampPickerItem7 = StampPickerItem.fromTitle(this, "electric_motor_hvac").withSize(31)
+    StampPickerItem stampPickerItem7 = StampPickerItem.fromTitle(this, "electric_motor_hvac")
         .withAppearanceStreamGenerator(appearanceStreamGen7).build();
     Log.i(LOG_TAG, "Adding custom stamps 8");
-    StampPickerItem stampPickerItem8 = StampPickerItem.fromTitle(this, "expansion_tank").withSize(37)
+    StampPickerItem stampPickerItem8 = StampPickerItem.fromTitle(this, "expansion_tank")
         .withAppearanceStreamGenerator(appearanceStreamGen8).build();
     Log.i(LOG_TAG, "Adding custom stamps 9");
-    StampPickerItem stampPickerItem9 = StampPickerItem.fromTitle(this, "fan").withSize(37)
+    StampPickerItem stampPickerItem9 = StampPickerItem.fromTitle(this, "fan")
         .withAppearanceStreamGenerator(appearanceStreamGen9).build();
     Log.i(LOG_TAG, "Adding custom stamps 10");
-    StampPickerItem stampPickerItem10 = StampPickerItem.fromTitle(this, "pump").withSize(95)
+    StampPickerItem stampPickerItem10 = StampPickerItem.fromTitle(this, "pump")
         .withAppearanceStreamGenerator(appearanceStreamGen10).build();
     Log.i(LOG_TAG, "Adding custom stamps 11");
-    StampPickerItem stampPickerItem11 = StampPickerItem.fromTitle(this, "roof_top_unit").withSize(95)
+    StampPickerItem stampPickerItem11 = StampPickerItem.fromTitle(this, "roof_top_unit")
         .withAppearanceStreamGenerator(appearanceStreamGen11).build();
     Log.i(LOG_TAG, "Adding custom stamps 12");
-    StampPickerItem stampPickerItem12 = StampPickerItem.fromTitle(this, "thermostat").withSize(95)
+    StampPickerItem stampPickerItem12 = StampPickerItem.fromTitle(this, "thermostat")
         .withAppearanceStreamGenerator(appearanceStreamGen12).build();
 
     final List<StampPickerItem> items = new ArrayList<>();
