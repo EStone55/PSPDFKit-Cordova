@@ -236,27 +236,23 @@ public class CordovaPdfActivity extends PdfActivity implements OnContextualToolb
         .withAppearanceStreamGenerator(appearanceStreamGen7).build();
     Log.i(LOG_TAG, "Adding custom stamps 8");
     StampPickerItem stampPickerItem8 = StampPickerItem.fromTitle(this, "expansion_tank")
-        .withSize(StampPickerItem.DEFAULT_STAMP_ANNOTATION_PDF_WIDTH
+        .withSize(StampPickerItem.DEFAULT_STAMP_ANNOTATION_PDF_WIDTH)
         .withAppearanceStreamGenerator(appearanceStreamGen8).build();
     Log.i(LOG_TAG, "Adding custom stamps 9");
     StampPickerItem stampPickerItem9 = StampPickerItem.fromTitle(this, "fan")
-        .withSize(
-            StampPickerItem.DEFAULT_STAMP_ANNOTATION_PDF_WIDTH)
+        .withSize(StampPickerItem.DEFAULT_STAMP_ANNOTATION_PDF_WIDTH)
         .withAppearanceStreamGenerator(appearanceStreamGen9).build();
     Log.i(LOG_TAG, "Adding custom stamps 10");
     StampPickerItem stampPickerItem10 = StampPickerItem.fromTitle(this, "pump")
-        .withSize(
-            StampPickerItem.DEFAULT_STAMP_ANNOTATION_PDF_WIDTH)
+        .withSize(StampPickerItem.DEFAULT_STAMP_ANNOTATION_PDF_WIDTH)
         .withAppearanceStreamGenerator(appearanceStreamGen10).build();
     Log.i(LOG_TAG, "Adding custom stamps 11");
     StampPickerItem stampPickerItem11 = StampPickerItem.fromTitle(this, "roof_top_unit")
-        .withSize(
-            StampPickerItem.DEFAULT_STAMP_ANNOTATION_PDF_WIDTH)
+        .withSize(StampPickerItem.DEFAULT_STAMP_ANNOTATION_PDF_WIDTH)
         .withAppearanceStreamGenerator(appearanceStreamGen11).build();
     Log.i(LOG_TAG, "Adding custom stamps 12");
     StampPickerItem stampPickerItem12 = StampPickerItem.fromTitle(this, "thermostat")
-        .withSize(
-            StampPickerItem.DEFAULT_STAMP_ANNOTATION_PDF_WIDTH)
+        .withSize(StampPickerItem.DEFAULT_STAMP_ANNOTATION_PDF_WIDTH)
         .withAppearanceStreamGenerator(appearanceStreamGen12).build();
 
     final List<StampPickerItem> items = new ArrayList<>();
