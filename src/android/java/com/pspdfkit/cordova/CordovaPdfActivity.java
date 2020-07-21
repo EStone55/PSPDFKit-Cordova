@@ -361,7 +361,7 @@ public class CordovaPdfActivity extends PdfActivity implements OnContextualToolb
     StampPickerItem stampPickerItem35 = StampPickerItem.fromTitle(this, "roof-access")
         .withSize(StampPickerItem.DEFAULT_STAMP_ANNOTATION_PDF_WIDTH)
         .withAppearanceStreamGenerator(appearanceStreamGen35).build();
-    StampPickerItem stampPickerItem36 = StampPickerItem.fromTitle(this, "roof-top-access")
+    StampPickerItem stampPickerItem36 = StampPickerItem.fromTitle(this, "roof-top-unit")
         .withSize(StampPickerItem.DEFAULT_STAMP_ANNOTATION_PDF_WIDTH)
         .withAppearanceStreamGenerator(appearanceStreamGen36).build();
     StampPickerItem stampPickerItem37 = StampPickerItem.fromTitle(this, "unit-heater")

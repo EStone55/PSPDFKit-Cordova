@@ -66,6 +66,7 @@ AND MAY NOT BE RESOLD OR REDISTRIBUTED. USAGE IS BOUND TO THE PSPDFKIT LICENSE A
     <resource-file src="src/android/assets/images/air-handler-unit.pdf" target="assets/images/air-handler-unit.pdf"/>
     <resource-file src="src/android/assets/images/backup-generator.pdf" target="assets/images/backup-generator.pdf"/>
     <resource-file src="src/android/assets/images/blue-light.pdf" target="assets/images/blue-light.pdf"/>
+    <resource-file src="src/android/assets/images/boiler.pdf" target="assets/images/boiler.pdf"/>
     <resource-file src="src/android/assets/images/chiller.pdf" target="assets/images/chiller.pdf"/>
     <resource-file src="src/android/assets/images/co-detector.pdf" target="assets/images/co-detector.pdf"/>
     <resource-file src="src/android/assets/images/condensor.pdf" target="assets/images/condensor.pdf"/>
@@ -90,11 +91,13 @@ AND MAY NOT BE RESOLD OR REDISTRIBUTED. USAGE IS BOUND TO THE PSPDFKIT LICENSE A
     <resource-file src="src/android/assets/images/handicap-accessibility.pdf" target="assets/images/handicap-accessibility.pdf"/>
     <resource-file src="src/android/assets/images/main-distribution-panel.pdf" target="assets/images/main-distribution-panel.pdf"/>
     <resource-file src="src/android/assets/images/makeup-air.pdf" target="assets/images/makeup-air.pdf"/>
+    <resource-file src="src/android/assets/images/manhole.pdf" target="assets/images/manhole.pdf"/>
     <resource-file src="src/android/assets/images/panel-electric.pdf" target="assets/images/panel-electric.pdf"/>
     <resource-file src="src/android/assets/images/pump-hvac.pdf" target="assets/images/pump-hvac.pdf"/>
     <resource-file src="src/android/assets/images/pump-potable.pdf" target="assets/images/pump-potable.pdf"/>
     <resource-file src="src/android/assets/images/return-air.pdf" target="assets/images/return-air.pdf"/>
-    <resource-file src="src/android/assets/images/roof-access.pdf" target="assets/images/roof-accesspdf"/>
+    <resource-file src="src/android/assets/images/roof-access.pdf" target="assets/images/roof-access.pdf"/>
+    <resource-file src="src/android/assets/images/roof-top-unit.pdf" target="assets/images/roof-top-unit.pdf"/>
     <resource-file src="src/android/assets/images/unit-heater.pdf" target="assets/images/unit-heater.pdf"/>
     <resource-file src="src/android/assets/images/unit-ventilator-cabinet-type.pdf" target="assets/images/unit-ventilator-cabinet-type.pdf"/>
     <resource-file src="src/android/assets/images/unit-ventilator-wall-type.pdf" target="assets/images/unit-ventilator-wall-type.pdf"/>
