@@ -136,7 +136,7 @@ public class CordovaPdfActivity extends PdfActivity implements OnContextualToolb
             // preprocess document
 
         }
-    }
+    };
   }
 
   @Override
