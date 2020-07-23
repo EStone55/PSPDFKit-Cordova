@@ -125,7 +125,7 @@ public class CordovaPdfActivity extends PdfActivity implements OnContextualToolb
   private final static AnnotationUpdatedListener annotationUpdatedListener = new AnnotationUpdatedListener();
 
   private void flattenAllButLinkAnnotations() {
-      final PdfDocument = getDocument();
+      final PdfDocument document = getDocument();
   }
 
   @NonNull
