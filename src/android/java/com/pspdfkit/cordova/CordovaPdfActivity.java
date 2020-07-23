@@ -277,64 +277,64 @@ public class CordovaPdfActivity extends PdfActivity implements OnContextualToolb
         .withSize(113, 54)
         .withAppearanceStreamGenerator(appearanceStreamGen1).build();
     StampPickerItem stampPickerItem2 = StampPickerItem.fromTitle(this, "air-handler-unit")
-        .withSize(StampPickerItem.DEFAULT_STAMP_ANNOTATION_PDF_WIDTH)
+        .withSize(115, 56)
         .withAppearanceStreamGenerator(appearanceStreamGen2).build();
     StampPickerItem stampPickerItem3 = StampPickerItem.fromTitle(this, "backup-generator")
-        .withSize(StampPickerItem.DEFAULT_STAMP_ANNOTATION_PDF_WIDTH)
+        .withSize(93, 35)
         .withAppearanceStreamGenerator(appearanceStreamGen3).build();
     StampPickerItem stampPickerItem4 = StampPickerItem.fromTitle(this, "blue-light")
-        .withSize(StampPickerItem.DEFAULT_STAMP_ANNOTATION_PDF_WIDTH)
+        .withSize(34, 35)
         .withAppearanceStreamGenerator(appearanceStreamGen4).build();
     StampPickerItem stampPickerItem5 = StampPickerItem.fromTitle(this, "boiler")
-        .withSize(StampPickerItem.DEFAULT_STAMP_ANNOTATION_PDF_WIDTH)
+        .withSize(79, 80)
         .withAppearanceStreamGenerator(appearanceStreamGen5).build();
     StampPickerItem stampPickerItem6 = StampPickerItem.fromTitle(this, "chiller")
-        .withSize(StampPickerItem.DEFAULT_STAMP_ANNOTATION_PDF_WIDTH)
+        .withSize(142, 48)
         .withAppearanceStreamGenerator(appearanceStreamGen6).build();
     StampPickerItem stampPickerItem7 = StampPickerItem.fromTitle(this, "co-detector")
-        .withSize(StampPickerItem.DEFAULT_STAMP_ANNOTATION_PDF_WIDTH)
+        .withSize(32, 32)
         .withAppearanceStreamGenerator(appearanceStreamGen7).build();
     StampPickerItem stampPickerItem8 = StampPickerItem.fromTitle(this, "condensor")
-        .withSize(StampPickerItem.DEFAULT_STAMP_ANNOTATION_PDF_WIDTH)
+        .withSize(96, 73)
         .withAppearanceStreamGenerator(appearanceStreamGen8).build();
     StampPickerItem stampPickerItem9 = StampPickerItem.fromTitle(this, "defibrilator")
-        .withSize(StampPickerItem.DEFAULT_STAMP_ANNOTATION_PDF_WIDTH)
+        .withSize(34, 33)
         .withAppearanceStreamGenerator(appearanceStreamGen9).build();
     StampPickerItem stampPickerItem10 = StampPickerItem.fromTitle(this, "diffuser-heating-cooling")
-        .withSize(StampPickerItem.DEFAULT_STAMP_ANNOTATION_PDF_WIDTH)
+        .withSize(77, 72)
         .withAppearanceStreamGenerator(appearanceStreamGen10).build();
     StampPickerItem stampPickerItem11 = StampPickerItem.fromTitle(this, "drinking-fountain")
-        .withSize(StampPickerItem.DEFAULT_STAMP_ANNOTATION_PDF_WIDTH)
+        .withSize(29, 32)
         .withAppearanceStreamGenerator(appearanceStreamGen11).build();
     StampPickerItem stampPickerItem12 = StampPickerItem.fromTitle(this, "electric-meter")
-        .withSize(StampPickerItem.DEFAULT_STAMP_ANNOTATION_PDF_WIDTH)
+        .withSize(66, 34)
         .withAppearanceStreamGenerator(appearanceStreamGen12).build();
     StampPickerItem stampPickerItem13 = StampPickerItem.fromTitle(this, "electric-motor")
-        .withSize(StampPickerItem.DEFAULT_STAMP_ANNOTATION_PDF_WIDTH)
+        .withSize(31, 25)
         .withAppearanceStreamGenerator(appearanceStreamGen13).build();
     StampPickerItem stampPickerItem14 = StampPickerItem.fromTitle(this, "emergency-recovery-ventilation")
-        .withSize(StampPickerItem.DEFAULT_STAMP_ANNOTATION_PDF_WIDTH)
+        .withSize(64, 51)
         .withAppearanceStreamGenerator(appearanceStreamGen14).build();
     StampPickerItem stampPickerItem15 = StampPickerItem.fromTitle(this, "entrance-door-designator")
-        .withSize(StampPickerItem.DEFAULT_STAMP_ANNOTATION_PDF_WIDTH)
+        .withSize(46, 24)
         .withAppearanceStreamGenerator(appearanceStreamGen15).build();
     StampPickerItem stampPickerItem16 = StampPickerItem.fromTitle(this, "exhaust-fan")
-        .withSize(StampPickerItem.DEFAULT_STAMP_ANNOTATION_PDF_WIDTH)
+        .withSize(44, 42)
         .withAppearanceStreamGenerator(appearanceStreamGen16).build();
     StampPickerItem stampPickerItem17 = StampPickerItem.fromTitle(this, "expansion-tank")
-        .withSize(StampPickerItem.DEFAULT_STAMP_ANNOTATION_PDF_WIDTH)
+        .withSize(42, 38)
         .withAppearanceStreamGenerator(appearanceStreamGen17).build();
     StampPickerItem stampPickerItem18 = StampPickerItem.fromTitle(this, "eye-wash-station")
-        .withSize(StampPickerItem.DEFAULT_STAMP_ANNOTATION_PDF_WIDTH)
+        .withSize(33, 32)
         .withAppearanceStreamGenerator(appearanceStreamGen18).build();
     StampPickerItem stampPickerItem19 = StampPickerItem.fromTitle(this, "fire-alarm")
-        .withSize(StampPickerItem.DEFAULT_STAMP_ANNOTATION_PDF_WIDTH)
+        .withSize(35, 32)
         .withAppearanceStreamGenerator(appearanceStreamGen19).build();
     StampPickerItem stampPickerItem20 = StampPickerItem.fromTitle(this, "fire-alarm-control-panel")
-        .withSize(StampPickerItem.DEFAULT_STAMP_ANNOTATION_PDF_WIDTH)
+        .withSize(46, 32)
         .withAppearanceStreamGenerator(appearanceStreamGen20).build();
     StampPickerItem stampPickerItem21 = StampPickerItem.fromTitle(this, "fire-extinguisher")
-        .withSize(StampPickerItem.DEFAULT_STAMP_ANNOTATION_PDF_WIDTH)
+        .withSize(33, 32)
         .withAppearanceStreamGenerator(appearanceStreamGen21).build();
     StampPickerItem stampPickerItem22 = StampPickerItem.fromTitle(this, "fire-hydrant")
         .withSize(StampPickerItem.DEFAULT_STAMP_ANNOTATION_PDF_WIDTH)
