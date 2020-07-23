@@ -124,20 +124,20 @@ public class CordovaPdfActivity extends PdfActivity implements OnContextualToolb
   @NonNull
   private final static AnnotationUpdatedListener annotationUpdatedListener = new AnnotationUpdatedListener();
 
-  private void flattenAllButLinkAnnotations() {
-      final PdfDocument document = getDocument();
-  }
+//   private void flattenAllButLinkAnnotations() {
+//       final PdfDocument document = getDocument();
+//   }
 
-  @NonNull
-  private DocumentSharingDiolog.SharingDialogListener getCustomSharingDialogListener() {
-    return new DocumentSharingDialog.SharingDialogListener() {
-        @Override
-        public void onAccept(@NonNull SharingOptions shareOptions) {
-            // preprocess document
+//   @NonNull
+//   private DocumentSharingDiolog.SharingDialogListener getCustomSharingDialogListener() {
+//     return new DocumentSharingDialog.SharingDialogListener() {
+//         @Override
+//         public void onAccept(@NonNull SharingOptions shareOptions) {
+//             // preprocess document
 
-        }
-    };
-  }
+//         }
+//     };
+//   }
 
   @Override
   public void onDocumentLoaded(@NonNull PdfDocument document) {
