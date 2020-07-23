@@ -32,6 +32,8 @@ import com.pspdfkit.annotations.configuration.StampAnnotationConfiguration;
 import com.pspdfkit.annotations.stamps.CustomStampAppearanceStreamGenerator;
 import com.pspdfkit.annotations.appearance.AssetAppearanceStreamGenerator;
 
+import com.pspdfkit.ui.dialog.DocumentSharingDialog;
+
 import android.graphics.Color;
 import android.graphics.BitmapFactory;
 import android.graphics.Bitmap;
@@ -121,6 +123,21 @@ public class CordovaPdfActivity extends PdfActivity implements OnContextualToolb
   // Make an instance of AnnotationUpdatedListener
   @NonNull
   private final static AnnotationUpdatedListener annotationUpdatedListener = new AnnotationUpdatedListener();
+
+  private void flattenAllButLinkAnnotations() {
+      final PdfDocument = getDocument();
+  }
+
+  @NonNull
+  private DocumentSharingDiolog.SharingDialogListener getCustomSharingDialogListener() {
+    return new DocumentSharingDialog.SharingDialogListener() {
+        @Override
+        public void onAccept(@NonNull SharingOptions shareOptions) {
+            // preprocess document
+
+        }
+    }
+  }
 
   @Override
   public void onDocumentLoaded(@NonNull PdfDocument document) {
@@ -257,7 +274,7 @@ public class CordovaPdfActivity extends PdfActivity implements OnContextualToolb
     // .withSize(StampPickerItem.DEFAULT_STAMP_ANNOTATION_PDF_WIDTH)
     // .withAppearanceStreamGenerator(appearanceStreamGenerator).build();
     StampPickerItem stampPickerItem1 = StampPickerItem.fromTitle(this, "air-conditioning-unit")
-        .withSize(StampPickerItem.DEFAULT_STAMP_ANNOTATION_PDF_WIDTH)
+        .withSize(113, 54)
         .withAppearanceStreamGenerator(appearanceStreamGen1).build();
     StampPickerItem stampPickerItem2 = StampPickerItem.fromTitle(this, "air-handler-unit")
         .withSize(StampPickerItem.DEFAULT_STAMP_ANNOTATION_PDF_WIDTH)
