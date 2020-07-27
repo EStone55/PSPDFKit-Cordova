@@ -105,6 +105,8 @@ AND MAY NOT BE RESOLD OR REDISTRIBUTED. USAGE IS BOUND TO THE PSPDFKIT LICENSE A
     <resource-file src="src/android/assets/images/water-meter.pdf" target="assets/images/water-meter.pdf"/>
     <resource-file src="src/android/assets/images/water-softening-tank.pdf" target="assets/images/water-softening-tank.pdf"/>
     <resource-file src="src/android/res/values/ids.xml" target="res/values/ids.xml"/>
+    <resource-file src="src/android/res/values/strings.xml" target="res/values/strings.xml"/>
+    <resource-file src="src/andriod/res/layout/custom_document_sharing_dialog.xml" target="res/layout/custom_document_sharing_dialog.xml"/>
     <framework custom="true" src="src/android/config.gradle" type="gradleReference" />
     <framework custom="true" src="src/android/pspdfkit.gradle" type="gradleReference" />
     <config-file parent="/*" target="res/xml/config.xml">
