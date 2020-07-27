@@ -43,6 +43,7 @@ import com.pspdfkit.annotations.appearance.AssetAppearanceStreamGenerator;
 import com.pspdfkit.ui.dialog.DocumentSharingDialog;
 import com.pspdfkit.ui.dialog.DocumentSharingDialogConfiguration;
 import com.pspdfkit.document.sharing.SharingOptions;
+import com.pspdfkit.ui.dialog.BaseDocumentSharingDialog;
 
 import android.graphics.Color;
 import android.graphics.BitmapFactory;
@@ -144,7 +145,7 @@ public class CordovaPdfActivity extends PdfActivity implements OnContextualToolb
   }
 
   static class DialogLayout {
-    DocumentsharingDialogConfiguration configuration;
+    DocumentSharingDialogConfiguration configuration;
     Context context;
 
     View root;
