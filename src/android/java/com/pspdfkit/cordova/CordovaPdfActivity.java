@@ -12,6 +12,8 @@ import android.app.Dialog;
 
 import androidx.annotation.NonNull;
 
+import com.pspdfkit.datastructures.Range;
+
 import com.pspdfkit.cordova.event.EventDispatcher;
 import com.pspdfkit.cordova.event.OpenAssetModalListener;
 import com.pspdfkit.cordova.event.AnnotationSelectedListener;
@@ -137,7 +139,7 @@ public class CordovaPdfActivity extends PdfActivity implements OnContextualToolb
         }
         return new SharingOptions(
             annotationProcessingMode,
-            Collections.singletonList(new Range(0, getDocument().getPageCount())),
+            Collections.singletonList(new Range(0, currentActivity.getDocument().getPageCount())),
             dialogLayout.documentNameEditText.getText().toString()
         );
     }
@@ -157,8 +159,8 @@ public class CordovaPdfActivity extends PdfActivity implements OnContextualToolb
         this.configuration = configuration;
         this.context = context;
 
-        int layoutId = currentActivity.getResources().getIdentifier("custom_document_sharing_dialog", "layout", this.getPackageName());
-        root = View.inflate(context, currentActivity.getResources().getLayout(layoutId), null);
+        int layoutId = currentActivity.getResources().getIdentifier("custom_document_sharing_dialog", "layout", currentActivity.getPackageName());
+        root = View.inflate(context, layoutId, null);
 
         documentNameEditText = root.findViewById(layoutId);
         documentNameEditText.setText(configuration.getInitialDocumentName());
