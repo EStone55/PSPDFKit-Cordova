@@ -631,7 +631,7 @@ public class CordovaPdfActivity extends PdfActivity implements OnContextualToolb
     
     setSharingOptionsProvider((document, currentPage) -> {
         return null;
-    })
+    });
     bindActivity(this);
   }
 
