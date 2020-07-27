@@ -3,6 +3,12 @@ package com.pspdfkit.cordova;
 import android.os.Bundle;
 import android.util.Log;
 import android.content.Context;
+import android.view.View;
+import android.widget.CheckBox;
+import android.widget.EditText;
+import android.widget.TextView;
+import androidx.appcompat.app.AlertDialog;
+import android.app.Dialog;
 
 import androidx.annotation.NonNull;
 
@@ -11,6 +17,7 @@ import com.pspdfkit.cordova.event.OpenAssetModalListener;
 import com.pspdfkit.cordova.event.AnnotationSelectedListener;
 import com.pspdfkit.cordova.event.AnnotationUpdatedListener;
 import com.pspdfkit.document.PdfDocument;
+import com.pspdfkit.document.processor.PdfProcessorTask;
 import com.pspdfkit.listeners.DocumentListener;
 import com.pspdfkit.listeners.SimpleDocumentListener;
 import com.pspdfkit.ui.PdfActivity;
@@ -19,6 +26,7 @@ import com.pspdfkit.ui.toolbar.ContextualToolbar;
 
 import java.util.List;
 import java.util.ArrayList;
+import java.util.Collections;
 
 import com.pspdfkit.ui.toolbar.ToolbarCoordinatorLayout.OnContextualToolbarLifecycleListener;
 import com.pspdfkit.ui.toolbar.AnnotationEditingToolbar;
@@ -33,6 +41,8 @@ import com.pspdfkit.annotations.stamps.CustomStampAppearanceStreamGenerator;
 import com.pspdfkit.annotations.appearance.AssetAppearanceStreamGenerator;
 
 import com.pspdfkit.ui.dialog.DocumentSharingDialog;
+import com.pspdfkit.ui.dialog.DocumentSharingDialogConfiguration;
+import com.pspdfkit.document.sharing.SharingOptions;
 
 import android.graphics.Color;
 import android.graphics.BitmapFactory;
@@ -97,6 +107,80 @@ public class CordovaPdfActivity extends PdfActivity implements OnContextualToolb
     }
   }
 
+  public static class CustomSharingDialog extends BaseDocumentSharingDialog {
+    
+    private DialogLayout dialogLayout;
+
+    public CustomSharingDialog() {
+
+    }
+
+    @Override
+    @NonNull
+    public Dialog onCreateDialog(Bundle savedInstanceState) {
+        dialogLayout = new DialogLayout(getConfiguration(), getContext());
+
+        dialogLayout.positiveButton.setOnClickListener(v -> {
+            if (getListener() != null) {
+                getListener().onAccept(getSharingOptions());
+                dismiss();
+            }
+        });
+        return dialogLayout.createDialog();
+    }
+
+    private SharingOptions getSharingOptions() {
+        PdfProcessorTask.AnnotationProcessingMode annotationProcessingMode = PdfProcessorTask.AnnotationProcessingMode.KEEP;
+        if (dialogLayout.addLinks.isChecked()) {
+            annotationProcessingMode = PdfProcessorTask.AnnotationProcessingMode.FLATTEN;
+        }
+        return new SharingOptions(
+            annotationProcessingMode,
+            Collections.singletonList(new Range(0, getDocument().getPageCount())),
+            dialogLayout.documentNameEditText.getText().toString()
+        );
+    }
+
+  }
+
+  static class DialogLayout {
+    DocumentsharingDialogConfiguration configuration;
+    Context context;
+
+    View root;
+    EditText documentNameEditText;
+    TextView positiveButton;
+    CheckBox addLinks;
+
+    DialogLayout(DocumentSharingDialogConfiguration configuration, Context context) {
+        this.configuration = configuration;
+        this.context = context;
+
+        int layoutId = currentActivity.getResources().getIdentifier("custom_document_sharing_dialog", "layout", this.getPackageName());
+        root = View.inflate(context, currentActivity.getResources().getLayout(layoutId), null);
+
+        documentNameEditText = root.findViewById(layoutId);
+        documentNameEditText.setText(configuration.getInitialDocumentName());
+        documentNameEditText.clearFocus();
+
+        int shareDialogAddLinksId = currentActivity.getResources().getIdentifier("share_dialog_add_links", "id", this.getPackageName());
+        addLinks = root.findViewById(shareDialogAddLinksId);
+
+        int shareButtonId = currentActivity.getResources().getIdentifier("share_button", "id", this.getPackageName());
+        positiveButton = root.findViewById(shareButtonId);
+        positiveButton.setText(configuration.getPositiveButtonText());
+    }
+
+    Dialog createDialog() {
+        return new AlertDialog.Builter(context)
+            .setCancelable(true)
+            .setTitle(configuration.getDialogTitle())
+            .setView(root)
+            .create();
+    }
+
+  }
+
   @NonNull
   private final static DocumentListener listener = new SimpleDocumentListener() {
     @Override
@@ -124,21 +208,6 @@ public class CordovaPdfActivity extends PdfActivity implements OnContextualToolb
   @NonNull
   private final static AnnotationUpdatedListener annotationUpdatedListener = new AnnotationUpdatedListener();
 
-//   private void flattenAllButLinkAnnotations() {
-//       final PdfDocument document = getDocument();
-//   }
-
-//   @NonNull
-//   private DocumentSharingDiolog.SharingDialogListener getCustomSharingDialogListener() {
-//     return new DocumentSharingDialog.SharingDialogListener() {
-//         @Override
-//         public void onAccept(@NonNull SharingOptions shareOptions) {
-//             // preprocess document
-
-//         }
-//     };
-//   }
-
   @Override
   public void onDocumentLoaded(@NonNull PdfDocument document) {
     super.onDocumentLoaded(document);
@@ -148,51 +217,6 @@ public class CordovaPdfActivity extends PdfActivity implements OnContextualToolb
 
       final List<StampPickerItem> items = createCustomApStampItem();
 
-      // Bitmap bitmap1 = BitmapFactory.decodeResource(this.getResources(),
-      // this.getResources().getIdentifier("ac_unit", "drawable",
-      // this.getPackageName()));
-      // Bitmap bitmap2 = BitmapFactory.decodeResource(this.getResources(),
-      // this.getResources().getIdentifier("air_compressor", "drawable",
-      // this.getPackageName()));
-      // Bitmap bitmap3 = BitmapFactory.decodeResource(this.getResources(),
-      // this.getResources().getIdentifier("air_dryer", "drawable",
-      // this.getPackageName()));
-      // Bitmap bitmap4 = BitmapFactory.decodeResource(this.getResources(),
-      // this.getResources().getIdentifier("air_handling_unit", "drawable",
-      // this.getPackageName()));
-      // Bitmap bitmap5 = BitmapFactory.decodeResource(this.getResources(),
-      // this.getResources().getIdentifier("boiler", "drawable",
-      // this.getPackageName()));
-      // Bitmap bitmap6 = BitmapFactory.decodeResource(this.getResources(),
-      // this.getResources().getIdentifier("chiller", "drawable",
-      // this.getPackageName()));
-      // Bitmap bitmap7 = BitmapFactory.decodeResource(this.getResources(),
-      // this.getResources().getIdentifier("electric_motor_hvac", "drawable",
-      // this.getPackageName()));
-      // Bitmap bitmap8 = BitmapFactory.decodeResource(this.getResources(),
-      // this.getResources().getIdentifier("fan", "drawable", this.getPackageName()));
-      // Bitmap bitmap9 = BitmapFactory.decodeResource(this.getResources(),
-      // this.getResources().getIdentifier("pump", "drawable",
-      // this.getPackageName()));
-      // Bitmap bitmap10 = BitmapFactory.decodeResource(this.getResources(),
-      // this.getResources().getIdentifier("roof_top_unit", "drawable",
-      // this.getPackageName()));
-      // Bitmap bitmap11 = BitmapFactory.decodeResource(this.getResources(),
-      // this.getResources().getIdentifier("thermostat", "drawable",
-      // this.getPackageName()));
-
-      // items.add(StampPickerItem.fromBitmap(bitmap1).withSize(95, 46).build());
-      // items.add(StampPickerItem.fromBitmap(bitmap2).withSize(54, 38).build());
-      // items.add(StampPickerItem.fromBitmap(bitmap3).withSize(25, 25).build());
-      // items.add(StampPickerItem.fromBitmap(bitmap4).withSize(98, 50).build());
-      // items.add(StampPickerItem.fromBitmap(bitmap5).withSize(68, 68).build());
-      // items.add(StampPickerItem.fromBitmap(bitmap6).withSize(122, 39).build());
-      // items.add(StampPickerItem.fromBitmap(bitmap7).withSize(31, 21).build());
-      // items.add(StampPickerItem.fromBitmap(bitmap8).withSize(37, 39).build());
-      // items.add(StampPickerItem.fromBitmap(bitmap9).withSize(19, 20).build());
-      // items.add(StampPickerItem.fromBitmap(bitmap10).withSize(100, 51).build());
-      // items.add(StampPickerItem.fromBitmap(bitmap11).withSize(28, 28).build());
-
       currentActivity.getPdfFragment().getAnnotationConfiguration().put(AnnotationType.STAMP,
           StampAnnotationConfiguration.builder(this).setAvailableStampPickerItems(items).build());
     }
@@ -200,9 +224,6 @@ public class CordovaPdfActivity extends PdfActivity implements OnContextualToolb
 
   @NonNull
   private List<StampPickerItem> createCustomApStampItem() {
-    // AssetAppearanceStreamGenerator appearanceStreamGenerator = new
-    // AssetAppearanceStreamGenerator(
-    // "images/PSPDFKit_Logo.pdf");
     AssetAppearanceStreamGenerator appearanceStreamGen1 = new AssetAppearanceStreamGenerator(
         "images/air-conditioning-unit.pdf");
     AssetAppearanceStreamGenerator appearanceStreamGen2 = new AssetAppearanceStreamGenerator(
@@ -269,10 +290,6 @@ public class CordovaPdfActivity extends PdfActivity implements OnContextualToolb
     AssetAppearanceStreamGenerator appearanceStreamGen41 = new AssetAppearanceStreamGenerator("images/water-meter.pdf");
     AssetAppearanceStreamGenerator appearanceStreamGen42 = new AssetAppearanceStreamGenerator(
         "images/water-softening-tank.pdf");
-    // StampPickerItem stampPickerItem = StampPickerItem.fromTitle(this,
-    // CUSTOM_AP_STREAM_SUBJECT)
-    // .withSize(StampPickerItem.DEFAULT_STAMP_ANNOTATION_PDF_WIDTH)
-    // .withAppearanceStreamGenerator(appearanceStreamGenerator).build();
     StampPickerItem stampPickerItem1 = StampPickerItem.fromTitle(this, "air-conditioning-unit")
         .withSize(113, 54)
         .withAppearanceStreamGenerator(appearanceStreamGen1).build();
@@ -401,7 +418,7 @@ public class CordovaPdfActivity extends PdfActivity implements OnContextualToolb
         .withAppearanceStreamGenerator(appearanceStreamGen42).build();
 
     final List<StampPickerItem> items = new ArrayList<>();
-    // items.add(stampPickerItem);
+
     items.add(stampPickerItem1);
     items.add(stampPickerItem2);
     items.add(stampPickerItem3);
@@ -444,8 +461,7 @@ public class CordovaPdfActivity extends PdfActivity implements OnContextualToolb
     items.add(stampPickerItem40);
     items.add(stampPickerItem41);
     items.add(stampPickerItem42);
-    // customStampAppearanceStreamGenerator.addAppearanceStreamGenerator(CUSTOM_AP_STREAM_SUBJECT,
-    // appearanceStreamGenerator);
+
     customStampAppearanceStreamGenerator.addAppearanceStreamGenerator("air-conditioning-unit", appearanceStreamGen1);
     customStampAppearanceStreamGenerator.addAppearanceStreamGenerator("air-handler-unit", appearanceStreamGen2);
     customStampAppearanceStreamGenerator.addAppearanceStreamGenerator("backup-generator", appearanceStreamGen3);
@@ -611,6 +627,11 @@ public class CordovaPdfActivity extends PdfActivity implements OnContextualToolb
   @Override
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
+    setSharingDialogFactory(CustomSharingDialog::new);
+    
+    setSharingOptionsProvider((document, currentPage) -> {
+        return null;
+    })
     bindActivity(this);
   }
 
