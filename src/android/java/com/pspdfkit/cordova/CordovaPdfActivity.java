@@ -29,6 +29,7 @@ import com.pspdfkit.ui.toolbar.ContextualToolbar;
 import java.util.List;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.lang.Integer;
 
 import com.pspdfkit.ui.toolbar.ToolbarCoordinatorLayout.OnContextualToolbarLifecycleListener;
 import com.pspdfkit.ui.toolbar.AnnotationEditingToolbar;
@@ -160,7 +161,7 @@ public class CordovaPdfActivity extends PdfActivity implements OnContextualToolb
         this.context = context;
 
         int layoutId = currentActivity.getResources().getIdentifier("custom_document_sharing_dialog", "layout", currentActivity.getPackageName());
-        Log.i(LOG_TAG, layoutId);
+        Log.i(LOG_TAG, Integer.toString(layoutId));
         root = View.inflate(context, layoutId, null);
         Log.i(LOG_TAG, root.toString());
 
