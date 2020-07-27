@@ -161,11 +161,10 @@ public class CordovaPdfActivity extends PdfActivity implements OnContextualToolb
         this.context = context;
 
         int layoutId = currentActivity.getResources().getIdentifier("custom_document_sharing_dialog", "layout", currentActivity.getPackageName());
-        Log.i(LOG_TAG, Integer.toString(layoutId));
         root = View.inflate(context, layoutId, null);
-        Log.i(LOG_TAG, root.toString());
 
-        documentNameEditText = root.findViewById(layoutId);
+        int shareDialogDocumentNameId = currentActivity.getResources().getIdentifier("share_dialog_document_name", "id", currentActivity.getPackageName());
+        documentNameEditText = root.findViewById(shareDialogDocumentNameId);
         documentNameEditText.setText(configuration.getInitialDocumentName());
         documentNameEditText.clearFocus();
 
