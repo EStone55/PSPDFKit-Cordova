@@ -159,12 +159,7 @@ public class CordovaPdfActivity extends PdfActivity implements OnContextualToolb
   public static class CustomSharingDialog extends BaseDocumentSharingDialog {
     
     private DialogLayout dialogLayout;
-    private static CustomSharingDialogListener customSharingDialogListener;
-
-    public CustomSharingDialog(CustomSharingDialogListener customSharingDialogListener) {
-        super();
-        this.customSharingDialogListener = customSharingDialogListener;
-    }
+    private static CustomSharingDialogListener customSharingDialogListener = new CustomSharingDialogListener();
 
     @Override
     public DocumentSharingDialog.SharingDialogListener getListener() {
@@ -684,7 +679,7 @@ public class CordovaPdfActivity extends PdfActivity implements OnContextualToolb
   @Override
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
-    setDocumentSharingDialogFactory(new CustomSharingDialog(new CustomSharingDialogListener()));
+    setDocumentSharingDialogFactory(CustomSharingDialog::new);
     
     setSharingOptionsProvider((document, currentPage) -> {
         return null;
