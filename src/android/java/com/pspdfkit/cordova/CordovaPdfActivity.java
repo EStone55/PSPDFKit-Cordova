@@ -21,6 +21,8 @@ import com.pspdfkit.cordova.event.AnnotationUpdatedListener;
 import com.pspdfkit.document.sharing.DocumentSharingManager;
 import com.pspdfkit.document.PdfDocument;
 import com.pspdfkit.document.processor.PdfProcessorTask;
+import com.pspdfkit.document.sharing.ShareAction;
+
 import com.pspdfkit.listeners.DocumentListener;
 import com.pspdfkit.listeners.SimpleDocumentListener;
 import com.pspdfkit.ui.PdfActivity;
@@ -137,9 +139,9 @@ public class CordovaPdfActivity extends PdfActivity implements OnContextualToolb
                 annotationProvider.addAnnotationToPage(linkAnnotation);
             }
         }
-        DocumentSharingManager.shareDocument(currentActivity, document, shareOptions);
+        DocumentSharingManager.shareDocument(currentActivity, document, ShareAction.VIEW, shareOptions);
       } else {
-        DocumentSharingManager.shareDocument(currentActivity, currentActivity.getDocument(), shareOptions);
+        DocumentSharingManager.shareDocument(currentActivity, currentActivity.getDocument(), ShareAction.VIEW, shareOptions);
       }
     }
 
