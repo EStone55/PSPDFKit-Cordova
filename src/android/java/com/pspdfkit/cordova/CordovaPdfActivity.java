@@ -683,7 +683,7 @@ public class CordovaPdfActivity extends PdfActivity implements OnContextualToolb
   @Override
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
-    setDocumentSharingDialogFactory(new CustomSharingDialog(new CustomSharingDialogListener));
+    setDocumentSharingDialogFactory(new CustomSharingDialog(new CustomSharingDialogListener()));
     
     setSharingOptionsProvider((document, currentPage) -> {
         return null;
