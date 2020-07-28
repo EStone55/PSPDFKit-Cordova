@@ -122,6 +122,10 @@ public class CordovaPdfActivity extends PdfActivity implements OnContextualToolb
 
   public class CustomSharingDialogListener implements DocumentSharingDialog.SharingDialogListener {
 
+    public CustomSharingDialogListener() {
+        
+    }
+
     @Override
     public void onAccept(@NonNull SharingOptions shareOptions) {
       if (shareOptions.getAnnotationProcessingMode() == PdfProcessorTask.AnnotationProcessingMode.FLATTEN) {
@@ -162,7 +166,7 @@ public class CordovaPdfActivity extends PdfActivity implements OnContextualToolb
 
     @Override
     public DocumentSharingDialog.SharingDialogListener getListener() {
-
+        return new CustomSharingDialogListener();
     }
 
     @Override
