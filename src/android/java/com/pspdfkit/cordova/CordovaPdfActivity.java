@@ -42,6 +42,8 @@ import com.pspdfkit.annotations.AnnotationType;
 import com.pspdfkit.annotations.configuration.StampAnnotationConfiguration;
 import com.pspdfkit.annotations.stamps.CustomStampAppearanceStreamGenerator;
 import com.pspdfkit.annotations.appearance.AssetAppearanceStreamGenerator;
+import com.pspdfkit.annotations.LinkAnnotation;
+
 
 import com.pspdfkit.ui.dialog.DocumentSharingDialog;
 import com.pspdfkit.ui.dialog.DocumentSharingDialogConfiguration;
@@ -51,6 +53,7 @@ import com.pspdfkit.ui.dialog.BaseDocumentSharingDialog;
 import android.graphics.Color;
 import android.graphics.BitmapFactory;
 import android.graphics.Bitmap;
+import android.graphics.RectF;
 
 import androidx.core.content.ContextCompat;
 
@@ -111,11 +114,48 @@ public class CordovaPdfActivity extends PdfActivity implements OnContextualToolb
     }
   }
 
+  public class CustomSharingDialogListener implements DocumentSharingDialog.SharingDialogListener {
+
+    @Override
+    public void onAccept(@NonNull SharingOptions shareOptions) {
+      if (shareOptions.getAnnotationProcessingMode() == PdfProcessorTask.AnnotationProcessingMode.FLATTEN) {
+        // add link annotations on top of stamps here
+        PdfDocument document =  currentActivity.getDocument();
+        AnnotationProvider annotationProvider = document.getAnnotationProvider();
+        List<Annotation> annotations = annotationProvider.getAnnotations(0);
+        for (Annotation annotation : annotations) {
+            AnnotationType annotationType = annotation.getType();
+            if (annotationType == AnnotationType.STAMP) {
+                RectF bbox = annotation.getBoundingBox();
+                LinkAnnotation linkAnnotation = new LinkAnnotation(0);
+                linkAnnotation.setBoundingBox(bbox);
+                linkAnnotation.setAction(new UriAction("https://github.com/"));
+                annotationProvider.addAnnotationToPage(linkAnnotation);
+            }
+        }
+        DocumentSharingManager.shareDocument(currentActivity, document, shareOptions);
+      } else {
+        DocumentSharingManager.shareDocument(currentActivity, currentActivity.getDocument(), shareOptions);
+      }
+    }
+
+    @Override
+    public void onDismiss() {
+
+    }
+
+  }
+
   public static class CustomSharingDialog extends BaseDocumentSharingDialog {
     
     private DialogLayout dialogLayout;
 
     public CustomSharingDialog() {
+
+    }
+
+    @Override
+    public DocumentSharingDialog.SharingDialogListener getListener() {
 
     }
 
