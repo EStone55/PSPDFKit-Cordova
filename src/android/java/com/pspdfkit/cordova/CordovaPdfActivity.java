@@ -18,6 +18,7 @@ import com.pspdfkit.cordova.event.EventDispatcher;
 import com.pspdfkit.cordova.event.OpenAssetModalListener;
 import com.pspdfkit.cordova.event.AnnotationSelectedListener;
 import com.pspdfkit.cordova.event.AnnotationUpdatedListener;
+import com.pspdfkit.document.sharing.DocumentSharingManager;
 import com.pspdfkit.document.PdfDocument;
 import com.pspdfkit.document.processor.PdfProcessorTask;
 import com.pspdfkit.listeners.DocumentListener;
@@ -43,6 +44,9 @@ import com.pspdfkit.annotations.configuration.StampAnnotationConfiguration;
 import com.pspdfkit.annotations.stamps.CustomStampAppearanceStreamGenerator;
 import com.pspdfkit.annotations.appearance.AssetAppearanceStreamGenerator;
 import com.pspdfkit.annotations.LinkAnnotation;
+import com.pspdfkit.annotations.AnnotationProvider;
+import com.pspdfkit.annotations.Annotation;
+import com.pspdfkit.annotations.actions.UriAction;
 
 
 import com.pspdfkit.ui.dialog.DocumentSharingDialog;
