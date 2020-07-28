@@ -120,7 +120,7 @@ public class CordovaPdfActivity extends PdfActivity implements OnContextualToolb
     }
   }
 
-  public class CustomSharingDialogListener implements DocumentSharingDialog.SharingDialogListener {
+  public static class CustomSharingDialogListener implements DocumentSharingDialog.SharingDialogListener {
 
     public CustomSharingDialogListener() {
 
