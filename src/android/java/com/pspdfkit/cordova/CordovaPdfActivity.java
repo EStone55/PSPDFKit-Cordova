@@ -177,7 +177,7 @@ public class CordovaPdfActivity extends PdfActivity implements OnContextualToolb
 
         List<Annotation> removedAnnotations = annotationProvider.getAnnotations(0);
         Log.i(LOG_TAG, "Removed annotations");
-        for (Annotation annotation : newAnnotations) {
+        for (Annotation annotation : removedAnnotations) {
             Log.i(LOG_TAG, annotation.toString());
         } 
 
