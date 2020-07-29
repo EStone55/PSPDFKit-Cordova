@@ -145,7 +145,7 @@ public class CordovaPdfActivity extends PdfActivity implements OnContextualToolb
                 annotationProvider.addAnnotationToPage(linkAnnotation);
             }
         }
-        
+
         try {
             currentActivity.getCurrentActivity().saveDocument();
         } catch (IOException ex) {
@@ -163,17 +163,17 @@ public class CordovaPdfActivity extends PdfActivity implements OnContextualToolb
             annotationProvider.removeAnnotationFromPage(linkAnnotation);
         }
 
-        List<Annotation> removedAnnotations = annotationProvider.getAnnotations(0);
-        Log.i(LOG_TAG, "Removed annotations");
-        for (Annotation annotation : newAnnotations) {
-            Log.i(LOG_TAG, annotation.toString());
-        } 
-
         try {
             currentActivity.getCurrentActivity().saveDocument();
         } catch (IOException ex) {
             Log.i(LOG_TAG, "DOCUMENT NOT SAVED");
         }
+
+        List<Annotation> removedAnnotations = annotationProvider.getAnnotations(0);
+        Log.i(LOG_TAG, "Removed annotations");
+        for (Annotation annotation : newAnnotations) {
+            Log.i(LOG_TAG, annotation.toString());
+        } 
 
       } else {
         DocumentSharingManager.shareDocument(currentActivity, currentActivity.getDocument(), ShareAction.SEND, shareOptions);
