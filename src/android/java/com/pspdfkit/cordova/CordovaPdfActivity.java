@@ -130,8 +130,8 @@ public class CordovaPdfActivity extends PdfActivity implements OnContextualToolb
     public void onAccept(@NonNull SharingOptions shareOptions) {
       if (shareOptions.getAnnotationProcessingMode() == PdfProcessorTask.AnnotationProcessingMode.FLATTEN) {
         // add link annotations on top of stamps here
-        PdfDocument document =  currentActivity.getDocument();
-        AnnotationProvider annotationProvider = document.getAnnotationProvider();
+        // PdfDocument document =  currentActivity.getDocument();
+        AnnotationProvider annotationProvider = currentActivity.getDocument().getAnnotationProvider();
         List<Annotation> annotations = annotationProvider.getAnnotations(0);
         List<LinkAnnotation> linkAnnotations = new ArrayList<>();
         for (Annotation annotation : annotations) {
@@ -150,7 +150,7 @@ public class CordovaPdfActivity extends PdfActivity implements OnContextualToolb
         } catch (IOException ex) {
             Log.i(LOG_TAG, "DOCUMENT NOT SAVED");
         }
-        DocumentSharingManager.shareDocument(currentActivity, document, ShareAction.SEND, shareOptions);
+        DocumentSharingManager.shareDocument(currentActivity, currentActivity.getDocument(), ShareAction.SEND, shareOptions);
         for (LinkAnnotation linkAnnotation : linkAnnotations) {
             annotationProvider.removeAnnotationFromPage(linkAnnotation);
         }
