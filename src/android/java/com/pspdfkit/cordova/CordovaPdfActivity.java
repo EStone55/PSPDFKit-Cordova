@@ -133,6 +133,7 @@ public class CordovaPdfActivity extends PdfActivity implements OnContextualToolb
         PdfDocument document =  currentActivity.getDocument();
         AnnotationProvider annotationProvider = document.getAnnotationProvider();
         List<Annotation> annotations = annotationProvider.getAnnotations(0);
+        List<LinkAnnotation> linkAnnotations = new List<LinkAnnotation>();
         for (Annotation annotation : annotations) {
             AnnotationType annotationType = annotation.getType();
             if (annotationType == AnnotationType.STAMP) {
@@ -140,12 +141,16 @@ public class CordovaPdfActivity extends PdfActivity implements OnContextualToolb
                 LinkAnnotation linkAnnotation = new LinkAnnotation(0);
                 linkAnnotation.setBoundingBox(bbox);
                 linkAnnotation.setAction(new UriAction("https://github.com/"));
+                linkAnnotations.add(linkAnnotation);
                 annotationProvider.addAnnotationToPage(linkAnnotation);
             }
         }
         DocumentSharingManager.shareDocument(currentActivity, currentActivity.getDocument(), ShareAction.SEND, shareOptions);
+        for (LinkAnnotation linkAnnotation : linkAnnotations) {
+            annotationProvider.removeAnnotationFromPage(linkAnnotation);
+        }
       } else {
-        DocumentSharingManager.shareDocument(currentActivity, document, ShareAction.SEND, shareOptions);
+        DocumentSharingManager.shareDocument(currentActivity, currentActivity.getDocument(), ShareAction.SEND, shareOptions);
       }
     }
 
