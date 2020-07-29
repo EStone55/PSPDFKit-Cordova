@@ -145,9 +145,11 @@ public class CordovaPdfActivity extends PdfActivity implements OnContextualToolb
                 annotationProvider.addAnnotationToPage(linkAnnotation);
             }
         }
+        Log.i(LOG_TAG, "exporting");
         DocumentSharingManager.shareDocument(currentActivity, currentActivity.getDocument(), ShareAction.SEND, shareOptions);
         for (LinkAnnotation linkAnnotation : linkAnnotations) {
             annotationProvider.removeAnnotationFromPage(linkAnnotation);
+            Log.i(LOG_TAG, "annotation removed");
         }
       } else {
         DocumentSharingManager.shareDocument(currentActivity, currentActivity.getDocument(), ShareAction.SEND, shareOptions);
