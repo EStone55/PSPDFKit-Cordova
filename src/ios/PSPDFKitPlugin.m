@@ -1970,4 +1970,23 @@ static NSString *PSPDFStringFromCGRect(CGRect rect) {
     }
 }
 
+// - (void)createCustomAnnotationToolbar {
+
+//     PSPDFAnnotationToolbarConfiguration *configuration = [[PSPDFAnnotationToolbarConfiguration alloc] initWithAnnotationGroups:@[
+//     [PSPDFAnnotationGroup groupWithItems:@[
+//         [PSPDFAnnotationGroupItem itemWithType:PSPDFAnnotationStringInk variant:PSPDFAnnotationVariantStringInkPen configurationBlock:[PSPDFAnnotationGroupItem inkConfigurationBlock]]
+//     ]],
+//     [PSPDFAnnotationGroup groupWithItems:@[
+//         [PSPDFAnnotationGroupItem itemWithType:PSPDFAnnotationStringLine],
+//         [PSPDFAnnotationGroupItem itemWithType:PSPDFAnnotationStringPolyLine]
+//     ]]
+
+//     pdfController.annotationToolbarController.annotationToolbar.configurations = @[configuration];
+
+//     PSPDFAnnotationGroupItemConfigurationBlock configurationBlock = ^UIImage *(PSPDFAnnotationGroupItem *item, id container, UIColor *tintColor) {
+//         UIImage *image = [UIImage imageName:@"Custom Button Icon"];
+//         return [image imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
+//     }
+// ]];
+// }
 @end
