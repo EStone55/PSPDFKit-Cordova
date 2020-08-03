@@ -148,7 +148,7 @@ public class CordovaPdfActivity extends PdfActivity implements OnContextualToolb
             if (annotationType == AnnotationType.STAMP) {
                 StampAnnotation stampAnnotation = (StampAnnotation) annotation;
                 Log.i(LOG_TAG, stampAnnotation.getTitle());
-                if (this.stampTitles.contains(stampAnnotation.getTitle())) {
+                if (currentActivity.stampTitles.contains(stampAnnotation.getTitle())) {
                     RectF bbox = stampAnnotation.getBoundingBox();
                     LinkAnnotation linkAnnotation = new LinkAnnotation(0);
                     linkAnnotation.setBoundingBox(bbox);
