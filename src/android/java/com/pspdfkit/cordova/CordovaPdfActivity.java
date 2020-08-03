@@ -95,7 +95,7 @@ public class CordovaPdfActivity extends PdfActivity implements OnContextualToolb
   private final CompositeDisposable compositeDisposable = new CompositeDisposable();
   @NonNull
   private final CustomStampAppearanceStreamGenerator customStampAppearanceStreamGenerator = new CustomStampAppearanceStreamGenerator();
-
+  private List<String> stampTitles = new ArrayList<>(); 
   /**
    * Nested class. Code specific to ML, not in default plugin. Description:
    * Specificies the rules for placement of custom items in toolbars
@@ -148,7 +148,7 @@ public class CordovaPdfActivity extends PdfActivity implements OnContextualToolb
             if (annotationType == AnnotationType.STAMP) {
                 StampAnnotation stampAnnotation = (StampAnnotation) annotation;
                 Log.i(LOG_TAG, stampAnnotation.getTitle());
-                if (stampAnnotation.getStampType() == null) {
+                if (this.stampTitles.contains(stampAnnotation.getTitle())) {
                     RectF bbox = stampAnnotation.getBoundingBox();
                     LinkAnnotation linkAnnotation = new LinkAnnotation(0);
                     linkAnnotation.setBoundingBox(bbox);
@@ -697,6 +697,49 @@ public class CordovaPdfActivity extends PdfActivity implements OnContextualToolb
     }
 
     Log.d("WTF", "listener during create = " + listener);
+
+    this.stampTitles.add("air-conditioning-unit");
+    this.stampTitles.add("air-handler-unit");
+    this.stampTitles.add("backup-generator");
+    this.stampTitles.add("blue-light");
+    this.stampTitles.add("boiler");
+    this.stampTitles.add("chiller");
+    this.stampTitles.add("co-detector");
+    this.stampTitles.add("condensor");
+    this.stampTitles.add("defibrilator");
+    this.stampTitles.add("diffuser-heating-cooling");
+    this.stampTitles.add("drinking-fountain");
+    this.stampTitles.add("electric-meter");
+    this.stampTitles.add("electric-motor");
+    this.stampTitles.add("emergency-recovery-ventilation");
+    this.stampTitles.add("entrance-door-designator");
+    this.stampTitles.add("exhaust-fan");
+    this.stampTitles.add("expansion-tank");
+    this.stampTitles.add("eye-wash-station");
+    this.stampTitles.add("fire-alarm");
+    this.stampTitles.add("fire-alarm-control-panel");
+    this.stampTitles.add("fire-extinguisher");
+    this.stampTitles.add("fire-hydrant");
+    this.stampTitles.add("first-aid-station");
+    this.stampTitles.add("gas-meter");
+    this.stampTitles.add("glycol-tank");
+    this.stampTitles.add("grease-trap");
+    this.stampTitles.add("handicap-accessibility");
+    this.stampTitles.add("main-distribution-panel");
+    this.stampTitles.add("makeup-air");
+    this.stampTitles.add("manhole");
+    this.stampTitles.add("panel-electric");
+    this.stampTitles.add("pump-hvac");
+    this.stampTitles.add("pump-potable");
+    this.stampTitles.add("return-air");
+    this.stampTitles.add("roof-access");
+    this.stampTitles.add("roof-top-unit");
+    this.stampTitles.add("unit-heater");
+    this.stampTitles.add("unit-ventilator-cabinet-type");
+    this.stampTitles.add("unit-ventilator-wall-type");
+    this.stampTitles.add("valve-generic");
+    this.stampTitles.add("water-meter");
+    this.stampTitles.add("water-softening-tank");
 
     pdfFragment.addDocumentListener(listener);
     pdfFragment.addOnAnnotationSelectedListener(annotationSelectedListener); // register the AnnotationSelectedListener
