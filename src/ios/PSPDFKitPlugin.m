@@ -25,6 +25,7 @@
 @property (nonatomic, strong) NSDictionary *defaultOptions;
 @property (nonatomic) BOOL disableAutomaticSaving;
 @property (nonatomic) PSPDFImageQuality allowedImageQualities;
+@property (nonatomic) NSArray<PSPDFAnnotation *> *currentSelectedAnnotations;
 
 @end
 
@@ -1988,5 +1989,9 @@ static NSString *PSPDFStringFromCGRect(CGRect rect) {
 //         return [image imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
 //     }
 // ]];
+// }
+
+// - (void)pdfViewController:(nonnull PSPDFViewController *)pdfController didSelectAnnotations:(nonnull NSArray<PSPDFAnnotation *> *)annotations onPageView:(nonnull PSPDFPageView *)pageView {
+//     currentSelectedAnnotations = annations;
 // }
 @end

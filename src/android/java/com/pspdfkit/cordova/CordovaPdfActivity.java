@@ -128,7 +128,7 @@ public class CordovaPdfActivity extends PdfActivity implements OnContextualToolb
 
     @Override
     public void onAccept(@NonNull SharingOptions shareOptions) {
-      if (shareOptions.getAnnotationProcessingMode() == PdfProcessorTask.AnnotationProcessingMode.FLATTEN) {
+      if (shareOptions.getAnnotationProcessingMode() == PdfProcessorTask.AnnotationProcessingMode.KEEP) {
         // add link annotations on top of stamps here
         // PdfDocument document =  currentActivity.getDocument();
         AnnotationProvider annotationProvider = currentActivity.getDocument().getAnnotationProvider();
@@ -220,7 +220,7 @@ public class CordovaPdfActivity extends PdfActivity implements OnContextualToolb
     private SharingOptions getSharingOptions() {
         PdfProcessorTask.AnnotationProcessingMode annotationProcessingMode = PdfProcessorTask.AnnotationProcessingMode.KEEP;
         if (dialogLayout.addLinks.isChecked()) {
-            annotationProcessingMode = PdfProcessorTask.AnnotationProcessingMode.FLATTEN;
+            annotationProcessingMode = PdfProcessorTask.AnnotationProcessingMode.KEEP;
         }
         return new SharingOptions(
             annotationProcessingMode,
