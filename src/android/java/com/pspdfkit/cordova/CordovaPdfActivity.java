@@ -229,7 +229,7 @@ public class CordovaPdfActivity extends PdfActivity implements OnContextualToolb
     }
 
     private boolean shouldAddLinks() {
-        return dialog.addLinks.isChecked();
+        return dialogLayout.addLinks.isChecked();
     }
 
   }
