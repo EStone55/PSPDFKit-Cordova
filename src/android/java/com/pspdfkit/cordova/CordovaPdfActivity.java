@@ -217,7 +217,7 @@ public class CordovaPdfActivity extends PdfActivity implements OnContextualToolb
         dialogLayout.positiveButton.setOnClickListener(v -> {
             if (getListener() != null) {
                 CustomSharingDialogListener listener = (CustomSharingDialogListener) getListener();
-                listener.setShouldAddLinks(shouldAddLinks())
+                listener.setShouldAddLinks(shouldAddLinks());
                 listener.onAccept(getSharingOptions());
                 dismiss();
             }
