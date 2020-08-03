@@ -22,6 +22,7 @@ import com.pspdfkit.document.sharing.DocumentSharingManager;
 import com.pspdfkit.document.PdfDocument;
 import com.pspdfkit.document.processor.PdfProcessorTask;
 import com.pspdfkit.document.sharing.ShareAction;
+import com.pspdfkit.annotations.StampAnnotation;
 
 import com.pspdfkit.listeners.DocumentListener;
 import com.pspdfkit.listeners.SimpleDocumentListener;
@@ -145,8 +146,9 @@ public class CordovaPdfActivity extends PdfActivity implements OnContextualToolb
         for (Annotation annotation : annotations) {
             AnnotationType annotationType = annotation.getType();
             if (annotationType == AnnotationType.STAMP) {
-                if (annotation.getStampType() == null) {
-                    RectF bbox = annotation.getBoundingBox();
+                StampAnnotation stampAnnotation = (StampAnnotation) annotation;
+                if (stampAnnotation.getStampType() == null) {
+                    RectF bbox = stampAnnotation.getBoundingBox();
                     LinkAnnotation linkAnnotation = new LinkAnnotation(0);
                     linkAnnotation.setBoundingBox(bbox);
                     linkAnnotation.setAction(new UriAction("https://github.com/"));
