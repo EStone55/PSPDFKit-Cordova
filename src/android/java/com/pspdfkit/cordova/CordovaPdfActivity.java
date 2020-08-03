@@ -165,15 +165,15 @@ public class CordovaPdfActivity extends PdfActivity implements OnContextualToolb
         } 
 
         DocumentSharingManager.shareDocument(currentActivity, currentActivity.getDocument(), ShareAction.SEND, shareOptions);
-        // for (LinkAnnotation linkAnnotation : linkAnnotations) {
-        //     annotationProvider.removeAnnotationFromPage(linkAnnotation);
-        // }
+        for (LinkAnnotation linkAnnotation : linkAnnotations) {
+            annotationProvider.removeAnnotationFromPage(linkAnnotation);
+        }
 
-        // try {
-        //     currentActivity.getCurrentActivity().saveDocument();
-        // } catch (IOException ex) {
-        //     Log.i(LOG_TAG, "DOCUMENT NOT SAVED");
-        // }
+        try {
+            currentActivity.getCurrentActivity().saveDocument();
+        } catch (IOException ex) {
+            Log.i(LOG_TAG, "DOCUMENT NOT SAVED");
+        }
 
         // List<Annotation> removedAnnotations = annotationProvider.getAnnotations(0);
         // Log.i(LOG_TAG, "Removed annotations");
