@@ -126,9 +126,8 @@ public class CordovaPdfActivity extends PdfActivity implements OnContextualToolb
 
     }
 
-    @Override
-    public void onAccept(@NonNull SharingOptions shareOptions) {
-      if (shareOptions.getAnnotationProcessingMode() == PdfProcessorTask.AnnotationProcessingMode.KEEP) {
+    public void onAccept(@NonNull SharingOptions shareOptions, boolean shouldAddLinks) {
+      if (shouldAddLinks) {
         // add link annotations on top of stamps here
         // PdfDocument document =  currentActivity.getDocument();
         AnnotationProvider annotationProvider = currentActivity.getDocument().getAnnotationProvider();
@@ -137,7 +136,7 @@ public class CordovaPdfActivity extends PdfActivity implements OnContextualToolb
 
         Log.i(LOG_TAG, "OG annotations");
         for (Annotation annotation : annotations) {
-            Log.i(LOG_TAG, annotation.toString());
+            Log.i(LOG_TAG, annotation.getName());
         } 
 
         for (Annotation annotation : annotations) {
@@ -161,7 +160,7 @@ public class CordovaPdfActivity extends PdfActivity implements OnContextualToolb
         List<Annotation> newAnnotations = annotationProvider.getAnnotations(0);
         Log.i(LOG_TAG, "New annotations");
         for (Annotation annotation : newAnnotations) {
-            Log.i(LOG_TAG, annotation.toString());
+            Log.i(LOG_TAG, annotation.getName());
         } 
 
         DocumentSharingManager.shareDocument(currentActivity, currentActivity.getDocument(), ShareAction.SEND, shareOptions);
@@ -175,11 +174,11 @@ public class CordovaPdfActivity extends PdfActivity implements OnContextualToolb
             Log.i(LOG_TAG, "DOCUMENT NOT SAVED");
         }
 
-        // List<Annotation> removedAnnotations = annotationProvider.getAnnotations(0);
-        // Log.i(LOG_TAG, "Removed annotations");
-        // for (Annotation annotation : removedAnnotations) {
-        //     Log.i(LOG_TAG, annotation.toString());
-        // } 
+        List<Annotation> removedAnnotations = annotationProvider.getAnnotations(0);
+        Log.i(LOG_TAG, "Removed annotations");
+        for (Annotation annotation : removedAnnotations) {
+            Log.i(LOG_TAG, annotation.getName());
+        } 
 
       } else {
         DocumentSharingManager.shareDocument(currentActivity, currentActivity.getDocument(), ShareAction.SEND, shareOptions);
@@ -210,7 +209,7 @@ public class CordovaPdfActivity extends PdfActivity implements OnContextualToolb
 
         dialogLayout.positiveButton.setOnClickListener(v -> {
             if (getListener() != null) {
-                getListener().onAccept(getSharingOptions());
+                getListener().onAccept(getSharingOptions(), shouldAddLinks());
                 dismiss();
             }
         });
@@ -227,6 +226,10 @@ public class CordovaPdfActivity extends PdfActivity implements OnContextualToolb
             Collections.singletonList(new Range(0, currentActivity.getDocument().getPageCount())),
             dialogLayout.documentNameEditText.getText().toString()
         );
+    }
+
+    private boolean shouldAddLinks() {
+        return dialog.addLinks.isChecked();
     }
 
   }
