@@ -122,12 +122,14 @@ public class CordovaPdfActivity extends PdfActivity implements OnContextualToolb
 
   public static class CustomSharingDialogListener implements DocumentSharingDialog.SharingDialogListener {
 
+    private boolean shouldAddLinks;
+
     public CustomSharingDialogListener() {
 
     }
 
-    public void onAccept(@NonNull SharingOptions shareOptions, boolean shouldAddLinks) {
-      if (shouldAddLinks) {
+    public void onAccept(@NonNull SharingOptions shareOptions) {
+      if (this.shouldAddLinks) {
         // add link annotations on top of stamps here
         // PdfDocument document =  currentActivity.getDocument();
         AnnotationProvider annotationProvider = currentActivity.getDocument().getAnnotationProvider();
@@ -190,6 +192,10 @@ public class CordovaPdfActivity extends PdfActivity implements OnContextualToolb
 
     }
 
+    public void setShouldAddLinks(boolean shouldAddLinks) {
+        this.shouldAddLinks = shouldAddLinks;
+    }
+
   }
 
   public static class CustomSharingDialog extends BaseDocumentSharingDialog {
@@ -209,7 +215,8 @@ public class CordovaPdfActivity extends PdfActivity implements OnContextualToolb
 
         dialogLayout.positiveButton.setOnClickListener(v -> {
             if (getListener() != null) {
-                getListener().onAccept(getSharingOptions(), shouldAddLinks());
+                getListener().setShouldAddLinks(shouldAddLinks());
+                getListener().onAccept(getSharingOptions());
                 dismiss();
             }
         });
