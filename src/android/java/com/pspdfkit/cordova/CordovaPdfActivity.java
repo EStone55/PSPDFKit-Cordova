@@ -128,6 +128,7 @@ public class CordovaPdfActivity extends PdfActivity implements OnContextualToolb
 
     }
 
+    @Override
     public void onAccept(@NonNull SharingOptions shareOptions) {
       if (this.shouldAddLinks) {
         // add link annotations on top of stamps here
