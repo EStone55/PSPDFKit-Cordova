@@ -2005,6 +2005,7 @@ static NSString *PSPDFStringFromCGRect(CGRect rect) {
     PSPDFAnnotation *annotation = annotations.firstObject;
     NSData *annotationData = [annotation generateInstantJSONWithError:NULL];
     NSString *jsonString = [[NSString alloc] initWithData:annotationData encoding:NSUTF8StringEncoding];
+    NSLog(@"Annotation added");
     [self sendEventWithJSON: [NSString stringWithFormat:@"{type: 'onAnnotationCreated' data:%@", jsonString]];
 }
 
