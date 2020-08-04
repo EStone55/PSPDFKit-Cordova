@@ -18,8 +18,12 @@ import com.pspdfkit.cordova.event.EventDispatcher;
 import com.pspdfkit.cordova.event.OpenAssetModalListener;
 import com.pspdfkit.cordova.event.AnnotationSelectedListener;
 import com.pspdfkit.cordova.event.AnnotationUpdatedListener;
+import com.pspdfkit.document.sharing.DocumentSharingManager;
 import com.pspdfkit.document.PdfDocument;
 import com.pspdfkit.document.processor.PdfProcessorTask;
+import com.pspdfkit.document.sharing.ShareAction;
+import com.pspdfkit.annotations.StampAnnotation;
+
 import com.pspdfkit.listeners.DocumentListener;
 import com.pspdfkit.listeners.SimpleDocumentListener;
 import com.pspdfkit.ui.PdfActivity;
@@ -42,6 +46,11 @@ import com.pspdfkit.annotations.AnnotationType;
 import com.pspdfkit.annotations.configuration.StampAnnotationConfiguration;
 import com.pspdfkit.annotations.stamps.CustomStampAppearanceStreamGenerator;
 import com.pspdfkit.annotations.appearance.AssetAppearanceStreamGenerator;
+import com.pspdfkit.annotations.LinkAnnotation;
+import com.pspdfkit.annotations.AnnotationProvider;
+import com.pspdfkit.annotations.Annotation;
+import com.pspdfkit.annotations.actions.UriAction;
+
 
 import com.pspdfkit.ui.dialog.DocumentSharingDialog;
 import com.pspdfkit.ui.dialog.DocumentSharingDialogConfiguration;
@@ -51,6 +60,7 @@ import com.pspdfkit.ui.dialog.BaseDocumentSharingDialog;
 import android.graphics.Color;
 import android.graphics.BitmapFactory;
 import android.graphics.Bitmap;
+import android.graphics.RectF;
 
 import androidx.core.content.ContextCompat;
 
@@ -85,7 +95,7 @@ public class CordovaPdfActivity extends PdfActivity implements OnContextualToolb
   private final CompositeDisposable compositeDisposable = new CompositeDisposable();
   @NonNull
   private final CustomStampAppearanceStreamGenerator customStampAppearanceStreamGenerator = new CustomStampAppearanceStreamGenerator();
-
+  private List<String> stampTitles = new ArrayList<>(); 
   /**
    * Nested class. Code specific to ML, not in default plugin. Description:
    * Specificies the rules for placement of custom items in toolbars
@@ -111,12 +121,97 @@ public class CordovaPdfActivity extends PdfActivity implements OnContextualToolb
     }
   }
 
+  public static class CustomSharingDialogListener implements DocumentSharingDialog.SharingDialogListener {
+
+    private boolean shouldAddLinks;
+
+    public CustomSharingDialogListener() {
+
+    }
+
+    @Override
+    public void onAccept(@NonNull SharingOptions shareOptions) {
+      if (this.shouldAddLinks) {
+        // add link annotations on top of stamps here
+        // PdfDocument document =  currentActivity.getDocument();
+        AnnotationProvider annotationProvider = currentActivity.getDocument().getAnnotationProvider();
+        List<Annotation> annotations = annotationProvider.getAnnotations(0);
+        List<LinkAnnotation> linkAnnotations = new ArrayList<>();
+
+        Log.i(LOG_TAG, "OG annotations");
+        for (Annotation annotation : annotations) {
+            Log.i(LOG_TAG, annotation.getName());
+        } 
+
+        for (Annotation annotation : annotations) {
+            AnnotationType annotationType = annotation.getType();
+            if (annotationType == AnnotationType.STAMP) {
+                StampAnnotation stampAnnotation = (StampAnnotation) annotation;
+                Log.i(LOG_TAG, stampAnnotation.getTitle());
+                if (currentActivity.stampTitles.contains(stampAnnotation.getTitle())) {
+                    RectF bbox = stampAnnotation.getBoundingBox();
+                    LinkAnnotation linkAnnotation = new LinkAnnotation(0);
+                    linkAnnotation.setBoundingBox(bbox);
+                    linkAnnotation.setAction(new UriAction("https://github.com/"));
+                    linkAnnotations.add(linkAnnotation);
+                    annotationProvider.addAnnotationToPage(linkAnnotation);
+                }
+            }
+        }
+
+        try {
+            currentActivity.getCurrentActivity().saveDocument();
+        } catch (IOException ex) {
+            Log.i(LOG_TAG, "DOCUMENT NOT SAVED");
+        }
+
+        List<Annotation> newAnnotations = annotationProvider.getAnnotations(0);
+        Log.i(LOG_TAG, "New annotations");
+        for (Annotation annotation : newAnnotations) {
+            Log.i(LOG_TAG, annotation.getName());
+        } 
+
+        DocumentSharingManager.shareDocument(currentActivity, currentActivity.getDocument(), ShareAction.SEND, shareOptions);
+        for (LinkAnnotation linkAnnotation : linkAnnotations) {
+            annotationProvider.removeAnnotationFromPage(linkAnnotation);
+        }
+
+        try {
+            currentActivity.getCurrentActivity().saveDocument();
+        } catch (IOException ex) {
+            Log.i(LOG_TAG, "DOCUMENT NOT SAVED");
+        }
+
+        List<Annotation> removedAnnotations = annotationProvider.getAnnotations(0);
+        Log.i(LOG_TAG, "Removed annotations");
+        for (Annotation annotation : removedAnnotations) {
+            Log.i(LOG_TAG, annotation.getName());
+        } 
+
+      } else {
+        DocumentSharingManager.shareDocument(currentActivity, currentActivity.getDocument(), ShareAction.SEND, shareOptions);
+      }
+    }
+
+    @Override
+    public void onDismiss() {
+
+    }
+
+    public void setShouldAddLinks(boolean shouldAddLinks) {
+        this.shouldAddLinks = shouldAddLinks;
+    }
+
+  }
+
   public static class CustomSharingDialog extends BaseDocumentSharingDialog {
     
     private DialogLayout dialogLayout;
+    private static CustomSharingDialogListener customSharingDialogListener = new CustomSharingDialogListener();
 
-    public CustomSharingDialog() {
-
+    @Override
+    public DocumentSharingDialog.SharingDialogListener getListener() {
+        return customSharingDialogListener;
     }
 
     @Override
@@ -126,7 +221,9 @@ public class CordovaPdfActivity extends PdfActivity implements OnContextualToolb
 
         dialogLayout.positiveButton.setOnClickListener(v -> {
             if (getListener() != null) {
-                getListener().onAccept(getSharingOptions());
+                CustomSharingDialogListener listener = (CustomSharingDialogListener) getListener();
+                listener.setShouldAddLinks(shouldAddLinks());
+                listener.onAccept(getSharingOptions());
                 dismiss();
             }
         });
@@ -136,13 +233,17 @@ public class CordovaPdfActivity extends PdfActivity implements OnContextualToolb
     private SharingOptions getSharingOptions() {
         PdfProcessorTask.AnnotationProcessingMode annotationProcessingMode = PdfProcessorTask.AnnotationProcessingMode.KEEP;
         if (dialogLayout.addLinks.isChecked()) {
-            annotationProcessingMode = PdfProcessorTask.AnnotationProcessingMode.FLATTEN;
+            annotationProcessingMode = PdfProcessorTask.AnnotationProcessingMode.KEEP;
         }
         return new SharingOptions(
             annotationProcessingMode,
             Collections.singletonList(new Range(0, currentActivity.getDocument().getPageCount())),
             dialogLayout.documentNameEditText.getText().toString()
         );
+    }
+
+    private boolean shouldAddLinks() {
+        return dialogLayout.addLinks.isChecked();
     }
 
   }
@@ -596,6 +697,49 @@ public class CordovaPdfActivity extends PdfActivity implements OnContextualToolb
     }
 
     Log.d("WTF", "listener during create = " + listener);
+
+    this.stampTitles.add("air-conditioning-unit");
+    this.stampTitles.add("air-handler-unit");
+    this.stampTitles.add("backup-generator");
+    this.stampTitles.add("blue-light");
+    this.stampTitles.add("boiler");
+    this.stampTitles.add("chiller");
+    this.stampTitles.add("co-detector");
+    this.stampTitles.add("condensor");
+    this.stampTitles.add("defibrilator");
+    this.stampTitles.add("diffuser-heating-cooling");
+    this.stampTitles.add("drinking-fountain");
+    this.stampTitles.add("electric-meter");
+    this.stampTitles.add("electric-motor");
+    this.stampTitles.add("emergency-recovery-ventilation");
+    this.stampTitles.add("entrance-door-designator");
+    this.stampTitles.add("exhaust-fan");
+    this.stampTitles.add("expansion-tank");
+    this.stampTitles.add("eye-wash-station");
+    this.stampTitles.add("fire-alarm");
+    this.stampTitles.add("fire-alarm-control-panel");
+    this.stampTitles.add("fire-extinguisher");
+    this.stampTitles.add("fire-hydrant");
+    this.stampTitles.add("first-aid-station");
+    this.stampTitles.add("gas-meter");
+    this.stampTitles.add("glycol-tank");
+    this.stampTitles.add("grease-trap");
+    this.stampTitles.add("handicap-accessibility");
+    this.stampTitles.add("main-distribution-panel");
+    this.stampTitles.add("makeup-air");
+    this.stampTitles.add("manhole");
+    this.stampTitles.add("panel-electric");
+    this.stampTitles.add("pump-hvac");
+    this.stampTitles.add("pump-potable");
+    this.stampTitles.add("return-air");
+    this.stampTitles.add("roof-access");
+    this.stampTitles.add("roof-top-unit");
+    this.stampTitles.add("unit-heater");
+    this.stampTitles.add("unit-ventilator-cabinet-type");
+    this.stampTitles.add("unit-ventilator-wall-type");
+    this.stampTitles.add("valve-generic");
+    this.stampTitles.add("water-meter");
+    this.stampTitles.add("water-softening-tank");
 
     pdfFragment.addDocumentListener(listener);
     pdfFragment.addOnAnnotationSelectedListener(annotationSelectedListener); // register the AnnotationSelectedListener

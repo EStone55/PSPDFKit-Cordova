@@ -25,6 +25,7 @@
 @property (nonatomic, strong) NSDictionary *defaultOptions;
 @property (nonatomic) BOOL disableAutomaticSaving;
 @property (nonatomic) PSPDFImageQuality allowedImageQualities;
+@property (nonatomic) NSArray<PSPDFAnnotation *> *currentSelectedAnnotations;
 
 @end
 
@@ -1970,13 +1971,27 @@ static NSString *PSPDFStringFromCGRect(CGRect rect) {
     }
 }
 
-- (void) annotaitonChangedNotification: (NSNotification *)notification {
-    if ([self.annotation isEqual:notification.object]) {
-        NSArray *keyPaths = notification.userInfo[PSPDFAnnotationChangedNotificationKeyPathKey];
-        if (keyPaths.count > 1 || ![keyPaths.firstObject isEqual:@"contents"]) {
-            [self.updateImageAnimated:YES];
-        }
-    }
-}
+// - (void)createCustomAnnotationToolbar {
 
+//     PSPDFAnnotationToolbarConfiguration *configuration = [[PSPDFAnnotationToolbarConfiguration alloc] initWithAnnotationGroups:@[
+//     [PSPDFAnnotationGroup groupWithItems:@[
+//         [PSPDFAnnotationGroupItem itemWithType:PSPDFAnnotationStringInk variant:PSPDFAnnotationVariantStringInkPen configurationBlock:[PSPDFAnnotationGroupItem inkConfigurationBlock]]
+//     ]],
+//     [PSPDFAnnotationGroup groupWithItems:@[
+//         [PSPDFAnnotationGroupItem itemWithType:PSPDFAnnotationStringLine],
+//         [PSPDFAnnotationGroupItem itemWithType:PSPDFAnnotationStringPolyLine]
+//     ]]
+
+//     pdfController.annotationToolbarController.annotationToolbar.configurations = @[configuration];
+
+//     PSPDFAnnotationGroupItemConfigurationBlock configurationBlock = ^UIImage *(PSPDFAnnotationGroupItem *item, id container, UIColor *tintColor) {
+//         UIImage *image = [UIImage imageName:@"Custom Button Icon"];
+//         return [image imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
+//     }
+// ]];
+// }
+
+// - (void)pdfViewController:(nonnull PSPDFViewController *)pdfController didSelectAnnotations:(nonnull NSArray<PSPDFAnnotation *> *)annotations onPageView:(nonnull PSPDFPageView *)pageView {
+//     currentSelectedAnnotations = annations;
+// }
 @end
