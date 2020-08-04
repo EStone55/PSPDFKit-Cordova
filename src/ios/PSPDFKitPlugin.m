@@ -489,7 +489,7 @@ void runOnMainQueueWithoutDeadlocking(void (^block)(void)) {
     [_pdfController.interactions.allInteractions allowSimultaneousRecognitionWithGestureRecognizer:longPressGestureRecognizer];
     [_pdfController.view addGestureRecognizer:longPressGestureRecognizer];
 
-    [NSNotificationCenter.defaultCenter addObserver:self selector:@selector(annotationsAddedNotification):] name:PSPDFAnnotationsAddedNotification object:nil];
+    [NSNotificationCenter.defaultCenter addObserver:self selector:@selector(annotationsAddedNotification:) name:PSPDFAnnotationsAddedNotification object:nil];
 
 }
 
