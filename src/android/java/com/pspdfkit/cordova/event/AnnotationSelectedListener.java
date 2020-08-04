@@ -26,8 +26,6 @@ public class AnnotationSelectedListener implements OnAnnotationSelectedListener 
     public void onAnnotationSelected(Annotation annotation, boolean annotationCreated) {
         try {
             JSONObject data = new JSONObject(annotation.toInstantJson());
-            // data.put("assetID", annotation.getName());
-            // data.put("dateAdded", annotation.getCreatedDate());
             this.data = data;
         } catch (JSONException ex) {
             // squash

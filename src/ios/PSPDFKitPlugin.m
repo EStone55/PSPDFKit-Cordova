@@ -1970,4 +1970,13 @@ static NSString *PSPDFStringFromCGRect(CGRect rect) {
     }
 }
 
+- (void) annotaitonChangedNotification: (NSNotification *)notification {
+    if ([self.annotation isEqual:notification.object]) {
+        NSArray *keyPaths = notification.userInfo[PSPDFAnnotationChangedNotificationKeyPathKey];
+        if (keyPaths.count > 1 || ![keyPaths.firstObject isEqual:@"contents"]) {
+            [self.updateImageAnimated:YES];
+        }
+    }
+}
+
 @end
