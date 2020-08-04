@@ -1995,14 +1995,14 @@ static NSString *PSPDFStringFromCGRect(CGRect rect) {
 //     currentSelectedAnnotations = annatations;
 // }
 
-- (void) annotationAddedNotification:(NSNotification *)notification {
+- (void) annotationsAddedNotification:(NSNotification *)notification {
     if ([self.annotation isEqual:notification.object]) {
-        NSArray *keyPaths = notification.userInfo[PSPDFAnnotationAddedNotification];
+        NSArray *keyPaths = notification.userInfo[PSPDFAnnotationsAddedNotification];
         if (keyPaths.count > 1 || ![keyPaths.firstObject isEqual:@"contents"]) {
             PSPDFAnnotation annotation = currentSelectedAnnotations[0];
             NSData *annotationData = [annotation generateInstantJSONWithError:NULL];
             NSString *jsonString = [[NSString alloc] initWithData: annotationData encoding:NSUTF8StringEncoding];
-            [self sendEventWithJSON: [NSString stringWithFormat:@"{type: 'onAnnotationCreated' data:%s}", jsonString]]
+            [self sendEventWithJSON: [NSString stringWithFormat:@"{type: 'onAnnotationCreated' data:%@}", jsonString]];
         }
     }
 }
