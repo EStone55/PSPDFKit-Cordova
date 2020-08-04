@@ -488,6 +488,9 @@ void runOnMainQueueWithoutDeadlocking(void (^block)(void)) {
     UILongPressGestureRecognizer *longPressGestureRecognizer = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(longPressGestureRecognizerDidChangeState:)];
     [_pdfController.interactions.allInteractions allowSimultaneousRecognitionWithGestureRecognizer:longPressGestureRecognizer];
     [_pdfController.view addGestureRecognizer:longPressGestureRecognizer];
+
+    [NSNotificationCenter.defaultCenter addObserver:self selector:@selector(annotationsAddedNotification):] name:PSPDFAnnotationsAddedNotification object:nil];
+
 }
 
 - (PSPDFDocument *)createXFDFDocumentWithPath:(NSString *)xfdfFilePath {
@@ -1991,20 +1994,18 @@ static NSString *PSPDFStringFromCGRect(CGRect rect) {
 //     ]];
 // }
 
-// - (void)pdfViewController:(nonnull PSPDFViewController *)pdfController didSelectAnnotations:(nonnull NSArray<PSPDFAnnotation *> *)annotations onPageView:(nonnull PSPDFPageView *)pageView {
-//     currentSelectedAnnotations = annatations;
+// - (void)pdfViewController:(nonnull PSPDFViewController *)pdfController 
+//     didSelectAnnotations:(nonnull NSArray<PSPDFAnnotation *> *)annotations 
+//     onPageView:(nonnull PSPDFPageView *)pageView {
+//     _currentSelectedAnnotations = annatations;
 // }
 
-- (void) annotationsAddedNotification:(NSNotification *)notification {
-    if ([self.annotation isEqual:notification.object]) {
-        NSArray *keyPaths = notification.userInfo[PSPDFAnnotationsAddedNotification];
-        if (keyPaths.count > 1 || ![keyPaths.firstObject isEqual:@"contents"]) {
-            PSPDFAnnotation annotation = currentSelectedAnnotations[0];
-            NSData *annotationData = [annotation generateInstantJSONWithError:NULL];
-            NSString *jsonString = [[NSString alloc] initWithData: annotationData encoding:NSUTF8StringEncoding];
-            [self sendEventWithJSON: [NSString stringWithFormat:@"{type: 'onAnnotationCreated' data:%@}", jsonString]];
-        }
-    }
+- (void)annotationAddedNotification:(NSNotification *)notification {
+    PSPDFAnnotation *annotations = notification.object;
+    PSPDFAnnotations *annotation = annotations.firstObject;
+    NSData *annotationData = [annotation generateInstantJSONWithError:NULL];
+    NSString *jsonString = [[NSString alloc] initWithData:annotationData encoding:NSUTF8StringEncoding];
+    [self sendEventWithJSON: [NSString stringWithFormat:@"{type: 'onAnnotationCreated' data:%@", jsonString]]
 }
 
 
