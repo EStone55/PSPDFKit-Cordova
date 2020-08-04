@@ -1599,7 +1599,7 @@ static NSString *PSPDFStringFromCGRect(CGRect rect) {
 
 - (void)tapGestureRecognizerDidChangeState:(UITapGestureRecognizer *)gestureRecognizer {
     CGPoint viewPoint = [gestureRecognizer locationInView:_pdfController.view];
-    [self sendEventWithJSON:[NSString stringWithFormat:@"{type:'didTapOnPageView',viewPoint:[%g,%g]}", viewPoint.x, viewPoint.y]];
+    [self sendEventWithJSON:[NSString stringWithFormat:@"{type:'didTapOnPageView',viewPoint:[%g,%g   ]}", viewPoint.x, viewPoint.y]];
 }
 
 - (void)longPressGestureRecognizerDidChangeState:(UILongPressGestureRecognizer *)gestureRecognizer {
@@ -1988,10 +1988,24 @@ static NSString *PSPDFStringFromCGRect(CGRect rect) {
 //         UIImage *image = [UIImage imageName:@"Custom Button Icon"];
 //         return [image imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
 //     }
-// ]];
+//     ]];
 // }
 
 // - (void)pdfViewController:(nonnull PSPDFViewController *)pdfController didSelectAnnotations:(nonnull NSArray<PSPDFAnnotation *> *)annotations onPageView:(nonnull PSPDFPageView *)pageView {
-//     currentSelectedAnnotations = annations;
+//     currentSelectedAnnotations = annatations;
 // }
+
+- (void) annotationAddedNotification:(NSNotification *)notification {
+    if ([self.annotation isEqual:notification.object]) {
+        NSArray *keyPaths = notification.userInfo[PSPDFAnnotationAddedNotification];
+        if (keyPaths.count > 1 || ![keyPaths.firstObject isEqual:@"contents"]) {
+            PSPDFAnnotation annotation = currentSelectedAnnotations[0];
+            NSData *annotationData = [annotation generateInstantJSONWithError:NULL];
+            NSString *jsonString = [[NSString alloc] initWithData: annotationData encoding:NSUTF8StringEncoding];
+            [self sendEventWithJSON: [NSString stringWithFormat:@"{type: 'onAnnotationCreated' data:%s}", jsonString]]
+        }
+    }
+}
+
+
 @end
