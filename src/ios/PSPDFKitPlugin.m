@@ -2001,11 +2001,11 @@ static NSString *PSPDFStringFromCGRect(CGRect rect) {
 // }
 
 - (void)annotationAddedNotification:(NSNotification *)notification {
-    PSPDFAnnotation *annotations = notification.object;
-    PSPDFAnnotations *annotation = annotations.firstObject;
+    NSArray *annotations = notification.object;
+    PSPDFAnnotation *annotation = annotations.firstObject;
     NSData *annotationData = [annotation generateInstantJSONWithError:NULL];
     NSString *jsonString = [[NSString alloc] initWithData:annotationData encoding:NSUTF8StringEncoding];
-    [self sendEventWithJSON: [NSString stringWithFormat:@"{type: 'onAnnotationCreated' data:%@", jsonString]]
+    [self sendEventWithJSON: [NSString stringWithFormat:@"{type: 'onAnnotationCreated' data:%@", jsonString]];
 }
 
 
