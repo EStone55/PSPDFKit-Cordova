@@ -490,7 +490,7 @@ void runOnMainQueueWithoutDeadlocking(void (^block)(void)) {
     [_pdfController.view addGestureRecognizer:longPressGestureRecognizer];
 
     [NSNotificationCenter.defaultCenter addObserver:self selector:@selector(annotationAddedNotification:) name:PSPDFAnnotationsAddedNotification object:nil];
-
+    // [NSNotificationCenter.defaultCenter addObserver:/self selector:@selector(nil) name:]
 }
 
 - (PSPDFDocument *)createXFDFDocumentWithPath:(NSString *)xfdfFilePath {
@@ -2000,13 +2000,35 @@ static NSString *PSPDFStringFromCGRect(CGRect rect) {
 //     _currentSelectedAnnotations = annatations;
 // }
 
+- (void) customButtonAction:(PSPDFAnnotation *)annotation {
+    NSData *annotationData = [annotation generateInstantJSONWithError:NULL];
+    NSString *jsonString = [[NSString alloc] initWithData:annotationData encoding:NSUTF8StringEncoding];
+    NSLog(@"Open asset action modal");
+    [self sendEventWithJSON]
+}
+
++ (NSDictionary *)instantJSONFromAnnotation:(PSPDFAnnotation *)annotation {
+    NSDictionary <NSString *, NSString *> *uuidDict = @{@"uuid":annotation.uuid};
+    NSData *annotationData = [annotation generateInstantJSONWithError:NULL];
+    if (annotationData) {
+        NSMutableDictionary *annotationDictionary = [[NSJSONSerialization JSONObjectWithData:annotationData options:kNilOptions error:NULL] mutableCopy];
+        [annotationDictionary addEntriesFromDictionary:uuidDict];
+        if (annotationDictionary) {
+            return [annotationDictionary copy];
+        } else {
+            return [uuidDict copy];
+        }
+    }
+}
+
 - (void)annotationAddedNotification:(NSNotification *)notification {
     NSArray *annotations = notification.object;
     PSPDFAnnotation *annotation = annotations.firstObject;
-    NSData *annotationData = [annotation generateInstantJSONWithError:NULL];
+    // NSData *annotationData = [annotation generateInstantJSONWithError:NULL];
+    NSDictionary *annotationJson = instantJSONFromAnnotation(annotation); 
     NSString *jsonString = [[NSString alloc] initWithData:annotationData encoding:NSUTF8StringEncoding];
     NSLog(@"Annotation added");
-    [self sendEventWithJSON: [NSString stringWithFormat:@"{type: 'onAnnotationCreated' data:%@", jsonString]];
+    [self sendEventWithJSON:@{@"type": "onAnnotationCreated", @"assetData":annotationJson}];
 }
 
 
