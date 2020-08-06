@@ -2000,12 +2000,12 @@ static NSString *PSPDFStringFromCGRect(CGRect rect) {
 //     _currentSelectedAnnotations = annatations;
 // }
 
-- (void) customButtonAction:(PSPDFAnnotation *)annotation {
-    NSData *annotationData = [annotation generateInstantJSONWithError:NULL];
-    NSString *jsonString = [[NSString alloc] initWithData:annotationData encoding:NSUTF8StringEncoding];
-    NSLog(@"Open asset action modal");
-    [self sendEventWithJSON]
-}
+// - (void) customButtonAction:(PSPDFAnnotation *)annotation {
+//     NSData *annotationData = [annotation generateInstantJSONWithError:NULL];
+//     NSString *jsonString = [[NSString alloc] initWithData:annotationData encoding:NSUTF8StringEncoding];
+//     NSLog(@"Open asset action modal");
+//     [self sendEventWithJSON];
+// }
 
 + (NSDictionary *)instantJSONFromAnnotation:(PSPDFAnnotation *)annotation {
     NSDictionary <NSString *, NSString *> *uuidDict = @{@"uuid":annotation.uuid};
@@ -2025,10 +2025,15 @@ static NSString *PSPDFStringFromCGRect(CGRect rect) {
     NSArray *annotations = notification.object;
     PSPDFAnnotation *annotation = annotations.firstObject;
     // NSData *annotationData = [annotation generateInstantJSONWithError:NULL];
-    NSDictionary *annotationJson = instantJSONFromAnnotation(annotation); 
+    NSDictionary *annotationJson = [PSPDFKitPlugin instantJSONFromAnnotation:annotation]; 
     NSString *jsonString = [[NSString alloc] initWithData:annotationData encoding:NSUTF8StringEncoding];
     NSLog(@"Annotation added");
-    [self sendEventWithJSON:@{@"type": "onAnnotationCreated", @"assetData":annotationJson}];
+    if (annotationJson) {
+        [self sendEventWithJSON:@{@"type": @"onAnnotationCreated", @"assetData":annotationJson}];
+        NSLog(@"Event dispatched");
+    } else {
+        NSLog(@"Event not dispatched");
+    }
 }
 
 
