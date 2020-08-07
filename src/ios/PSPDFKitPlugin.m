@@ -489,8 +489,9 @@ void runOnMainQueueWithoutDeadlocking(void (^block)(void)) {
     [_pdfController.interactions.allInteractions allowSimultaneousRecognitionWithGestureRecognizer:longPressGestureRecognizer];
     [_pdfController.view addGestureRecognizer:longPressGestureRecognizer];
 
-    [NSNotificationCenter.defaultCenter addObserver:self selector:@selector(annotationAddedNotification:) name:PSPDFAnnotationsAddedNotification object:nil];
-    // [NSNotificationCenter.defaultCenter addObserver:/self selector:@selector(nil) name:]
+    [NSNotificationCenter.defaultCenter addObserver:self selector:@selector(annotationChangedNotification:) name:PSPDFAnnotationsAddedNotification object:nil];
+    [NSNotificationCenter.defaultCenter addObserver:self selector:@selector(annotationChangedNotification:) name:PSPDFAnnotationChangedNotification object:nil];
+    [NSNotificationCenter.defaultCenter addObserver:self selector:@selector(annotationChangedNotification:) name:PSPDFAnnotationsRemovedNotification object:nil];
 }
 
 - (PSPDFDocument *)createXFDFDocumentWithPath:(NSString *)xfdfFilePath {
@@ -2007,32 +2008,49 @@ static NSString *PSPDFStringFromCGRect(CGRect rect) {
 //     [self sendEventWithJSON];
 // }
 
-+ (NSDictionary *)instantJSONFromAnnotation:(PSPDFAnnotation *)annotation {
-    NSDictionary <NSString *, NSString *> *uuidDict = @{@"uuid":annotation.uuid};
-    NSData *annotationData = [annotation generateInstantJSONWithError:NULL];
-    if (annotationData) {
-        NSMutableDictionary *annotationDictionary = [[NSJSONSerialization JSONObjectWithData:annotationData options:kNilOptions error:NULL] mutableCopy];
-        [annotationDictionary addEntriesFromDictionary:uuidDict];
-        if (annotationDictionary) {
-            return [annotationDictionary copy];
++ (NSArray <NSDictionary *> *)instantJSONFromAnnotations:(NSArray <PSPDFAnnotation *> *)annotations {
+    NSMutableArray <NSDictionary *> *annotationsJSON = [NSMutableArray new];
+    for (PSPDFAnnotation *annotation in annotations) {
+        NSDictionary <NSString *, NSString *> *uuidDict = @{@"uuid" : annotation.uuid};
+        NSData *annotationData = [annotation generateInstantJSONWithError:NULL];
+        if (annotationData) {
+            NSMutableDictionary *annotationDictionary = [[NSJSONSerialization JSONObjectWithData:annotationData options:kNilOptions error:NULL] mutableCopy];
+            [annotationDictionary addEntriesFromDictionary:uuidDict];
+            if (annotationDictionary) {
+                [annotationsJSON addObject:annotationDictionary];
+            }
         } else {
-            return [uuidDict copy];
+            // We only generate Instant JSON data for attached annotations. When an annotation is deleted, we only set the annotation uuid.
+            [annotationsJSON addObject:uuidDict];
         }
     }
+    return [annotationsJSON copy];
 }
 
-- (void)annotationAddedNotification:(NSNotification *)notification {
-    NSArray *annotations = notification.object;
-    PSPDFAnnotation *annotation = annotations.firstObject;
-    // NSData *annotationData = [annotation generateInstantJSONWithError:NULL];
-    NSDictionary *annotationJson = [PSPDFKitPlugin instantJSONFromAnnotation:annotation]; 
-    // NSString *jsonString = [[NSString alloc] initWithData:annotationData encoding:NSUTF8StringEncoding];
-    NSLog(@"Annotation added");
-    if (annotationJson) {
-        [self sendEventWithJSON:@{@"type": @"onAnnotationCreated", @"assetData":annotationJson}];
-        NSLog(@"Event dispatched");
+- (void)annotationChangedNotification:(NSNotification *)notification {
+    id object = notification.object;
+    NSArray <PSPDFAnnotation *> *annotations;
+    if ([object isKindOfClass:NSArray.class]) {
+        annotations = object;
+    } else if ([object isKindOfClass:PSPDFAnnotation.class]) {
+        annotations = @[object];
     } else {
-        NSLog(@"Event not dispatched");
+        return;
+    }
+
+    NSString *name = notification.name;
+    NSString *changeEventName;
+    if ([name isEqualToString:PSPDFAnnotationChangedNotification]) {
+        changeEventName = @"onAnnotationChanged";
+    } else if ([name isEqualToString:PSPDFAnnotationsAddedNotification]) {
+        changeEventName = @"onAnnotationCreated";
+    } else if ([name isEqualToString:PSPDFAnnotationsRemovedNotification]) {
+        changeEventName = @"onAnnotationsRemoved";
+    }
+
+    NSArray <NSDictionary *> *annotationsJSON = [PSPDFKitPlugin instantJSONFromAnnotations:annotations];
+    if (annotationsJSON) {
+        [self sendEventWithJSON:@{@"type": changeEventName, @"annotations": annotationsJSON}];
     }
 }
 
