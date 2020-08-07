@@ -2008,25 +2008,6 @@ static NSString *PSPDFStringFromCGRect(CGRect rect) {
 //     [self sendEventWithJSON];
 // }
 
-+ (NSArray <NSDictionary *> *)instantJSONFromAnnotations:(NSArray <PSPDFAnnotation *> *)annotations {
-    NSMutableArray <NSDictionary *> *annotationsJSON = [NSMutableArray new];
-    for (PSPDFAnnotation *annotation in annotations) {
-        NSDictionary <NSString *, NSString *> *uuidDict = @{@"uuid" : annotation.uuid};
-        NSData *annotationData = [annotation generateInstantJSONWithError:NULL];
-        if (annotationData) {
-            NSMutableDictionary *annotationDictionary = [[NSJSONSerialization JSONObjectWithData:annotationData options:kNilOptions error:NULL] mutableCopy];
-            [annotationDictionary addEntriesFromDictionary:uuidDict];
-            if (annotationDictionary) {
-                [annotationsJSON addObject:annotationDictionary];
-            }
-        } else {
-            // We only generate Instant JSON data for attached annotations. When an annotation is deleted, we only set the annotation uuid.
-            [annotationsJSON addObject:uuidDict];
-        }
-    }
-    return [annotationsJSON copy];
-}
-
 - (void)annotationChangedNotification:(NSNotification *)notification {
     id object = notification.object;
     NSArray <PSPDFAnnotation *> *annotations;
