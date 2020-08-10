@@ -493,22 +493,9 @@ void runOnMainQueueWithoutDeadlocking(void (^block)(void)) {
     [_pdfController.interactions.allInteractions allowSimultaneousRecognitionWithGestureRecognizer:longPressGestureRecognizer];
     [_pdfController.view addGestureRecognizer:longPressGestureRecognizer];
 
-    UIImage *img = [[UIImage alloc] init];
-    editImage = [UIImage imageNamed:@"ic_edit.png" imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
-    _editAssetButton = [PSPDFToolbarButton new];
-    _editAssetButton.accessibilityLabel = @"Edit Asset";
-    [_editAssetButton setImage:editImage];
-    [_editAssetButton addTarget:self action:@selector(editAssetButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
-
-    self.additionalButtons = @[_editAssetButton];
-
-    [PSPDFKitPlugin addEditAssetButton];
-
     [NSNotificationCenter.defaultCenter addObserver:self selector:@selector(annotationChangedNotification:) name:PSPDFAnnotationsAddedNotification object:nil];
     [NSNotificationCenter.defaultCenter addObserver:self selector:@selector(annotationChangedNotification:) name:PSPDFAnnotationChangedNotification object:nil];
     [NSNotificationCenter.defaultCenter addObserver:self selector:@selector(annotationChangedNotification:) name:PSPDFAnnotationsRemovedNotification object:nil];
-
-
 }
 
 - (PSPDFDocument *)createXFDFDocumentWithPath:(NSString *)xfdfFilePath {
@@ -1119,12 +1106,6 @@ void runOnMainQueueWithoutDeadlocking(void (^block)(void)) {
     [_pdfController updateConfigurationWithBuilder:^(PSPDFConfigurationBuilder *builder) {
         builder.backgroundColor = backgroundColor;
     }];
-}
-
-- (void)addEditAssetButton {
-    [_pdfController updateConfigurationWithBuilder:^(PSPDFConfigurationBuilder *builder) {
-        [builder overrideClass:PSPDFAnnotationToolbar.class withClass:PSCCustomButtonAnnotationToolbar.class];
-    }]
 }
 
 - (NSString *)backgroundColorAsJSON {
@@ -2058,14 +2039,17 @@ static NSString *PSPDFStringFromCGRect(CGRect rect) {
     }
 }
 
-- (instancetype)initWithAnnotationStateManager:(PSPDFAnnotationStateManager *)annotationStateManager {
+@end
+
+@implementation PSCCustomButtonAnnotationToolbar
+
+- (instancetype)initWithAnnotationStateManager:(PSPDFAnnotationStateManager *)annotationsStateManager {
     if ((self = [super initWithAnnotationStateManager:annotationStateManager])) {
-        UIImage *img = [[UIImage alloc] init];
-        editImage = [UIImage imageNamed:@"ic_edit.png" imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
+        UIImage *editImage = [[PSPDFKitGlobal imageName:@"ic_edit.png"] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
         _editAssetButton = [PSPDFToolbarButton new];
         _editAssetButton.accessibilityLabel = @"Edit Asset";
         [_editAssetButton setImage:editImage];
-        [_editAssetButton addTarget:self action:@select(editAssetButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
+        [_editAssetButton addTarget:self action:@selector(editAssetButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
 
         self.additionalButtons = @[_editAssetButton];
     }
@@ -2073,13 +2057,13 @@ static NSString *PSPDFStringFromCGRect(CGRect rect) {
 }
 
 - (void)editAssetButtonPressed:(id)sender {
-    PSPDFPageView view = [_pdfController pageViewForPageAtIndex:0];
+    PSPDFViewController *pdfController = self.annotationsStateManager.pdfController;
+    PSPDFPageView *view = [pdfController pageViewForPageAtIndex:0];
     NSArray<PSPDFAnnotation *> *annotations = view.selectedAnnotations;
     NSArray <NSDictionary *> *annotationsJSON = [PSPDFKitPlugin instantJSONFromAnnotations:annotations];
     if (annotationsJSON) {
         [self sendEventWithJSON:@{@"type": @"onOpenAssetActionModal", @"annotations": annotationsJSON}];
     }
 }
-
 
 @end
