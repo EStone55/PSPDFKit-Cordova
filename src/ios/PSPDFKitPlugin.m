@@ -2064,12 +2064,36 @@ static NSString *PSPDFStringFromCGRect(CGRect rect) {
     return self;
 }
 
+- (NSString *)stringByEvaluatingJavaScriptFromString:(NSString *)script {
+    __block NSString *result;
+#if WK_WEB_VIEW_ONLY
+    if ([self.webView isKindOfClass:WKWebView.class]) {
+        runOnMainQueueWithoutDeadlocking(^{
+            [((WKWebView *)self.webView) evaluateJavaScript:script completionHandler:^(id resultID, NSError *error) {
+                result = [resultID description];
+            }];
+        });
+    }
+#else
+    if ([self.webView isKindOfClass:UIWebView.class]) {
+        result = [(UIWebView *)self.webView stringByEvaluatingJavaScriptFromString:script];
+    } else if ([self.webView isKindOfClass:WKWebView.class]) {
+        runOnMainQueueWithoutDeadlocking(^{
+            [((WKWebView *)self.webView) evaluateJavaScript:script completionHandler:^(id resultID, NSError *error) {
+                result = [resultID description];
+            }];
+        });
+    }
+#endif
+    return result;
+}
+
 - (BOOL)sendEventWithJSON:(id)JSON {
     if ([JSON isKindOfClass:[NSDictionary class]]) {
         JSON = [[NSString alloc] initWithData:[NSJSONSerialization dataWithJSONObject:JSON options:0 error:NULL] encoding:NSUTF8StringEncoding];
     }
     NSString *script = [NSString stringWithFormat:@"PSPDFKit.dispatchEvent(%@)", JSON];
-    NSString *result = [PSPDFKitPlugin stringByEvaluatingJavaScriptFromString:script];
+    NSString *result = [self stringByEvaluatingJavaScriptFromString:script];
     return [result length]? [result boolValue]: YES;
 }
 
