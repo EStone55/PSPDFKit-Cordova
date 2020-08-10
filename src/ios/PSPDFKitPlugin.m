@@ -308,7 +308,7 @@ void runOnMainQueueWithoutDeadlocking(void (^block)(void)) {
     }
 }
 
-- (BOOL)sendEventWithJSON:(id)JSON {
++ (BOOL)sendEventWithJSON:(id)JSON {
     if ([JSON isKindOfClass:[NSDictionary class]]) {
         JSON = [[NSString alloc] initWithData:[NSJSONSerialization dataWithJSONObject:JSON options:0 error:NULL] encoding:NSUTF8StringEncoding];
     }
@@ -496,6 +496,8 @@ void runOnMainQueueWithoutDeadlocking(void (^block)(void)) {
     [NSNotificationCenter.defaultCenter addObserver:self selector:@selector(annotationChangedNotification:) name:PSPDFAnnotationsAddedNotification object:nil];
     [NSNotificationCenter.defaultCenter addObserver:self selector:@selector(annotationChangedNotification:) name:PSPDFAnnotationChangedNotification object:nil];
     [NSNotificationCenter.defaultCenter addObserver:self selector:@selector(annotationChangedNotification:) name:PSPDFAnnotationsRemovedNotification object:nil];
+
+    [self addEditAssetButton]
 }
 
 - (PSPDFDocument *)createXFDFDocumentWithPath:(NSString *)xfdfFilePath {
@@ -975,6 +977,12 @@ void runOnMainQueueWithoutDeadlocking(void (^block)(void)) {
     PSPDFPageTransition pageTransition = (PSPDFPageTransition) [self enumValueForKey:transition ofType:@"PSPDFPageTransition" withDefault:PSPDFPageTransitionScrollPerSpread];
     [_pdfController updateConfigurationWithBuilder:^(PSPDFConfigurationBuilder *builder) {
         builder.pageTransition = pageTransition;
+    }];
+}
+
+- (void)addEditAssetButton {
+    [_pdfController updateConfigurationWithBuilder:^(PSPDFConfigurationBuilder *builder) {
+        [builder overrideClass:PSPDFAnnotationToolbar.class withClass:PSCCustomButtonAnnotationToolbar];
     }];
 }
 
