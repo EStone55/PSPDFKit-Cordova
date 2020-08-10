@@ -308,7 +308,7 @@ void runOnMainQueueWithoutDeadlocking(void (^block)(void)) {
     }
 }
 
-+ (BOOL)sendEventWithJSON:(id)JSON {
+- (BOOL)sendEventWithJSON:(id)JSON {
     if ([JSON isKindOfClass:[NSDictionary class]]) {
         JSON = [[NSString alloc] initWithData:[NSJSONSerialization dataWithJSONObject:JSON options:0 error:NULL] encoding:NSUTF8StringEncoding];
     }
@@ -1520,19 +1520,19 @@ void runOnMainQueueWithoutDeadlocking(void (^block)(void)) {
 }
 
 - (void)pdfViewController:(PSPDFViewController *)pdfController willBeginDisplayingPageView:(PSPDFPageView *)pageView forPageAtIndex:(NSInteger)pageIndex {
-    [PSPDFKitPlugin sendEventWithJSON:[NSString stringWithFormat:@"{type:'willBeginDisplayingPageView',page:%ld}", (long) pageIndex]];
+    [self sendEventWithJSON:[NSString stringWithFormat:@"{type:'willBeginDisplayingPageView',page:%ld}", (long) pageIndex]];
 }
 
 - (void)pdfViewController:(PSPDFViewController *)pdfController didFinishRenderTaskForPageView:(PSPDFPageView *)pageView {
-    [PSPDFKitPlugin sendEventWithJSON:[NSString stringWithFormat:@"{type:'didFinishRenderTaskForPageView',page:%ld}", (long) pageView.pageIndex]];
+    [self sendEventWithJSON:[NSString stringWithFormat:@"{type:'didFinishRenderTaskForPageView',page:%ld}", (long) pageView.pageIndex]];
 }
 
 - (void)pdfViewController:(PSPDFViewController *)pdfController didConfigurePageView:(PSPDFPageView *)pageView forPageAtIndex:(NSInteger)pageIndex {
-    [PSPDFKitPlugin sendEventWithJSON:[NSString stringWithFormat:@"{type:'didConfigurePageView',page:%ld}", (long) pageView.pageIndex]];
+    [self sendEventWithJSON:[NSString stringWithFormat:@"{type:'didConfigurePageView',page:%ld}", (long) pageView.pageIndex]];
 }
 
 - (void)pdfViewController:(PSPDFViewController *)pdfController didCleanupPageView:(PSPDFPageView *)pageView forPageAtIndex:(NSInteger)pageIndex {
-    [PSPDFKitPlugin sendEventWithJSON:[NSString stringWithFormat:@"{type:'didCleanupPageView',page:%ld}", (long) pageView.pageIndex]];
+    [self sendEventWithJSON:[NSString stringWithFormat:@"{type:'didCleanupPageView',page:%ld}", (long) pageView.pageIndex]];
 }
 
 static NSString *PSPDFStringFromCGRect(CGRect rect) {
@@ -1540,15 +1540,15 @@ static NSString *PSPDFStringFromCGRect(CGRect rect) {
 }
 
 - (BOOL)pdfViewController:(PSPDFViewController *)pdfController shouldSelectText:(NSString *)text withGlyphs:(NSArray *)glyphs atRect:(CGRect)rect onPageView:(PSPDFPageView *)pageView {
-    return [PSPDFKitPlugin sendEventWithJSON:@{@"type": @"shouldSelectText", @"text": text, @"rect": PSPDFStringFromCGRect(rect)}];
+    return [self sendEventWithJSON:@{@"type": @"shouldSelectText", @"text": text, @"rect": PSPDFStringFromCGRect(rect)}];
 }
 
 - (void)pdfViewController:(PSPDFViewController *)pdfController didSelectText:(NSString *)text withGlyphs:(NSArray *)glyphs atRect:(CGRect)rect onPageView:(PSPDFPageView *)pageView {
-    [PSPDFKitPlugin sendEventWithJSON:@{@"type": @"didSelectText", @"text": text, @"rect": PSPDFStringFromCGRect(rect)}];
+    [self sendEventWithJSON:@{@"type": @"didSelectText", @"text": text, @"rect": PSPDFStringFromCGRect(rect)}];
 }
 
 - (void)pdfViewControllerWillDismiss:(PSPDFViewController *)pdfController {
-    [PSPDFKitPlugin sendEventWithJSON:@"{type:'willDismiss'}"];
+    [self sendEventWithJSON:@"{type:'willDismiss'}"];
 }
 
 - (void)pdfViewControllerDidDismiss:(PSPDFViewController *)pdfController {
@@ -1558,23 +1558,23 @@ static NSString *PSPDFStringFromCGRect(CGRect rect) {
     _navigationController = nil;
 
     //send event
-    [PSPDFKitPlugin sendEventWithJSON:@"{type:'didDismiss'}"];
+    [self sendEventWithJSON:@"{type:'didDismiss'}"];
 }
 
 - (BOOL)pdfViewController:(PSPDFViewController *)pdfController shouldShowUserInterface:(BOOL)animated {
-    return [PSPDFKitPlugin sendEventWithJSON:@{@"type": @"shouldShowUserInterface", @"animated": @(animated)}];
+    return [self sendEventWithJSON:@{@"type": @"shouldShowUserInterface", @"animated": @(animated)}];
 }
 
 - (void)pdfViewController:(PSPDFViewController *)pdfController didShowUserInterface:(BOOL)animated {
-    [PSPDFKitPlugin sendEventWithJSON:@{@"type": @"didShowUserInterface", @"animated": @(animated)}];
+    [self sendEventWithJSON:@{@"type": @"didShowUserInterface", @"animated": @(animated)}];
 }
 
 - (BOOL)pdfViewController:(PSPDFViewController *)pdfController shouldHideUserInterface:(BOOL)animated {
-    return [PSPDFKitPlugin sendEventWithJSON:@{@"type": @"shouldHideUserInterface", @"animated": @(animated)}];
+    return [self sendEventWithJSON:@{@"type": @"shouldHideUserInterface", @"animated": @(animated)}];
 }
 
 - (void)pdfViewController:(PSPDFViewController *)pdfController didHideUserInterface:(BOOL)animated {
-    [PSPDFKitPlugin sendEventWithJSON:@{@"type": @"didHideUserInterface", @"animated": @(animated)}];
+    [self sendEventWithJSON:@{@"type": @"didHideUserInterface", @"animated": @(animated)}];
 }
 
 - (BOOL)pdfViewController:(PSPDFViewController *)pdfController shouldShowController:(UIViewController *)controller options:(NSDictionary<NSString *,id> *)options animated:(BOOL)animated {
@@ -1588,11 +1588,11 @@ static NSString *PSPDFStringFromCGRect(CGRect rect) {
 #pragma mark Annotation toolbar delegate methods
 
 - (void)flexibleToolbarContainerDidShow:(nonnull PSPDFFlexibleToolbarContainer *)container {
-    [PSPDFKitPlugin sendEventWithJSON:@"{type:'flexibleToolbarContainerDidShow'}"];
+    [self sendEventWithJSON:@"{type:'flexibleToolbarContainerDidShow'}"];
 }
 
 - (void)flexibleToolbarContainerDidHide:(nonnull PSPDFFlexibleToolbarContainer *)container {
-    [PSPDFKitPlugin sendEventWithJSON:@"{type:'flexibleToolbarContainerDidHide'}"];
+    [self sendEventWithJSON:@"{type:'flexibleToolbarContainerDidHide'}"];
 }
 
 - (CGRect)flexibleToolbarContainerContentRect:(PSPDFFlexibleToolbarContainer *)container forToolbarPosition:(PSPDFFlexibleToolbarPosition)position {
@@ -1615,12 +1615,12 @@ static NSString *PSPDFStringFromCGRect(CGRect rect) {
 
 - (void)tapGestureRecognizerDidChangeState:(UITapGestureRecognizer *)gestureRecognizer {
     CGPoint viewPoint = [gestureRecognizer locationInView:_pdfController.view];
-    [PSPDFKitPlugin sendEventWithJSON:[NSString stringWithFormat:@"{type:'didTapOnPageView',viewPoint:[%g,%g   ]}", viewPoint.x, viewPoint.y]];
+    [self sendEventWithJSON:[NSString stringWithFormat:@"{type:'didTapOnPageView',viewPoint:[%g,%g   ]}", viewPoint.x, viewPoint.y]];
 }
 
 - (void)longPressGestureRecognizerDidChangeState:(UILongPressGestureRecognizer *)gestureRecognizer {
     CGPoint viewPoint = [gestureRecognizer locationInView:_pdfController.view];
-    [PSPDFKitPlugin sendEventWithJSON:[NSString stringWithFormat:@"{type:'didLongPressOnPageView',viewPoint:[%g,%g]}", viewPoint.x, viewPoint.y]];
+    [self sendEventWithJSON:[NSString stringWithFormat:@"{type:'didLongPressOnPageView',viewPoint:[%g,%g]}", viewPoint.x, viewPoint.y]];
 }
 
 #pragma mark - Instant JSON
@@ -2043,8 +2043,12 @@ static NSString *PSPDFStringFromCGRect(CGRect rect) {
 
     NSArray <NSDictionary *> *annotationsJSON = [PSPDFKitPlugin instantJSONFromAnnotations:annotations];
     if (annotationsJSON) {
-        [PSPDFKitPlugin sendEventWithJSON:@{@"type": changeEventName, @"annotations": annotationsJSON}];
+        [self sendEventWithJSON:@{@"type": changeEventName, @"annotations": annotationsJSON}];
     }
+}
+
++ (void)sendEditAssetEvent:(NSArray <NSDictionary *> *)annotationsJSON {
+    [self sendEventWithJSON:@{@"type": @"onOpenAssetActionModal", @"annotations": annotationsJSON}];
 }
 
 @end
@@ -2064,13 +2068,22 @@ static NSString *PSPDFStringFromCGRect(CGRect rect) {
     return self;
 }
 
+// - (BOOL)sendEventWithJSON:(id)JSON {
+//     if ([JSON isKindOfClass:[NSDictionary class]]) {
+//         JSON = [[NSString alloc] initWithData:[NSJSONSerialization dataWithJSONObject:JSON options:0 error:NULL] encoding:NSUTF8StringEncoding];
+//     }
+//     NSString *script = [NSString stringWithFormat:@"PSPDFKit.dispatchEvent(%@)", JSON];
+//     NSString *result = [self stringByEvaluatingJavaScriptFromString:script];
+//     return [result length]? [result boolValue]: YES;
+// }
+
 - (void)editAssetButtonPressed:(id)sender {
     PSPDFViewController *pdfController = self.annotationStateManager.pdfController;
     PSPDFPageView *view = [pdfController pageViewForPageAtIndex:0];
     NSArray<PSPDFAnnotation *> *annotations = view.selectedAnnotations;
     NSArray <NSDictionary *> *annotationsJSON = [PSPDFKitPlugin instantJSONFromAnnotations:annotations];
     if (annotationsJSON) {
-        [PSPDFKitPlugin sendEventWithJSON:@{@"type": @"onOpenAssetActionModal", @"annotations": annotationsJSON}];
+        [PSPDFKitPlugin sendEditAssetEvent:annotationsJSON];
     }
 }
 
