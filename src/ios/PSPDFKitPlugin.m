@@ -308,7 +308,7 @@ void runOnMainQueueWithoutDeadlocking(void (^block)(void)) {
     }
 }
 
-+ (BOOL)sendEventWithJSON:(id)JSON {
+- (BOOL)sendEventWithJSON:(id)JSON {
     if ([JSON isKindOfClass:[NSDictionary class]]) {
         JSON = [[NSString alloc] initWithData:[NSJSONSerialization dataWithJSONObject:JSON options:0 error:NULL] encoding:NSUTF8StringEncoding];
     }
@@ -497,7 +497,7 @@ void runOnMainQueueWithoutDeadlocking(void (^block)(void)) {
     [NSNotificationCenter.defaultCenter addObserver:self selector:@selector(annotationChangedNotification:) name:PSPDFAnnotationChangedNotification object:nil];
     [NSNotificationCenter.defaultCenter addObserver:self selector:@selector(annotationChangedNotification:) name:PSPDFAnnotationsRemovedNotification object:nil];
 
-    [self addEditAssetButton]
+    [self addEditAssetButton];
 }
 
 - (PSPDFDocument *)createXFDFDocumentWithPath:(NSString *)xfdfFilePath {
@@ -2064,13 +2064,22 @@ static NSString *PSPDFStringFromCGRect(CGRect rect) {
     return self;
 }
 
+- (BOOL)sendEventWithJSON:(id)JSON {
+    if ([JSON isKindOfClass:[NSDictionary class]]) {
+        JSON = [[NSString alloc] initWithData:[NSJSONSerialization dataWithJSONObject:JSON options:0 error:NULL] encoding:NSUTF8StringEncoding];
+    }
+    NSString *script = [NSString stringWithFormat:@"PSPDFKit.dispatchEvent(%@)", JSON];
+    NSString *result = [self stringByEvaluatingJavaScriptFromString:script];
+    return [result length]? [result boolValue]: YES;
+}
+
 - (void)editAssetButtonPressed:(id)sender {
     PSPDFViewController *pdfController = self.annotationStateManager.pdfController;
     PSPDFPageView *view = [pdfController pageViewForPageAtIndex:0];
     NSArray<PSPDFAnnotation *> *annotations = view.selectedAnnotations;
     NSArray <NSDictionary *> *annotationsJSON = [PSPDFKitPlugin instantJSONFromAnnotations:annotations];
     if (annotationsJSON) {
-        [PSPDFKitPlugin sendEventWithJSON:@{@"type": @"onOpenAssetActionModal", @"annotations": annotationsJSON}];
+        [self sendEventWithJSON:@{@"type": @"onOpenAssetActionModal", @"annotations": annotationsJSON}];
     }
 }
 
