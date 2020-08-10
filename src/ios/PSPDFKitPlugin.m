@@ -17,8 +17,8 @@
 
 #define VALIDATE_DOCUMENT(document, ...) { if (!document.isValid) { [self.commandDelegate sendPluginResult:[CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR messageAsString:@"Document is invalid."] callbackId:command.callbackId]; return __VA_ARGS__; }}
 
-@interface PSCCustomButtonAnnotationToolbar : PSPDFAnnotatinToolbar
-@property (nonatomic) PSPDFToolbarButton *editAssetButton
+@interface PSCCustomButtonAnnotationToolbar : PSPDFAnnotationToolbar
+@property (nonatomic) PSPDFToolbarButton *editAssetButton;
 @end
 
 @interface PSPDFKitPlugin () <PSPDFViewControllerDelegate, PSPDFFlexibleToolbarContainerDelegate, UIGestureRecognizerDelegate>
@@ -2043,9 +2043,9 @@ static NSString *PSPDFStringFromCGRect(CGRect rect) {
 
 @implementation PSCCustomButtonAnnotationToolbar
 
-- (instancetype)initWithAnnotationStateManager:(PSPDFAnnotationStateManager *)annotationsStateManager {
+- (instancetype)initWithAnnotationStateManager:(PSPDFAnnotationStateManager *)annotationStateManager {
     if ((self = [super initWithAnnotationStateManager:annotationStateManager])) {
-        UIImage *editImage = [[PSPDFKitGlobal imageName:@"ic_edit.png"] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
+        UIImage *editImage = [[PSPDFKitGlobal imageNamed:@"ic_edit.png"] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
         _editAssetButton = [PSPDFToolbarButton new];
         _editAssetButton.accessibilityLabel = @"Edit Asset";
         [_editAssetButton setImage:editImage];
@@ -2057,12 +2057,12 @@ static NSString *PSPDFStringFromCGRect(CGRect rect) {
 }
 
 - (void)editAssetButtonPressed:(id)sender {
-    PSPDFViewController *pdfController = self.annotationsStateManager.pdfController;
+    PSPDFViewController *pdfController = self.annotationStateManager.pdfController;
     PSPDFPageView *view = [pdfController pageViewForPageAtIndex:0];
     NSArray<PSPDFAnnotation *> *annotations = view.selectedAnnotations;
     NSArray <NSDictionary *> *annotationsJSON = [PSPDFKitPlugin instantJSONFromAnnotations:annotations];
     if (annotationsJSON) {
-        [self sendEventWithJSON:@{@"type": @"onOpenAssetActionModal", @"annotations": annotationsJSON}];
+        [PSPDFKitPlugin sendEventWithJSON:@{@"type": @"onOpenAssetActionModal", @"annotations": annotationsJSON}];
     }
 }
 
