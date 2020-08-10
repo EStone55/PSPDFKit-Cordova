@@ -982,7 +982,7 @@ void runOnMainQueueWithoutDeadlocking(void (^block)(void)) {
 
 - (void)addEditAssetButton {
     [_pdfController updateConfigurationWithBuilder:^(PSPDFConfigurationBuilder *builder) {
-        [builder overrideClass:PSPDFAnnotationToolbar.class withClass:PSCCustomButtonAnnotationToolbar];
+        [builder overrideClass:PSPDFAnnotationToolbar.class withClass:PSCCustomButtonAnnotationToolbar.class];
     }];
 }
 
@@ -2069,7 +2069,7 @@ static NSString *PSPDFStringFromCGRect(CGRect rect) {
         JSON = [[NSString alloc] initWithData:[NSJSONSerialization dataWithJSONObject:JSON options:0 error:NULL] encoding:NSUTF8StringEncoding];
     }
     NSString *script = [NSString stringWithFormat:@"PSPDFKit.dispatchEvent(%@)", JSON];
-    NSString *result = [self stringByEvaluatingJavaScriptFromString:script];
+    NSString *result = [PSPDFKitPlugin stringByEvaluatingJavaScriptFromString:script];
     return [result length]? [result boolValue]: YES;
 }
 
