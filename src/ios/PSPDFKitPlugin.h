@@ -12,6 +12,9 @@
 
 #import <Foundation/Foundation.h>
 #import <Cordova/CDV.h>
+#import <WebKit/WebKit.h>
+#import <PSPDFKit/PSPDFKit.h>
+#import <PSPDFKitUI/PSPDFKitUI.h>
 
 @interface PSPDFKitPlugin : CDVPlugin
 + (NSArrary <NSDictionary *> *)instantJSONFromAnnotations:(NSArray <PSPDFAnnotation *> *) annotations;
