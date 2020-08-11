@@ -12,7 +12,7 @@
 
 #import "PSPDFKitPlugin.h"
 // #import "PSCCustomButtonAnnotationToolbar.h"
-#import <PSCCustomButtonAnnotationToolbar/PSCCustomButtonAnnotationToolbar.h>
+#import <PSCCustomButtonAnnotationToolbar.h>
 #import <WebKit/WebKit.h>
 #import <PSPDFKit/PSPDFKit.h>
 #import <PSPDFKitUI/PSPDFKitUI.h>
