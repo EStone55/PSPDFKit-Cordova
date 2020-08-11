@@ -17,7 +17,7 @@
 #import <PSPDFKitUI/PSPDFKitUI.h>
 
 @interface PSPDFKitPlugin : CDVPlugin
-+ (NSArrary <NSDictionary *> *)instantJSONFromAnnotations:(NSArray <PSPDFAnnotation *> *) annotations;
++ (NSArray <NSDictionary *> *)instantJSONFromAnnotations:(NSArray <PSPDFAnnotation *> *) annotations;
 - (BOOL)sendEventWithJSON:(id)JSON;
 
 @end
