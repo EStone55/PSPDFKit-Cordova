@@ -140,6 +140,7 @@ AND MAY NOT BE RESOLD OR REDISTRIBUTED. USAGE IS BOUND TO THE PSPDFKIT LICENSE A
     <header-file src="src/ios/PSPDFKitPlugin.h" />
     <source-file src="src/ios/PSCCustomButtonAnnotationToolbar.m" />
     <header-file src="src/ios/PSCCustomButtonAnnotationToolbar.h" />
+    <resource-file src="src/ios/ic_edit.png" />
     <framework src="CoreText.framework" />
     <framework src="QuartzCore.framework" />
     <framework src="MessageUI.framework" />
