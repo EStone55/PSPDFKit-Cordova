@@ -138,6 +138,8 @@ AND MAY NOT BE RESOLD OR REDISTRIBUTED. USAGE IS BOUND TO THE PSPDFKIT LICENSE A
     </js-module>
     <source-file src="src/ios/PSPDFKitPlugin.m" />
     <header-file src="src/ios/PSPDFKitPlugin.h" />
+    <source-file src="src/ios/PSCCustomButtonAnnotationToolbar.m" />
+    <header-file src="src/ios/PSCCustomButtonAnnotationToolbar.h" />
     <framework src="CoreText.framework" />
     <framework src="QuartzCore.framework" />
     <framework src="MessageUI.framework" />
