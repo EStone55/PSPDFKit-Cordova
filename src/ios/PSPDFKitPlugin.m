@@ -498,6 +498,7 @@ void runOnMainQueueWithoutDeadlocking(void (^block)(void)) {
     [NSNotificationCenter.defaultCenter addObserver:self selector:@selector(annotationChangedNotification:) name:PSPDFAnnotationsRemovedNotification object:nil];
 
     [self addEditAssetButton];
+    [PSCCustomButtonAnnotationToolbar setPluginReference:self];
 }
 
 - (PSPDFDocument *)createXFDFDocumentWithPath:(NSString *)xfdfFilePath {
@@ -984,6 +985,7 @@ void runOnMainQueueWithoutDeadlocking(void (^block)(void)) {
     [_pdfController updateConfigurationWithBuilder:^(PSPDFConfigurationBuilder *builder) {
         [builder overrideClass:PSPDFAnnotationToolbar.class withClass:PSCCustomButtonAnnotationToolbar.class];
     }];
+    [PSCCustomButtonAnnotationToolbar ]
 }
 
 - (NSString *)pageTransitionAsJSON {
@@ -2047,13 +2049,15 @@ static NSString *PSPDFStringFromCGRect(CGRect rect) {
     }
 }
 
-+ (void)sendEditAssetEvent:(NSArray <NSDictionary *> *)annotationsJSON {
-    [self sendEventWithJSON:@{@"type": @"onOpenAssetActionModal", @"annotations": annotationsJSON}];
-}
+// + (void)sendEditAssetEvent:(NSArray <NSDictionary *> *)annotationsJSON {
+//     [self sendEventWithJSON:@{@"type": @"onOpenAssetActionModal", @"annotations": annotationsJSON}];
+// }
 
 @end
 
 @implementation PSCCustomButtonAnnotationToolbar
+
+static PSPDFKitPlugin *_pluginReference = nil;
 
 - (instancetype)initWithAnnotationStateManager:(PSPDFAnnotationStateManager *)annotationStateManager {
     if ((self = [super initWithAnnotationStateManager:annotationStateManager])) {
@@ -2068,14 +2072,11 @@ static NSString *PSPDFStringFromCGRect(CGRect rect) {
     return self;
 }
 
-// - (BOOL)sendEventWithJSON:(id)JSON {
-//     if ([JSON isKindOfClass:[NSDictionary class]]) {
-//         JSON = [[NSString alloc] initWithData:[NSJSONSerialization dataWithJSONObject:JSON options:0 error:NULL] encoding:NSUTF8StringEncoding];
-//     }
-//     NSString *script = [NSString stringWithFormat:@"PSPDFKit.dispatchEvent(%@)", JSON];
-//     NSString *result = [self stringByEvaluatingJavaScriptFromString:script];
-//     return [result length]? [result boolValue]: YES;
-// }
++ (void)setPluginReference:(PSPDFKitPlugin *):pluginReference {
+    if (plugin != _pluginReference) {
+        _pluginReference = pluginReference;
+    }
+}
 
 - (void)editAssetButtonPressed:(id)sender {
     PSPDFViewController *pdfController = self.annotationStateManager.pdfController;
@@ -2083,7 +2084,7 @@ static NSString *PSPDFStringFromCGRect(CGRect rect) {
     NSArray<PSPDFAnnotation *> *annotations = view.selectedAnnotations;
     NSArray <NSDictionary *> *annotationsJSON = [PSPDFKitPlugin instantJSONFromAnnotations:annotations];
     if (annotationsJSON) {
-        [PSPDFKitPlugin sendEditAssetEvent:annotationsJSON];
+        [_pluginReference sendEventWithJSON:@{@"type": @"onOpenAssetActionModal", @"annotations": annotationsJSON}];;
     }
 }
 
