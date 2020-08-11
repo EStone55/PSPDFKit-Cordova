@@ -6,5 +6,6 @@
 @interface PSCCustomButtonAnnotationToolbar : PSPDFAnnotationToolbar
 
 @property (nonatomic) PSPDFToolbarButton *editAssetButton;
++ (void)setPluginReference:(PSPDFKitPlugin *)pluginReference;
 
 @end
