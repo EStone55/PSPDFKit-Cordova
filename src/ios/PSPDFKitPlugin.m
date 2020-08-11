@@ -498,7 +498,6 @@ void runOnMainQueueWithoutDeadlocking(void (^block)(void)) {
     [NSNotificationCenter.defaultCenter addObserver:self selector:@selector(annotationChangedNotification:) name:PSPDFAnnotationsRemovedNotification object:nil];
 
     [self addEditAssetButton];
-    [PSCCustomButtonAnnotationToolbar setPluginReference:self];
 }
 
 - (PSPDFDocument *)createXFDFDocumentWithPath:(NSString *)xfdfFilePath {
@@ -985,7 +984,7 @@ void runOnMainQueueWithoutDeadlocking(void (^block)(void)) {
     [_pdfController updateConfigurationWithBuilder:^(PSPDFConfigurationBuilder *builder) {
         [builder overrideClass:PSPDFAnnotationToolbar.class withClass:PSCCustomButtonAnnotationToolbar.class];
     }];
-    [PSCCustomButtonAnnotationToolbar ]
+    [PSCCustomButtonAnnotationToolbar setPluginReference:self];
 }
 
 - (NSString *)pageTransitionAsJSON {
@@ -2072,10 +2071,10 @@ static PSPDFKitPlugin *_pluginReference = nil;
     return self;
 }
 
-+ (void)setPluginReference:(PSPDFKitPlugin *):pluginReference {
++ (void)setPluginReference:(PSPDFKitPlugin *)pluginReference {
     if (plugin != _pluginReference) {
         _pluginReference = pluginReference;
-    }
+    } 
 }
 
 - (void)editAssetButtonPressed:(id)sender {
