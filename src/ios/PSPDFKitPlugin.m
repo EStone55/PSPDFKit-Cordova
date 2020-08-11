@@ -18,9 +18,9 @@
 
 #define VALIDATE_DOCUMENT(document, ...) { if (!document.isValid) { [self.commandDelegate sendPluginResult:[CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR messageAsString:@"Document is invalid."] callbackId:command.callbackId]; return __VA_ARGS__; }}
 
-@interface PSCCustomButtonAnnotationToolbar : PSPDFAnnotationToolbar
-@property (nonatomic) PSPDFToolbarButton *editAssetButton;
-@end
+// @interface PSCCustomButtonAnnotationToolbar : PSPDFAnnotationToolbar
+// @property (nonatomic) PSPDFToolbarButton *editAssetButton;
+// @end
 
 @interface PSPDFKitPlugin () <PSPDFViewControllerDelegate, PSPDFFlexibleToolbarContainerDelegate, UIGestureRecognizerDelegate>
 
