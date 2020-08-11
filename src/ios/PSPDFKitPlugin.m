@@ -984,7 +984,7 @@ void runOnMainQueueWithoutDeadlocking(void (^block)(void)) {
     [_pdfController updateConfigurationWithBuilder:^(PSPDFConfigurationBuilder *builder) {
         [builder overrideClass:PSPDFAnnotationToolbar.class withClass:PSCCustomButtonAnnotationToolbar.class];
     }];
-    [PSCCustomButtonAnnotationToolbar.class setPluginReference:self];
+    [PSCCustomButtonAnnotationToolbar setPluginReference:self];
 }
 
 - (NSString *)pageTransitionAsJSON {
