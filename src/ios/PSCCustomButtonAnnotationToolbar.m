@@ -1,5 +1,4 @@
 #import "PSCCustomButtonAnnotationToolbar.h"
-#import "PSPDFKitPlugin.h"
 
 @implementation PSCCustomButtonAnnotationToolbar
 
