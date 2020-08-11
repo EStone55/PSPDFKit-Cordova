@@ -7,7 +7,7 @@ static PSPDFKitPlugin *_pluginReference = nil;
 
 - (instancetype)initWithAnnotationStateManager:(PSPDFAnnotationStateManager *)annotationStateManager {
     if ((self = [super initWithAnnotationStateManager:annotationStateManager])) {
-        UIImage *editImage = [[PSPDFKitGlobal imageNamed:@"ic_edit.png"] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
+        UIImage *editImage = [[PSPDFKitGlobal imageNamed:@"trash"] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
         _editAssetButton = [PSPDFToolbarButton new];
         _editAssetButton.accessibilityLabel = @"Edit Asset";
         [_editAssetButton setImage:editImage];
