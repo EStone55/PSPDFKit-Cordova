@@ -14,5 +14,7 @@
 #import <Cordova/CDV.h>
 
 @interface PSPDFKitPlugin : CDVPlugin
++ (NSArrary <NSDictionary *> *)instantJSONFromAnnotations:(NSArray <PSPDFAnnotation *> *) annotations;
+- (BOOL)sendEventWithJSON:(id)JSON;
 
 @end
