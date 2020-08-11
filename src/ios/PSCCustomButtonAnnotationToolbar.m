@@ -13,6 +13,7 @@ static PSPDFKitPlugin *_pluginReference = nil;
         [_editAssetButton setImage:editImage];
         [_editAssetButton addTarget:self action:@selector(editAssetButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
 
+        [self updateEditAssetButton];
         self.additionalButtons = @[_editAssetButton];
     }
     return self;
@@ -22,6 +23,10 @@ static PSPDFKitPlugin *_pluginReference = nil;
     if (pluginReference != _pluginReference) {
         _pluginReference = pluginReference;
     } 
+}
+
+- (void)updateEditAssetButton {
+    self.editAssetButton.enabled = YES;
 }
 
 - (void)editAssetButtonPressed:(id)sender {
