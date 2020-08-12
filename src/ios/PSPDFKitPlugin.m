@@ -2038,21 +2038,27 @@ static NSString *PSPDFStringFromCGRect(CGRect rect) {
     NSString *editAssetImagePath = [myBundle pathForResource:@"ic_edit2" ofType:@"png"];
     UIImage *editAssetImage = [UIImage imageNamed:editAssetImagePath];
     PSPDFMenuItem *newMenuItem = [[PSPDFMenuItem alloc] initWithTitle:NSLocalizedString(@"Edit Asset", nil) image:editAssetImage block:^{
-        NSString *URLString = @"https://www.google.com/";
 
-        // Create browser.
-        PSPDFWebViewController *browser = [[PSPDFWebViewController alloc] initWithURL:(NSURL *)[NSURL URLWithString:URLString]];
-        browser.delegate = pdfController;
-        browser.modalPresentationStyle = UIModalPresentationPopover;
-        browser.preferredContentSize = CGSizeMake(600.f, 500.f);
+        NSArray <NSDictionary *> *annotationsJSON = [PSPDFKitPlugin instantJSONFromAnnotations:annotations];
+        if(annotationsJSON) {
+            [self sendEventWithJSON:@{@"type:onOpenAssetActionModal", @"annotations":annotationsJSON}];
+        }
 
-        NSDictionary<PSPDFPresentationOption, id> *presentationOptions = @{
-            PSPDFPresentationOptionSourceRect: @(annotationRect),
-            PSPDFPresentationOptionInNavigationController: @YES,
-            PSPDFPresentationOptionCloseButton: @YES
-        };
+        // NSString *URLString = @"https://www.google.com/";
 
-        [pdfController presentViewController:browser options:presentationOptions animated:YES sender:nil completion:NULL];
+        // // Create browser.
+        // PSPDFWebViewController *browser = [[PSPDFWebViewController alloc] initWithURL:(NSURL *)[NSURL URLWithString:URLString]];
+        // browser.delegate = pdfController;
+        // browser.modalPresentationStyle = UIModalPresentationPopover;
+        // browser.preferredContentSize = CGSizeMake(600.f, 500.f);
+
+        // NSDictionary<PSPDFPresentationOption, id> *presentationOptions = @{
+        //     PSPDFPresentationOptionSourceRect: @(annotationRect),
+        //     PSPDFPresentationOptionInNavigationController: @YES,
+        //     PSPDFPresentationOptionCloseButton: @YES
+        // };
+
+        // [pdfController presentViewController:browser options:presentationOptions animated:YES sender:nil completion:NULL];
     } identifier:@"EditAsset"];
 
     [newMenuItems addObject:newMenuItem];
