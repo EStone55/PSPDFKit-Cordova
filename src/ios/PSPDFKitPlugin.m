@@ -2024,38 +2024,23 @@ static NSString *PSPDFStringFromCGRect(CGRect rect) {
     }
 }
 
-// - (void)createCustomAnnotationToolbar {
+- (nonnull NSArray<PSPDFMenuItem *> *)pdfViewController:(nonnull PSPDFViewController *)pdfController shouldShowMenuItems:(nonnull NSArray<PSPDFMenuItem *> *)menuItems atSuggestedTargetRect:(CGRect)rect forAnnotations:(nullable NSArray<PSPDFAnnotation *> *)annotations inRect:(CGRect)annotationRect onPageView:(nonnull PSPDFPageView *)pageView {
+    
+    NSMutableArray *newMenuItems = [menuItems mutableCopy];
+    for (PSPDFMenuItem *menuItem in menuItems) {
+        if ([menuItem isKindOfClass:PSPDFMenuItem.class] && [menuItem.identifier isEqualToString:PSPDFTextMenuWikipedia]) {
+            [newMenuItems removeObjectIdenticalTo:menuItem];
+            break;
+        }
+    }
+    
+    NSBundle* myBundle = [NSBundle mainBundle];
+    NSString editAssetImagePath = [myBundle pathForResource:@"ic_edit" ofType:@"png"];
+    UIImage editAssetImage = [UIImage imageNamed:editAssetImagePath];
+    PSPDFMenuItem *newMenuItem = [[PSPDFMenuItem alloc] initWithTitle:NSLocalizedString(@"Edit Asset", nil) block:nil image:editAssetImage identifier:@"EditAsset"];
 
-//     PSPDFAnnotationToolbarConfiguration *configuration = [[PSPDFAnnotationToolbarConfiguration alloc] initWithAnnotationGroups:@[
-//     [PSPDFAnnotationGroup groupWithItems:@[
-//         [PSPDFAnnotationGroupItem itemWithType:PSPDFAnnotationStringInk variant:PSPDFAnnotationVariantStringInkPen configurationBlock:[PSPDFAnnotationGroupItem inkConfigurationBlock]]
-//     ]],
-//     [PSPDFAnnotationGroup groupWithItems:@[
-//         [PSPDFAnnotationGroupItem itemWithType:PSPDFAnnotationStringLine],
-//         [PSPDFAnnotationGroupItem itemWithType:PSPDFAnnotationStringPolyLine]
-//     ]]
-
-//     pdfController.annotationToolbarController.annotationToolbar.configurations = @[configuration];
-
-//     PSPDFAnnotationGroupItemConfigurationBlock configurationBlock = ^UIImage *(PSPDFAnnotationGroupItem *item, id container, UIColor *tintColor) {
-//         UIImage *image = [UIImage imageName:@"Custom Button Icon"];
-//         return [image imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
-//     }
-//     ]];
-// }
-
-// - (void)pdfViewController:(nonnull PSPDFViewController *)pdfController 
-//     didSelectAnnotations:(nonnull NSArray<PSPDFAnnotation *> *)annotations 
-//     onPageView:(nonnull PSPDFPageView *)pageView {
-//     _currentSelectedAnnotations = annatations;
-// }
-
-// - (void) customButtonAction:(PSPDFAnnotation *)annotation {
-//     NSData *annotationData = [annotation generateInstantJSONWithError:NULL];
-//     NSString *jsonString = [[NSString alloc] initWithData:annotationData encoding:NSUTF8StringEncoding];
-//     NSLog(@"Open asset action modal");
-//     [self sendEventWithJSON];
-// }
+    [newMenuItem addObject:newMenuItem];
+}
 
 - (void)annotationChangedNotification:(NSNotification *)notification {
     id object = notification.object;
@@ -2084,43 +2069,4 @@ static NSString *PSPDFStringFromCGRect(CGRect rect) {
     }
 }
 
-// + (void)sendEditAssetEvent:(NSArray <NSDictionary *> *)annotationsJSON {
-//     [self sendEventWithJSON:@{@"type": @"onOpenAssetActionModal", @"annotations": annotationsJSON}];
-// }
-
 @end
-
-// @implementation PSCCustomButtonAnnotationToolbar
-
-// static PSPDFKitPlugin *_pluginReference = nil;
-
-// - (instancetype)initWithAnnotationStateManager:(PSPDFAnnotationStateManager *)annotationStateManager {
-//     if ((self = [super initWithAnnotationStateManager:annotationStateManager])) {
-//         UIImage *editImage = [[PSPDFKitGlobal imageNamed:@"ic_edit.png"] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
-//         _editAssetButton = [PSPDFToolbarButton new];
-//         _editAssetButton.accessibilityLabel = @"Edit Asset";
-//         [_editAssetButton setImage:editImage];
-//         [_editAssetButton addTarget:self action:@selector(editAssetButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
-
-//         self.additionalButtons = @[_editAssetButton];
-//     }
-//     return self;
-// }
-
-// + (void)setPluginReference:(PSPDFKitPlugin *)pluginReference {
-//     if (pluginReference != _pluginReference) {
-//         _pluginReference = pluginReference;
-//     } 
-// }
-
-// - (void)editAssetButtonPressed:(id)sender {
-//     PSPDFViewController *pdfController = self.annotationStateManager.pdfController;
-//     PSPDFPageView *view = [pdfController pageViewForPageAtIndex:0];
-//     NSArray<PSPDFAnnotation *> *annotations = view.selectedAnnotations;
-//     NSArray <NSDictionary *> *annotationsJSON = [PSPDFKitPlugin instantJSONFromAnnotations:annotations];
-//     if (annotationsJSON) {
-//         [_pluginReference sendEventWithJSON:@{@"type": @"onOpenAssetActionModal", @"annotations": annotationsJSON}];;
-//     }
-// }
-
-// @end
