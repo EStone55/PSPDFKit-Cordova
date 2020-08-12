@@ -534,6 +534,18 @@ void runOnMainQueueWithoutDeadlocking(void (^block)(void)) {
     [NSNotificationCenter.defaultCenter addObserver:self selector:@selector(annotationChangedNotification:) name:PSPDFAnnotationsRemovedNotification object:nil];
 
     [self addEditAssetButton];
+
+    NSMutableArray<PSPDFStampAnnotation *> *customStamps = [NSMutableArray array];
+
+    NSURL *icon1URL = [NSBundle.mainBundle.resourceURL URLByAppendingPathComponent:"@air-conditioning-unit.pdf"];
+    PSPDFStampAnnotation *vectorStamp1 = [[PSPDFStampAnnotation alloc] init];
+    vectorStamp1.appearanceStreamGenerator = [[PSPDFFileAppearanceStreamGenerator alloc] initWithFileURL:icon1URL];
+    vectorStamp1.boundingBox = CGRectMake(0.0, 0.0, 113.0, 54.0);
+
+    [customStamps addObject:vectorStamp1];
+
+    [PSPDFStampViewController setDefaultStampAnnotations:customStamps];
+
 }
 
 - (PSPDFDocument *)createXFDFDocumentWithPath:(NSString *)xfdfFilePath {
@@ -2043,22 +2055,6 @@ static NSString *PSPDFStringFromCGRect(CGRect rect) {
         if(annotationsJSON) {
             [self sendEventWithJSON:@{@"type":@"onOpenAssetActionModal", @"annotations":annotationsJSON}];
         }
-
-        // NSString *URLString = @"https://www.google.com/";
-
-        // // Create browser.
-        // PSPDFWebViewController *browser = [[PSPDFWebViewController alloc] initWithURL:(NSURL *)[NSURL URLWithString:URLString]];
-        // browser.delegate = pdfController;
-        // browser.modalPresentationStyle = UIModalPresentationPopover;
-        // browser.preferredContentSize = CGSizeMake(600.f, 500.f);
-
-        // NSDictionary<PSPDFPresentationOption, id> *presentationOptions = @{
-        //     PSPDFPresentationOptionSourceRect: @(annotationRect),
-        //     PSPDFPresentationOptionInNavigationController: @YES,
-        //     PSPDFPresentationOptionCloseButton: @YES
-        // };
-
-        // [pdfController presentViewController:browser options:presentationOptions animated:YES sender:nil completion:NULL];
     } identifier:@"EditAsset"];
 
     [newMenuItems addObject:newMenuItem];
