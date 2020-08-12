@@ -2034,12 +2034,12 @@ static NSString *PSPDFStringFromCGRect(CGRect rect) {
         }
     }
     
-    NSBundle* myBundle = [NSBundle mainBundle];
-    NSString editAssetImagePath = [myBundle pathForResource:@"ic_edit" ofType:@"png"];
+    NSBundle *myBundle = [NSBundle mainBundle];
+    NSString *editAssetImagePath = [myBundle pathForResource:@"ic_edit" ofType:@"png"];
     UIImage editAssetImage = [UIImage imageNamed:editAssetImagePath];
-    PSPDFMenuItem *newMenuItem = [[PSPDFMenuItem alloc] initWithTitle:NSLocalizedString(@"Edit Asset", nil) block:nil image:editAssetImage identifier:@"EditAsset"];
+    PSPDFMenuItem *newMenuItem = [[PSPDFMenuItem alloc] initWithTitle:NSLocalizedString(@"Edit Asset", nil) image:editAssetImage block:nil identifier:@"EditAsset"];
 
-    [newMenuItem addObject:newMenuItem];
+    [newMenuItems addObject:newMenuItem];
 }
 
 - (void)annotationChangedNotification:(NSNotification *)notification {
