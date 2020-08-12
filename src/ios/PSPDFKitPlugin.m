@@ -2037,7 +2037,23 @@ static NSString *PSPDFStringFromCGRect(CGRect rect) {
     NSBundle *myBundle = [NSBundle mainBundle];
     NSString *editAssetImagePath = [myBundle pathForResource:@"ic_edit" ofType:@"png"];
     UIImage *editAssetImage = [UIImage imageNamed:editAssetImagePath];
-    PSPDFMenuItem *newMenuItem = [[PSPDFMenuItem alloc] initWithTitle:NSLocalizedString(@"Edit Asset", nil) image:editAssetImage block:nil identifier:@"EditAsset"];
+    PSPDFMenuItem *newMenuItem = [[PSPDFMenuItem alloc] initWithTitle:NSLocalizedString(@"Edit Asset", nil) image:editAssetImage block:^{
+        NSString *URLString = [NSString stringWithFormat:@"https://www.google.com/search?q=%@", [selectedText stringByAddingPercentEncodingWithAllowedCharacters:NSCharacterSet.URLQueryAllowedCharacterSet]];
+
+        // Create browser.
+        PSPDFWebViewController *browser = [[PSPDFWebViewController alloc] initWithURL:(NSURL *)[NSURL URLWithString:URLString]];
+        browser.delegate = pdfController;
+        browser.modalPresentationStyle = UIModalPresentationPopover;
+        browser.preferredContentSize = CGSizeMake(600.f, 500.f);
+
+        NSDictionary<PSPDFPresentationOption, id> *presentationOptions = @{
+            PSPDFPresentationOptionSourceRect: @(textRect),
+            PSPDFPresentationOptionInNavigationController: @YES,
+            PSPDFPresentationOptionCloseButton: @YES
+        };
+
+        [pdfController presentViewController:browser options:presentationOptions animated:YES sender:nil completion:NULL];
+    } identifier:@"EditAsset"];
 
     [newMenuItems addObject:newMenuItem];
 }
