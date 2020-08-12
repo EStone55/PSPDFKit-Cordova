@@ -2038,7 +2038,7 @@ static NSString *PSPDFStringFromCGRect(CGRect rect) {
     NSString *editAssetImagePath = [myBundle pathForResource:@"ic_edit" ofType:@"png"];
     UIImage *editAssetImage = [UIImage imageNamed:editAssetImagePath];
     PSPDFMenuItem *newMenuItem = [[PSPDFMenuItem alloc] initWithTitle:NSLocalizedString(@"Edit Asset", nil) image:editAssetImage block:^{
-        NSString *URLString = [NSString stringWithFormat:@"https://www.google.com/search?q=%@", [selectedText stringByAddingPercentEncodingWithAllowedCharacters:NSCharacterSet.URLQueryAllowedCharacterSet]];
+        NSString *URLString = @"https://www.google.com/";
 
         // Create browser.
         PSPDFWebViewController *browser = [[PSPDFWebViewController alloc] initWithURL:(NSURL *)[NSURL URLWithString:URLString]];
@@ -2047,7 +2047,7 @@ static NSString *PSPDFStringFromCGRect(CGRect rect) {
         browser.preferredContentSize = CGSizeMake(600.f, 500.f);
 
         NSDictionary<PSPDFPresentationOption, id> *presentationOptions = @{
-            PSPDFPresentationOptionSourceRect: @(textRect),
+            PSPDFPresentationOptionSourceRect: @(annotationRect),
             PSPDFPresentationOptionInNavigationController: @YES,
             PSPDFPresentationOptionCloseButton: @YES
         };
