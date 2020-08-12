@@ -2056,6 +2056,8 @@ static NSString *PSPDFStringFromCGRect(CGRect rect) {
     } identifier:@"EditAsset"];
 
     [newMenuItems addObject:newMenuItem];
+
+    return newMenuItems;
 }
 
 - (void)annotationChangedNotification:(NSNotification *)notification {
