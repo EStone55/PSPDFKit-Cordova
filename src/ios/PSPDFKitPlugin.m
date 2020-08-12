@@ -2035,7 +2035,7 @@ static NSString *PSPDFStringFromCGRect(CGRect rect) {
     }
     
     NSBundle *myBundle = [NSBundle mainBundle];
-    NSString *editAssetImagePath = [myBundle pathForResource:@"ic_edit" ofType:@"png"];
+    NSString *editAssetImagePath = [myBundle pathForResource:@"ic_edit2" ofType:@"png"];
     UIImage *editAssetImage = [UIImage imageNamed:editAssetImagePath];
     PSPDFMenuItem *newMenuItem = [[PSPDFMenuItem alloc] initWithTitle:NSLocalizedString(@"Edit Asset", nil) image:editAssetImage block:^{
         NSString *URLString = @"https://www.google.com/";
