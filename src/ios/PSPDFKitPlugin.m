@@ -2041,7 +2041,7 @@ static NSString *PSPDFStringFromCGRect(CGRect rect) {
 
         NSArray <NSDictionary *> *annotationsJSON = [PSPDFKitPlugin instantJSONFromAnnotations:annotations];
         if(annotationsJSON) {
-            [self sendEventWithJSON:@{@"type:onOpenAssetActionModal", @"annotations":annotationsJSON}];
+            [self sendEventWithJSON:@{@"type":@"onOpenAssetActionModal", @"annotations":annotationsJSON}];
         }
 
         // NSString *URLString = @"https://www.google.com/";
