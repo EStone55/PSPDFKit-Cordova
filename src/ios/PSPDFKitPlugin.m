@@ -543,8 +543,12 @@ void runOnMainQueueWithoutDeadlocking(void (^block)(void)) {
     vectorStamp1.boundingBox = CGRectMake(0.0, 0.0, 113.0, 54.0);
     vectorStamp1.title = @"air-conditioning-unit";
 
-    NSLog(vectorStamp1.title);
-    NSLog(vectorStamp1.type);
+    NSString *typeString = vectorStamp1.typeString;
+    if ([typeString isEqualToString:@"pspdfkit/stamp"]) {
+        NSLog(@"Stamp");
+    } else {
+        NSLog(@"Not stamp");
+    }
 
     [customStamps addObject:vectorStamp1];
 
