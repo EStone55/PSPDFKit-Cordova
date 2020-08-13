@@ -541,6 +541,7 @@ void runOnMainQueueWithoutDeadlocking(void (^block)(void)) {
     PSPDFStampAnnotation *vectorStamp1 = [[PSPDFStampAnnotation alloc] init];
     vectorStamp1.appearanceStreamGenerator = [[PSPDFFileAppearanceStreamGenerator alloc] initWithFileURL:icon1URL];
     vectorStamp1.boundingBox = CGRectMake(0.0, 0.0, 113.0, 54.0);
+    vectorStamp1.title = @"air-conditioning-unit";
 
     [customStamps addObject:vectorStamp1];
 
