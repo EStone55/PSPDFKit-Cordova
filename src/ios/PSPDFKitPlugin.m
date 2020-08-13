@@ -544,11 +544,12 @@ void runOnMainQueueWithoutDeadlocking(void (^block)(void)) {
     vectorStamp1.title = @"air-conditioning-unit";
 
     NSString *typeString = vectorStamp1.typeString;
-    if ([typeString isEqualToString:@"pspdfkit/stamp"]) {
-        NSLog(@"Stamp");
-    } else {
-        NSLog(@"Not stamp");
-    }
+    NSLog(typeString);
+    // if ([typeString isEqualToString:@"pspdfkit/stamp"]) {
+    //     NSLog(@"Stamp");
+    // } else {
+    //     NSLog(@"Not stamp");
+    // }
 
     [customStamps addObject:vectorStamp1];
 
