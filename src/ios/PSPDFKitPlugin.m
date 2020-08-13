@@ -538,7 +538,7 @@ void runOnMainQueueWithoutDeadlocking(void (^block)(void)) {
     NSMutableArray<PSPDFStampAnnotation *> *customStamps = [NSMutableArray array];
 
     NSURL *icon1URL = [NSBundle.mainBundle.resourceURL URLByAppendingPathComponent:@"air-conditioning-unit.pdf"];
-    PSPDFStampAnnotation *vectorStamp1 = [[PSPDFStampAnnotation alloc] init];
+    PSPDFStampAnnotation *vectorStamp1 = [[PSPDFStampAnnotation alloc] initWithTitle:@"air-conditioning-unit"];
     vectorStamp1.appearanceStreamGenerator = [[PSPDFFileAppearanceStreamGenerator alloc] initWithFileURL:icon1URL];
     vectorStamp1.boundingBox = CGRectMake(0.0, 0.0, 113.0, 54.0);
     vectorStamp1.title = @"air-conditioning-unit";
